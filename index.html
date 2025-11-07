@@ -142,21 +142,85 @@
     color: #667eea;
   }
   
-  .partidos-section {
+  .equipos-section, .partidos-section {
     max-width: 1200px;
     background: white;
-    margin: 0 auto;
+    margin: 0 auto 50px;
     padding: 40px;
     border-radius: 20px;
     box-shadow: 0 20px 60px rgba(0,0,0,0.3);
   }
   
-  .partidos-header {
+  .section-header {
     text-align: center;
     margin-bottom: 30px;
     color: #2c3e50;
     font-size: 2em;
     font-weight: 700;
+  }
+  
+  .equipos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+  }
+  
+  .equipo-card {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 25px;
+    border-radius: 15px;
+    text-align: center;
+    color: white;
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+  
+  .equipo-card:hover {
+    transform: translateY(-8px) scale(1.03);
+    box-shadow: 0 15px 30px rgba(102, 126, 234, 0.4);
+  }
+  
+  .equipo-icon {
+    font-size: 3em;
+    margin-bottom: 10px;
+  }
+  
+  .equipo-nombre {
+    font-size: 1.5em;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  
+  .equipo-grupo {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 0.9em;
+    display: inline-block;
+    margin-bottom: 15px;
+  }
+  
+  .equipo-stats {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid rgba(255, 255, 255, 0.3);
+  }
+  
+  .stat {
+    text-align: center;
+  }
+  
+  .stat-value {
+    font-size: 1.5em;
+    font-weight: 700;
+    display: block;
+  }
+  
+  .stat-label {
+    font-size: 0.8em;
+    opacity: 0.9;
   }
   
   .partidos-grid {
@@ -278,25 +342,30 @@
   </div>
 </div>
 
+<!-- SECCIÓN DE EQUIPOS -->
+<div class="equipos-section">
+  <h2 class="section-header">🎯 Todos los Equipos</h2>
+  <div class="equipos-grid" id="listaEquipos"></div>
+</div>
+
 <!-- SECCIÓN DE PARTIDOS -->
 <div class="partidos-section">
-  <h2 class="partidos-header">⚽ Próximos Partidos</h2>
+  <h2 class="section-header">⚽ Próximos Partidos</h2>
   <div class="partidos-grid" id="listaPartidos"></div>
 </div>
 
 <script>
   const grupoA = [
-    { nombre: "Tigres", gf: 10, gc: 4, puntos: 9 },
-    { nombre: "Leones", gf: 8, gc: 5, puntos: 6 },
-    { nombre: "Águilas", gf: 5, gc: 6, puntos: 3 },
-    { nombre: "Panteras", gf: 3, gc: 8, puntos: 1 }
+    { nombre: "Los Callejeros FC", gf: 12, gc: 3, puntos: 12 },
+    { nombre: "Los Papis", gf: 9, gc: 5, puntos: 9 },
+    { nombre: "FC SOWF", gf: 7, gc: 6, puntos: 7 },
+    { nombre: "Karnaugh", gf: 4, gc: 8, puntos: 3 }
   ];
 
   const grupoB = [
-    { nombre: "Dragones", gf: 9, gc: 2, puntos: 9 },
-    { nombre: "Halcones", gf: 7, gc: 5, puntos: 6 },
-    { nombre: "Lobos", gf: 4, gc: 6, puntos: 3 },
-    { nombre: "Toros", gf: 2, gc: 8, puntos: 0 }
+    { nombre: "Los Descortezadores", gf: 10, gc: 4, puntos: 10 },
+    { nombre: "Los Chicos que Lloran", gf: 8, gc: 6, puntos: 7 },
+    { nombre: "Nottingham Forest", gf: 5, gc: 9, puntos: 4 }
   ];
 
   function ordenarYMostrar(grupo, tablaId) {
@@ -321,11 +390,52 @@
   ordenarYMostrar(grupoA, "tablaA");
   ordenarYMostrar(grupoB, "tablaB");
 
+  // Mostrar todos los equipos
+  const iconosEquipos = {
+    "Los Callejeros FC": "⚽",
+    "Los Papis": "👨‍👦",
+    "FC SOWF": "🛡️",
+    "Karnaugh": "🔧",
+    "Los Descortezadores": "🪓",
+    "Los Chicos que Lloran": "😢",
+    "Nottingham Forest": "🌲"
+  };
+
+  const todosLosEquipos = [
+    ...grupoA.map(e => ({...e, grupo: "A"})),
+    ...grupoB.map(e => ({...e, grupo: "B"}))
+  ];
+
+  const listaEquipos = document.getElementById("listaEquipos");
+  todosLosEquipos.forEach(equipo => {
+    listaEquipos.innerHTML += `
+      <div class="equipo-card">
+        <div class="equipo-icon">${iconosEquipos[equipo.nombre]}</div>
+        <div class="equipo-nombre">${equipo.nombre}</div>
+        <div class="equipo-grupo">Grupo ${equipo.grupo}</div>
+        <div class="equipo-stats">
+          <div class="stat">
+            <span class="stat-value">${equipo.puntos}</span>
+            <span class="stat-label">Puntos</span>
+          </div>
+          <div class="stat">
+            <span class="stat-value">${equipo.gf}</span>
+            <span class="stat-label">Goles</span>
+          </div>
+          <div class="stat">
+            <span class="stat-value">${equipo.dg > 0 ? '+' : ''}${equipo.dg}</span>
+            <span class="stat-label">DG</span>
+          </div>
+        </div>
+      </div>
+    `;
+  });
+
   const partidos = [
-    { equipo1: "Tigres", equipo2: "Leones", fecha: "10 Nov", hora: "16:00" },
-    { equipo1: "Águilas", equipo2: "Panteras", fecha: "10 Nov", hora: "17:00" },
-    { equipo1: "Dragones", equipo2: "Halcones", fecha: "11 Nov", hora: "15:00" },
-    { equipo1: "Lobos", equipo2: "Toros", fecha: "11 Nov", hora: "16:00" }
+    { equipo1: "Los Callejeros FC", equipo2: "Los Papis", fecha: "10 Nov", hora: "16:00" },
+    { equipo1: "FC SOWF", equipo2: "Karnaugh", fecha: "10 Nov", hora: "17:30" },
+    { equipo1: "Los Descortezadores", equipo2: "Los Chicos que Lloran", fecha: "11 Nov", hora: "15:00" },
+    { equipo1: "Nottingham Forest", equipo2: "Los Descortezadores", fecha: "11 Nov", hora: "16:30" }
   ];
 
   const listaPartidos = document.getElementById("listaPartidos");
