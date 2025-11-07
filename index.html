@@ -248,12 +248,16 @@
     align-items: center;
     justify-content: space-between;
     margin-bottom: 15px;
+    gap: 8px;
   }
   
   .equipo-nombre {
     font-weight: 700;
     color: #2c3e50;
     flex: 1;
+    font-size: 0.95em;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   
   .vs-badge {
@@ -282,16 +286,50 @@
   }
   
   @media (max-width: 768px) {
+    body {
+      padding: 10px;
+    }
+    
     .header h1 {
       font-size: 2em;
+    }
+    
+    .header {
+      padding: 30px 15px;
+      margin-bottom: 30px;
     }
     
     .grupo-container {
       grid-template-columns: 1fr;
     }
     
-    .partidos-grid {
+    .partidos-grid, .equipos-grid {
       grid-template-columns: 1fr;
+    }
+    
+    .partidos-section, .equipos-section {
+      padding: 20px 15px;
+    }
+    
+    .partido-card {
+      padding: 15px;
+    }
+    
+    .equipo-nombre {
+      font-size: 0.85em;
+    }
+    
+    .vs-badge {
+      padding: 4px 10px;
+      font-size: 0.75em;
+      margin: 0 5px;
+      flex-shrink: 0;
+    }
+    
+    .partido-info {
+      font-size: 0.85em;
+      flex-wrap: wrap;
+      gap: 8px;
     }
   }
 </style>
