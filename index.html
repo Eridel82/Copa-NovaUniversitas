@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Copa NovaUniversitas - Tabla de Posiciones</title>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: "Inter", "Segoe UI", sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    padding: 20px;
+  }
+  
+  .header {
+    text-align: center;
+    color: white;
+    margin-bottom: 40px;
+    padding: 40px 20px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    max-width: 1200px;
+    margin: 0 auto 40px;
+  }
+  
+  .header h1 {
+    font-size: 3em;
+    font-weight: 800;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+    letter-spacing: -1px;
+  }
+  
+  .header .subtitle {
+    font-size: 1.2em;
+    opacity: 0.9;
+    font-weight: 300;
+  }
+  
+  .trophy-icon {
+    font-size: 4em;
+    margin-bottom: 15px;
+    animation: bounce 2s infinite;
+  }
+  
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+  
+  .grupo-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto 50px;
+  }
+  
+  .tabla {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    transition: transform 0.3s ease;
+  }
+  
+  .tabla:hover {
+    transform: translateY(-5px);
+  }
+  
+  .tabla-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 25px;
+    font-size: 1.5em;
+    font-weight: 700;
+    text-align: center;
+    letter-spacing: 1px;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  thead {
+    background: #f8f9fa;
+  }
+  
+  th {
+    padding: 15px 10px;
+    text-align: center;
+    font-weight: 600;
+    color: #495057;
+    font-size: 0.9em;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  
+  td {
+    padding: 15px 10px;
+    text-align: center;
+    border-bottom: 1px solid #f0f0f0;
+    color: #333;
+  }
+  
+  tbody tr {
+    transition: all 0.2s ease;
+  }
+  
+  tbody tr:hover {
+    background: #f8f9ff;
+    transform: scale(1.01);
+  }
+  
+  tbody tr:first-child {
+    background: linear-gradient(90deg, #fff3cd 0%, #ffffff 100%);
+    font-weight: 600;
+  }
+  
+  tbody tr:nth-child(2) {
+    background: linear-gradient(90deg, #e7f3ff 0%, #ffffff 100%);
+    font-weight: 500;
+  }
+  
+  .equipo-cell {
+    text-align: left;
+    font-weight: 600;
+    color: #2c3e50;
+  }
+  
+  .pts-cell {
+    font-weight: 700;
+    font-size: 1.1em;
+    color: #667eea;
+  }
+  
+  .partidos-section {
+    max-width: 1200px;
+    background: white;
+    margin: 0 auto;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+  }
+  
+  .partidos-header {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #2c3e50;
+    font-size: 2em;
+    font-weight: 700;
+  }
+  
+  .partidos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+  }
+  
+  .partido-card {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    padding: 20px;
+    border-radius: 15px;
+    border-left: 4px solid #667eea;
+    transition: all 0.3s ease;
+  }
+  
+  .partido-card:hover {
+    transform: translateX(5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    border-left-color: #764ba2;
+  }
+  
+  .partido-equipos {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 15px;
+  }
+  
+  .equipo-nombre {
+    font-weight: 700;
+    color: #2c3e50;
+    flex: 1;
+  }
+  
+  .vs-badge {
+    background: #667eea;
+    color: white;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 0.85em;
+    margin: 0 10px;
+  }
+  
+  .partido-info {
+    display: flex;
+    justify-content: space-between;
+    color: #6c757d;
+    font-size: 0.9em;
+    padding-top: 10px;
+    border-top: 1px solid #dee2e6;
+  }
+  
+  .fecha, .hora {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  
+  @media (max-width: 768px) {
+    .header h1 {
+      font-size: 2em;
+    }
+    
+    .grupo-container {
+      grid-template-columns: 1fr;
+    }
+    
+    .partidos-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="trophy-icon">🏆</div>
+  <h1>Copa NovaUniversitas</h1>
+  <div class="subtitle">Temporada 2025 - Fase de Grupos</div>
+</div>
+
+<div class="grupo-container">
+  <!-- GRUPO A -->
+  <div class="tabla">
+    <div class="tabla-header">GRUPO A</div>
+    <table id="tablaA">
+      <thead>
+        <tr>
+          <th>Pos</th>
+          <th style="text-align: left; padding-left: 20px;">Equipo</th>
+          <th>GF</th>
+          <th>GC</th>
+          <th>DG</th>
+          <th>Pts</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+
+  <!-- GRUPO B -->
+  <div class="tabla">
+    <div class="tabla-header">GRUPO B</div>
+    <table id="tablaB">
+      <thead>
+        <tr>
+          <th>Pos</th>
+          <th style="text-align: left; padding-left: 20px;">Equipo</th>
+          <th>GF</th>
+          <th>GC</th>
+          <th>DG</th>
+          <th>Pts</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+</div>
+
+<!-- SECCIÓN DE PARTIDOS -->
+<div class="partidos-section">
+  <h2 class="partidos-header">⚽ Próximos Partidos</h2>
+  <div class="partidos-grid" id="listaPartidos"></div>
+</div>
+
+<script>
+  const grupoA = [
+    { nombre: "Tigres", gf: 10, gc: 4, puntos: 9 },
+    { nombre: "Leones", gf: 8, gc: 5, puntos: 6 },
+    { nombre: "Águilas", gf: 5, gc: 6, puntos: 3 },
+    { nombre: "Panteras", gf: 3, gc: 8, puntos: 1 }
+  ];
+
+  const grupoB = [
+    { nombre: "Dragones", gf: 9, gc: 2, puntos: 9 },
+    { nombre: "Halcones", gf: 7, gc: 5, puntos: 6 },
+    { nombre: "Lobos", gf: 4, gc: 6, puntos: 3 },
+    { nombre: "Toros", gf: 2, gc: 8, puntos: 0 }
+  ];
+
+  function ordenarYMostrar(grupo, tablaId) {
+    grupo.forEach(e => e.dg = e.gf - e.gc);
+    grupo.sort((a, b) => b.puntos - a.puntos || b.dg - a.dg);
+    const tbody = document.querySelector(`#${tablaId} tbody`);
+    tbody.innerHTML = "";
+    grupo.forEach((e, i) => {
+      tbody.innerHTML += `
+        <tr>
+          <td>${i + 1}</td>
+          <td class="equipo-cell" style="text-align: left; padding-left: 20px;">${e.nombre}</td>
+          <td>${e.gf}</td>
+          <td>${e.gc}</td>
+          <td>${e.dg > 0 ? '+' : ''}${e.dg}</td>
+          <td class="pts-cell">${e.puntos}</td>
+        </tr>
+      `;
+    });
+  }
+
+  ordenarYMostrar(grupoA, "tablaA");
+  ordenarYMostrar(grupoB, "tablaB");
+
+  const partidos = [
+    { equipo1: "Tigres", equipo2: "Leones", fecha: "10 Nov", hora: "16:00" },
+    { equipo1: "Águilas", equipo2: "Panteras", fecha: "10 Nov", hora: "17:00" },
+    { equipo1: "Dragones", equipo2: "Halcones", fecha: "11 Nov", hora: "15:00" },
+    { equipo1: "Lobos", equipo2: "Toros", fecha: "11 Nov", hora: "16:00" }
+  ];
+
+  const listaPartidos = document.getElementById("listaPartidos");
+  partidos.forEach(p => {
+    listaPartidos.innerHTML += `
+      <div class="partido-card">
+        <div class="partido-equipos">
+          <div class="equipo-nombre">${p.equipo1}</div>
+          <div class="vs-badge">VS</div>
+          <div class="equipo-nombre" style="text-align: right;">${p.equipo2}</div>
+        </div>
+        <div class="partido-info">
+          <div class="fecha">📅 ${p.fecha}</div>
+          <div class="hora">⏰ ${p.hora}</div>
+        </div>
+      </div>
+    `;
+  });
+</script>
+
+</body>
+</html>
