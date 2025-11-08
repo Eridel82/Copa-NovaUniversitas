@@ -85,6 +85,10 @@
     letter-spacing: 1px;
   }
   
+  .tabla-header.femenina {
+    background: linear-gradient(135deg, #ec4899 0%, #be185d 100%);
+  }
+  
   table {
     width: 100%;
     border-collapse: collapse;
@@ -125,8 +129,18 @@
     font-weight: 600;
   }
   
+  .tabla.femenina tbody tr:first-child {
+    background: linear-gradient(90deg, #fce7f3 0%, #ffffff 100%);
+    font-weight: 600;
+  }
+  
   tbody tr:nth-child(2) {
     background: linear-gradient(90deg, #e7f3ff 0%, #ffffff 100%);
+    font-weight: 500;
+  }
+  
+  .tabla.femenina tbody tr:nth-child(2) {
+    background: linear-gradient(90deg, #fbcfe8 0%, #ffffff 100%);
     font-weight: 500;
   }
   
@@ -140,6 +154,10 @@
     font-weight: 700;
     font-size: 1.1em;
     color: #667eea;
+  }
+  
+  .tabla.femenina .pts-cell {
+    color: #ec4899;
   }
   
   .equipos-section, .partidos-section {
@@ -237,10 +255,19 @@
     transition: all 0.3s ease;
   }
   
+  .partido-card.femenino {
+    background: linear-gradient(135deg, #fce7f3 0%, #fbcfe8 100%);
+    border-left: 4px solid #ec4899;
+  }
+  
   .partido-card:hover {
     transform: translateX(5px);
     box-shadow: 0 5px 15px rgba(0,0,0,0.1);
     border-left-color: #764ba2;
+  }
+  
+  .partido-card.femenino:hover {
+    border-left-color: #be185d;
   }
   
   .partido-equipos {
@@ -251,7 +278,7 @@
     gap: 8px;
   }
   
-  .equipo-nombre {
+  .partido-equipos .equipo-nombre {
     font-weight: 700;
     color: #2c3e50;
     flex: 1;
@@ -268,6 +295,10 @@
     font-weight: 600;
     font-size: 0.85em;
     margin: 0 10px;
+  }
+  
+  .partido-card.femenino .vs-badge {
+    background: #ec4899;
   }
   
   .partido-info {
@@ -315,7 +346,7 @@
       padding: 15px;
     }
     
-    .equipo-nombre {
+    .partido-equipos .equipo-nombre {
       font-size: 0.85em;
     }
     
@@ -378,6 +409,24 @@
       <tbody></tbody>
     </table>
   </div>
+
+  <!-- GRUPO FEMENIL -->
+  <div class="tabla femenina">
+    <div class="tabla-header femenina">FEMENIL 👩‍🦰</div>
+    <table id="tablaFemenil">
+      <thead>
+        <tr>
+          <th>Pos</th>
+          <th style="text-align: left; padding-left: 20px;">Equipo</th>
+          <th>GF</th>
+          <th>GC</th>
+          <th>DG</th>
+          <th>Pts</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
 </div>
 
 <!-- SECCIÓN DE PARTIDOS -->
@@ -398,6 +447,12 @@
     { nombre: "Karnaugh", gf: 0, gc: 0, puntos: 0 },
     { nombre: "Los Chicos que Lloran", gf: 0, gc: 0, puntos: 0 },
     { nombre: "Nottingham Forest", gf: 0, gc: 0, puntos: 0 }
+  ];
+
+  const grupoFemenil = [
+    { nombre: "Girls", gf: 0, gc: 0, puntos: 0 },
+    { nombre: "Agronenas", gf: 0, gc: 0, puntos: 0 },
+    { nombre: "Combinadas", gf: 0, gc: 0, puntos: 0 }
   ];
 
   function ordenarYMostrar(grupo, tablaId) {
@@ -421,6 +476,7 @@
 
   ordenarYMostrar(grupoA, "tablaA");
   ordenarYMostrar(grupoB, "tablaB");
+  ordenarYMostrar(grupoFemenil, "tablaFemenil");
 
   const iconosEquipos = {
     "Los Callejeros FC": "⚽",
@@ -429,29 +485,37 @@
     "Karnaugh": "🔧",
     "Los Descortezadores": "🪓",
     "Los Chicos que Lloran": "😢",
-    "Nottingham Forest": "🌲"
+    "Nottingham Forest": "🌲",
+    "Girls": "💕",
+    "Agronenas": "🌾",
+    "Combinadas": "✨"
   };
 
   const todosLosEquipos = [
     ...grupoA.map(e => ({...e, grupo: "A"})),
-    ...grupoB.map(e => ({...e, grupo: "B"}))
+    ...grupoB.map(e => ({...e, grupo: "B"})),
+    ...grupoFemenil.map(e => ({...e, grupo: "Femenil"}))
   ];
 
   // 📅 Partidos con árbitros (ninguno arbitra su propio juego)
   const partidos = [
-    { equipo1: "Los Callejeros FC", equipo2: "Los Papis", fecha: "10 Noviembre", hora: "14:00", arbitro: "Karnaugh" },
-    { equipo1: "Karnaugh", equipo2: "Los Chicos que Lloran", fecha: "10 Noviembre", hora: "15:00", arbitro: "FC SOWF" },
-    { equipo1: "Los Descortezadores", equipo2: "FC SOWF", fecha: "11 Noviembre", hora: "15:00", arbitro: "Nottingham Forest" },
-    { equipo1: "Karnaugh", equipo2: "Nottingham Forest", fecha: "12 Noviembre", hora: "14:00", arbitro: "Los Papis" },
-    { equipo1: "FC SOWF", equipo2: "Los Callejeros FC", fecha: "12 Noviembre", hora: "15:00", arbitro: "Los Descortezadores" },
-    { equipo1: "Los Descortezadores", equipo2: "Los Papis", fecha: "13 Noviembre", hora: "15:00", arbitro: "Karnaugh" },
-    { equipo1: "Nottingham Forest", equipo2: "Los Chicos que Lloran", fecha: "14 Noviembre", hora: "15:00", arbitro: "Los Callejeros FC" },
+    { equipo1: "Los Callejeros FC", equipo2: "Los Papis", fecha: "10 Noviembre", hora: "14:00", arbitro: "Karnaugh", categoria: "varonil" },
+    { equipo1: "Karnaugh", equipo2: "Los Chicos que Lloran", fecha: "10 Noviembre", hora: "15:00", arbitro: "FC SOWF", categoria: "varonil" },
+    { equipo1: "Los Descortezadores", equipo2: "FC SOWF", fecha: "11 Noviembre", hora: "15:00", arbitro: "Nottingham Forest", categoria: "varonil" },
+    { equipo1: "Karnaugh", equipo2: "Nottingham Forest", fecha: "12 Noviembre", hora: "14:00", arbitro: "Los Papis", categoria: "varonil" },
+    { equipo1: "FC SOWF", equipo2: "Los Callejeros FC", fecha: "12 Noviembre", hora: "15:00", arbitro: "Los Descortezadores", categoria: "varonil" },
+    { equipo1: "Los Descortezadores", equipo2: "Los Papis", fecha: "13 Noviembre", hora: "15:00", arbitro: "Karnaugh", categoria: "varonil" },
+    { equipo1: "Nottingham Forest", equipo2: "Los Chicos que Lloran", fecha: "14 Noviembre", hora: "15:00", arbitro: "Los Callejeros FC", categoria: "varonil" },
+    { equipo1: "Girls", equipo2: "Agronenas", fecha: "11 Noviembre", hora: "16:00", arbitro: "Los Descortezadores", categoria: "femenil" },
+    { equipo1: "Combinadas", equipo2: "Girls", fecha: "13 Noviembre", hora: "16:00", arbitro: "Los Papis", categoria: "femenil" },
+    { equipo1: "Agronenas", equipo2: "Combinadas", fecha: "14 Noviembre", hora: "16:00", arbitro: "FC SOWF", categoria: "femenil" }
   ];
 
   const listaPartidos = document.getElementById("listaPartidos");
   partidos.forEach(p => {
+    const claseCategoria = p.categoria === "femenil" ? "femenino" : "";
     listaPartidos.innerHTML += `
-      <div class="partido-card">
+      <div class="partido-card ${claseCategoria}">
         <div class="partido-equipos">
           <div class="equipo-nombre">${p.equipo1}</div>
           <div class="vs-badge">VS</div>
@@ -469,7 +533,3 @@
 
 </body>
 </html>
-
-
-
-
