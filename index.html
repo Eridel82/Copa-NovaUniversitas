@@ -443,31 +443,6 @@
     ...grupoB.map(e => ({...e, grupo: "B"}))
   ];
 
-  const listaEquipos = document.getElementById("listaEquipos");
-  todosLosEquipos.forEach(equipo => {
-    listaEquipos.innerHTML += `
-      <div class="equipo-card">
-        <div class="equipo-icon">${iconosEquipos[equipo.nombre]}</div>
-        <div class="equipo-nombre">${equipo.nombre}</div>
-        <div class="equipo-grupo">Grupo ${equipo.grupo}</div>
-        <div class="equipo-stats">
-          <div class="stat">
-            <span class="stat-value">${equipo.puntos}</span>
-            <span class="stat-label">Puntos</span>
-          </div>
-          <div class="stat">
-            <span class="stat-value">${equipo.gf}</span>
-            <span class="stat-label">Goles</span>
-          </div>
-          <div class="stat">
-            <span class="stat-value">${equipo.dg > 0 ? '+' : ''}${equipo.dg}</span>
-            <span class="stat-label">DG</span>
-          </div>
-        </div>
-      </div>
-    `;
-  });
-
   // 📅 Partidos con árbitros (ninguno arbitra su propio juego)
   const partidos = [
     { equipo1: "Los Callejeros FC", equipo2: "Los Papis", fecha: "10 Noviembre", hora: "14:00", arbitro: "Karnaugh" },
@@ -500,5 +475,6 @@
 
 </body>
 </html>
+
 
 
