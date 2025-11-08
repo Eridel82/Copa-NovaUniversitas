@@ -478,51 +478,97 @@
   ordenarYMostrar(grupoB, "tablaB");
   ordenarYMostrar(grupoFemenil, "tablaFemenil");
 
-  const iconosEquipos = {
-    "Los Callejeros FC": "⚽",
-    "Los Papis": "👨‍👦",
-    "FC SOWF": "🛡️",
-    "Karnaugh": "🔧",
-    "Los Descortezadores": "🪓",
-    "Los Chicos que Lloran": "😢",
-    "Nottingham Forest": "🌲",
-    "Girls": "💕",
-    "Agronenas": "🌾",
-    "Combinadas": "✨"
+  const coloresEquipos = {
+    "Los Callejeros FC": "rosa",
+    "Nottingham Forest": "roja",
+    "Los Papis": "blanca",
+    "Los Descortezadores": "negra",
+    "FC SOWF": "blanca",
+    "Karnaugh": "negra",
+    "Los Chicos que Lloran": "blanca",
+    "Girls": "blanca",
+    "Agronenas": "negra"
   };
 
-  const todosLosEquipos = [
-    ...grupoA.map(e => ({...e, grupo: "A"})),
-    ...grupoB.map(e => ({...e, grupo: "B"})),
-    ...grupoFemenil.map(e => ({...e, grupo: "Femenil"}))
-  ];
+  // 👕 Emojis según color
+  const emojiCamisa = {
+    blanca: "⚪",
+    negra: "⚫",
+    rosa: "🩷",
+    azul: "🔵",
+    roja: "🔴"
+  };
+
+ // ⚙️ Función que asigna colores de camiseta
+  function asignarColores(equipo1, equipo2) {
+    const colorLocal = coloresEquipos[equipo1] || "blanca";
+    let colorVisita = coloresEquipos[equipo2] || "blanca";
+
+    // Evita que los dos usen el mismo color
+    if (colorLocal === colorVisita) {
+      // Alterna el visitante a un color distinto automáticamente
+      const opcionesAlternas = ["blanca", "negra", "rosa", "azul", "roja"].filter(c => c !== colorLocal);
+      colorVisita = opcionesAlternas[Math.floor(Math.random() * opcionesAlternas.length)];
+    }
+
+    return { colorLocal, colorVisita };
+  }
 
   // 📅 Partidos con árbitros (ninguno arbitra su propio juego)
   const partidos = [
-    { equipo1: "Los Callejeros FC", equipo2: "Los Papis", fecha: "10 Noviembre", hora: "14:00", arbitro: "Karnaugh", categoria: "varonil" },
-    { equipo1: "Karnaugh", equipo2: "Los Chicos que Lloran", fecha: "10 Noviembre", hora: "15:00", arbitro: "FC SOWF", categoria: "varonil" },
-   { equipo1: "Girls", equipo2: "Agronenas", fecha: "11 Noviembre", hora: "14:00", arbitro: "Los Descortezadores", categoria: "femenil" },
-    { equipo1: "Los Descortezadores", equipo2: "FC SOWF", fecha: "11 Noviembre", hora: "15:00", arbitro: "Nottingham Forest", categoria: "varonil" },
-    { equipo1: "Karnaugh", equipo2: "Nottingham Forest", fecha: "12 Noviembre", hora: "14:00", arbitro: "Los Papis", categoria: "varonil" },
-    { equipo1: "FC SOWF", equipo2: "Los Callejeros FC", fecha: "12 Noviembre", hora: "15:00", arbitro: "Los Descortezadores", categoria: "varonil" },
-    { equipo1: "Los Descortezadores", equipo2: "Los Papis", fecha: "13 Noviembre", hora: "15:00", arbitro: "Karnaugh", categoria: "varonil" },
-    { equipo1: "Nottingham Forest", equipo2: "Los Chicos que Lloran", fecha: "14 Noviembre", hora: "15:00", arbitro: "Los Callejeros FC", categoria: "varonil" },
+  { equipo1: "Los Callejeros FC", equipo2: "Los Papis", fecha: "10 Noviembre", hora: "14:00", arbitro: "Karnaugh", categoria: "varonil" },
+  { equipo1: "Karnaugh", equipo2: "Los Chicos que Lloran", fecha: "10 Noviembre", hora: "15:00", arbitro: "FC SOWF", categoria: "varonil" },
+   //Partido Femenil
+  { equipo1: "Girls", equipo2: "Agronenas", fecha: "11 Noviembre", hora: "14:00", arbitro: "Los Descortezadores", categoria: "femenil" },
+  { equipo1: "Los Descortezadores", equipo2: "FC SOWF", fecha: "11 Noviembre", hora: "15:00", arbitro: "Nottingham Forest", categoria: "varonil" },
+  { equipo1: "Karnaugh", equipo2: "Nottingham Forest", fecha: "12 Noviembre", hora: "14:00", arbitro: "Los Papis", categoria: "varonil" },
+  { equipo1: "FC SOWF", equipo2: "Los Callejeros FC", fecha: "12 Noviembre", hora: "15:00", arbitro: "Los Descortezadores", categoria: "varonil" },
+   //partido Femenil
+  { equipo1: "Agronenas", equipo2: "*", fecha: "18 Noviembre", hora: "14:00", arbitro: "Los Descortezadores", categoria: "femenil" },
+  { equipo1: "Los Descortezadores", equipo2: "Los Papis", fecha: "13 Noviembre", hora: "15:00", arbitro: "Karnaugh", categoria: "varonil" },
+   //partido Femenil
+   { equipo1: "*", equipo2: "Girls", fecha: "18 Noviembre", hora: "14:00", arbitro: "Los Descortezadores", categoria: "femenil" },
+  { equipo1: "Nottingham Forest", equipo2: "Los Chicos que Lloran", fecha: "14 Noviembre", hora: "15:00", arbitro: "Los Callejeros FC", categoria: "varonil" },
+  
+   // Partidos cruzados entre grupos
+   //partido Femenil
+  { equipo1: "Agronenas", equipo2: "Girls", fecha: "18 Noviembre", hora: "14:00", arbitro: "Los Descortezadores", categoria: "femenil" },
+  { equipo1: "Los Callejeros FC", equipo2: "Karnaugh", fecha: "18 Noviembre", hora: "15:00", arbitro: "Los Papis", categoria: "varonil" },
+  { equipo1: "Los Descortezadores", equipo2: "Los Chicos que Lloran", fecha: "19 Noviembre", hora: "14:00", arbitro: "FC SOWF", categoria: "varonil" },
+   //partido Femenil
+   { equipo1: "*", equipo2: "Girls", fecha: "18 Noviembre", hora: "14:00", arbitro: "Los Descortezadores", categoria: "femenil" },
+  { equipo1: "FC SOWF", equipo2: "Nottingham Forest", fecha: "19 Noviembre", hora: "15:00", arbitro: "Los Callejeros FC", categoria: "varonil" },
+  { equipo1: "Los Papis", equipo2: "Karnaugh", fecha: "20 Noviembre", hora: "15:00", arbitro: "Los Descortezadores", categoria: "varonil" },
+  { equipo1: "Los Callejeros FC", equipo2: "Los Chicos que Lloran", fecha: "21 Noviembre", hora: "14:00", arbitro: "Nottingham Forest", categoria: "varonil" },
+   //partido Femenil
+   { equipo1: "Agronenas", equipo2: "*", fecha: "18 Noviembre", hora: "14:00", arbitro: "Los Descortezadores", categoria: "femenil" },
+  { equipo1: "Los Papis", equipo2: "Nottingham Forest", fecha: "21 Noviembre", hora: "15:00", arbitro: "FC SOWF", categoria: "varonil" }
+
+   // Partido agregado para balancear
+  { equipo1: "FC SOWF ", equipo2: "Los Descortezadores", fecha: "24 Noviembre", hora: "15:00", arbitro: "Los Chicos que Lloran", categoria: "varonil" }
   ];
 
+  // 🧱 Renderizado de tarjetas
   const listaPartidos = document.getElementById("listaPartidos");
+
   partidos.forEach(p => {
+    const { colorLocal, colorVisita } = asignarColores(p.equipo1, p.equipo2);
     const claseCategoria = p.categoria === "femenil" ? "femenino" : "";
+
     listaPartidos.innerHTML += `
       <div class="partido-card ${claseCategoria}">
         <div class="partido-equipos">
-          <div class="equipo-nombre">${p.equipo1}</div>
+          <div>${p.equipo1}</div>
           <div class="vs-badge">VS</div>
-          <div class="equipo-nombre" style="text-align: right;">${p.equipo2}</div>
+          <div>${p.equipo2}</div>
+        </div>
+        <div class="camisas">
+          <span>${emojiCamisa[colorLocal]}</span>
+          <span>${emojiCamisa[colorVisita]}</span>
         </div>
         <div class="partido-info">
-          <div class="fecha">📅 ${p.fecha}</div>
-          <div class="hora">⏰ ${p.hora}</div>
-          <div class="arbitro">🧑‍⚖️ Árbitro: ${p.arbitro}</div>
+          📅 ${p.fecha} | ⏰ ${p.hora} <br>
+          🧑‍⚖️ Árbitro: ${p.arbitro}
         </div>
       </div>
     `;
@@ -531,5 +577,6 @@
 
 </body>
 </html>
+
 
 
