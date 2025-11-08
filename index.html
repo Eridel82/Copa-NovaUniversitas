@@ -432,10 +432,10 @@
 <!-- SECCIÓN DE PARTIDOS -->
 <div class="partidos-section">
   <h2 class="section-header">⚽ Próximos Partidos</h2>
-  <div class="partidos-grid" id="listaPartidos"></div>
+  <div id="contenedorJornadas"></div>
 </div>
  
- <div id="contenedorJornadas"></div>
+ 
 
 <script>
   const grupoA = [
@@ -570,6 +570,7 @@
 
     let html = `
       <h2>
+       <br>
         <span>🏅 Jornada ${jornadaNum}</span>
         <span class="fecha-jornada">📅 ${fechaJornada}</span>
       </h2>
@@ -604,6 +605,7 @@
 
 </body>
 </html>
+
 
 
 
