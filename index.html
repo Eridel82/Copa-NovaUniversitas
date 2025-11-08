@@ -583,13 +583,9 @@
       html += `
         <div class="partido-card ${claseCategoria}">
           <div class="partido-equipos">
-            <div>${p.equipo1}</div>
+            <div>${emojiCamisa[colorLocal]} ${p.equipo1}</div>
             <div class="vs-badge">VS</div>
-            <div>${p.equipo2}</div>
-          </div>
-          <div class="camisas">
-            <span>${emojiCamisa[colorLocal]}</span>
-            <span>${emojiCamisa[colorVisita]}</span>
+            <div>${emojiCamisa[colorVisita]} ${p.equipo2}</div>
           </div>
           <div class="partido-info">
             ⏰ ${p.hora}<br>
@@ -605,6 +601,7 @@
 
 </body>
 </html>
+
 
 
 
