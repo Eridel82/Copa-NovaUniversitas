@@ -480,14 +480,14 @@
 
   const coloresEquipos = {
     "Los Callejeros FC": "rosa",
-    "Nottingham Forest": "roja",
+    "Nottingham Forest": "Azul",
     "Los Papis": "blanca",
     "Los Descortezadores": "negra",
-    "FC SOWF": "blanca",
-    "Karnaugh": "negra",
+    "FC SOWF": "negra",
+    "Karnaugh": "blanca",
     "Los Chicos que Lloran": "blanca",
-    "Girls": "blanca",
-    "Agronenas": "negra"
+    "Girls": "negra",
+    "Agronenas": "blanca"
   };
 
   // 👕 Emojis según color
@@ -548,7 +548,7 @@
   { equipo1: "FC SOWF ", equipo2: "Los Descortezadores", fecha: "24 Noviembre", hora: "15:00", arbitro: "Los Chicos que Lloran", categoria: "varonil" }
   ];
 
-  // 🧱 Renderizado de tarjetas
+  // 🧱 Renderizado visual
   const listaPartidos = document.getElementById("listaPartidos");
 
   partidos.forEach(p => {
@@ -567,7 +567,7 @@
           <span>${emojiCamisa[colorVisita]}</span>
         </div>
         <div class="partido-info">
-          📅 ${p.fecha} | ⏰ ${p.hora} <br>
+          📅 ${p.fecha} | ⏰ ${p.hora}<br>
           🧑‍⚖️ Árbitro: ${p.arbitro}
         </div>
       </div>
@@ -577,6 +577,7 @@
 
 </body>
 </html>
+
 
 
 
