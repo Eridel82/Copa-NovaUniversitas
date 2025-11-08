@@ -394,16 +394,16 @@
 
 <script>
   const grupoA = [
-    { nombre: "Los Callejeros FC", gf: 12, gc: 3, puntos: 12 },
-    { nombre: "Los Papis", gf: 9, gc: 5, puntos: 9 },
-    { nombre: "FC SOWF", gf: 7, gc: 6, puntos: 7 },
-    { nombre: "Karnaugh", gf: 4, gc: 8, puntos: 3 }
+    { nombre: "Los Callejeros FC", gf: 0, gc: 0, puntos: 0 },
+    { nombre: "Los Papis", gf: 0, gc: 0, puntos: 0 },
+    { nombre: "FC SOWF", gf: 0, gc: 0, puntos: 0 },
+    { nombre: "Los Descortezadores", gf: 0, gc: 0, puntos:  0}
   ];
 
   const grupoB = [
-    { nombre: "Los Descortezadores", gf: 10, gc: 4, puntos: 10 },
-    { nombre: "Los Chicos que Lloran", gf: 8, gc: 6, puntos: 7 },
-    { nombre: "Nottingham Forest", gf: 5, gc: 9, puntos: 4 }
+    { nombre: "Karnaugh", gf: 0, gc: 0, puntos: 0 },
+    { nombre: "Los Chicos que Lloran", gf: 0, gc: 0, puntos: 0 },
+    { nombre: "Nottingham Forest", gf: 0, gc: 0, puntos: 0 }
   ];
 
   function ordenarYMostrar(grupo, tablaId) {
@@ -470,10 +470,13 @@
   });
 
   const partidos = [
-    { equipo1: "Los Callejeros FC", equipo2: "Los Papis", fecha: "10 Nov", hora: "16:00" },
-    { equipo1: "FC SOWF", equipo2: "Karnaugh", fecha: "10 Nov", hora: "17:30" },
-    { equipo1: "Los Descortezadores", equipo2: "Los Chicos que Lloran", fecha: "11 Nov", hora: "15:00" },
-    { equipo1: "Nottingham Forest", equipo2: "Los Descortezadores", fecha: "11 Nov", hora: "16:30" }
+    { equipo1: "Los Callejeros FC", equipo2: "Los Papis", fecha: "10 Noviembre", hora: "14:00" },
+    { equipo1: "Karnaugh", equipo2: "Los Chicos que Lloran", fecha: "10 Noviembre", hora: "15:00" },
+    { equipo1: "Los Descortezadores", equipo2: "FC SOWF", fecha: "11 Noviembre", hora: "15:00" },
+    { equipo1: "Nottingham Forest", equipo2: "Los Chicos que Lloran", fecha: "12 Noviembre", hora: "14:00" },
+    { equipo1: "FC SOWF", equipo2: "Los Callejeros FC", fecha: "12 Noviembre", hora: "15:00" },
+    { equipo1: "Los Descortezadores", equipo2: "Los Papis", fecha: "13 Noviembre", hora: "15:00" },
+    { equipo1: "Karnaugh", equipo2: "Nottingham Forest", fecha: "14 Noviembre", hora: "15:00" },
   ];
 
   const listaPartidos = document.getElementById("listaPartidos");
@@ -496,3 +499,4 @@
 
 </body>
 </html>
+
