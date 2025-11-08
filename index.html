@@ -397,7 +397,7 @@
     { nombre: "Los Callejeros FC", gf: 0, gc: 0, puntos: 0 },
     { nombre: "Los Papis", gf: 0, gc: 0, puntos: 0 },
     { nombre: "FC SOWF", gf: 0, gc: 0, puntos: 0 },
-    { nombre: "Los Descortezadores", gf: 0, gc: 0, puntos:  0}
+    { nombre: "Los Descortezadores", gf: 0, gc: 0, puntos: 0 }
   ];
 
   const grupoB = [
@@ -428,7 +428,6 @@
   ordenarYMostrar(grupoA, "tablaA");
   ordenarYMostrar(grupoB, "tablaB");
 
-  // Mostrar todos los equipos
   const iconosEquipos = {
     "Los Callejeros FC": "⚽",
     "Los Papis": "👨‍👦",
@@ -469,14 +468,15 @@
     `;
   });
 
+  // 📅 Partidos con árbitros (ninguno arbitra su propio juego)
   const partidos = [
-    { equipo1: "Los Callejeros FC", equipo2: "Los Papis", fecha: "10 Noviembre", hora: "14:00" },
-    { equipo1: "Karnaugh", equipo2: "Los Chicos que Lloran", fecha: "10 Noviembre", hora: "15:00" },
-    { equipo1: "Los Descortezadores", equipo2: "FC SOWF", fecha: "11 Noviembre", hora: "15:00" },
-    { equipo1: "Nottingham Forest", equipo2: "Los Chicos que Lloran", fecha: "12 Noviembre", hora: "14:00" },
-    { equipo1: "FC SOWF", equipo2: "Los Callejeros FC", fecha: "12 Noviembre", hora: "15:00" },
-    { equipo1: "Los Descortezadores", equipo2: "Los Papis", fecha: "13 Noviembre", hora: "15:00" },
-    { equipo1: "Karnaugh", equipo2: "Nottingham Forest", fecha: "14 Noviembre", hora: "15:00" },
+    { equipo1: "Los Callejeros FC", equipo2: "Los Papis", fecha: "10 Noviembre", hora: "14:00", arbitro: "Karnaugh" },
+    { equipo1: "Karnaugh", equipo2: "Los Chicos que Lloran", fecha: "10 Noviembre", hora: "15:00", arbitro: "FC SOWF" },
+    { equipo1: "Los Descortezadores", equipo2: "FC SOWF", fecha: "11 Noviembre", hora: "15:00", arbitro: "Nottingham Forest" },
+    { equipo1: "Karnaugh", equipo2: "Nottingham Forest", fecha: "12 Noviembre", hora: "14:00", arbitro: "Los Papis" },
+    { equipo1: "FC SOWF", equipo2: "Los Callejeros FC", fecha: "12 Noviembre", hora: "15:00", arbitro: "Los Descortezadores" },
+    { equipo1: "Los Descortezadores", equipo2: "Los Papis", fecha: "13 Noviembre", hora: "15:00", arbitro: "Karnaugh" },
+    { equipo1: "Nottingham Forest", equipo2: "Los Chicos que Lloran", fecha: "14 Noviembre", hora: "15:00", arbitro: "Los Callejeros FC" },
   ];
 
   const listaPartidos = document.getElementById("listaPartidos");
@@ -491,6 +491,7 @@
         <div class="partido-info">
           <div class="fecha">📅 ${p.fecha}</div>
           <div class="hora">⏰ ${p.hora}</div>
+          <div class="arbitro">🧑‍⚖️ Árbitro: ${p.arbitro}</div>
         </div>
       </div>
     `;
@@ -499,4 +500,5 @@
 
 </body>
 </html>
+
 
