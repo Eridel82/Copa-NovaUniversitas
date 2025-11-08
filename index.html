@@ -509,7 +509,7 @@
     // Evita que los dos usen el mismo color
     if (colorLocal === colorVisita) {
       // Alterna el visitante a un color distinto automáticamente
-      const opcionesAlternas = ["blanca", "negra", "rosa", "azul", "roja"].filter(c => c !== colorLocal);
+      const opcionesAlternas = ["blanca", "negra"].filter(c => c !== colorLocal);
       colorVisita = opcionesAlternas[Math.floor(Math.random() * opcionesAlternas.length)];
     }
 
@@ -605,6 +605,7 @@
 
 </body>
 </html>
+
 
 
 
