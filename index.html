@@ -490,6 +490,21 @@
     "Agronenas": "negra"
   };
 
+ const iconosEquipos = {
+    "Los Callejeros FC": "⚽",
+    "Los Papis": "👨‍👦",
+    "FC SOWF": "🛡️",
+    "Karnaugh": "🔧",
+    "Los Descortezadores": "🪓",
+    "Los Chicos que Lloran": "😢",
+    "Nottingham Forest": "🌲"
+  };
+
+  const todosLosEquipos = [
+    ...grupoA.map(e => ({...e, grupo: "A"})),
+    ...grupoB.map(e => ({...e, grupo: "B"}))
+  ];
+
   // 👕 Emojis según color
   const emojiCamisa = {
     blanca: "⚪",
@@ -577,6 +592,7 @@
 
 </body>
 </html>
+
 
 
 
