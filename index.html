@@ -315,6 +315,111 @@
     align-items: center;
     gap: 5px;
   }
+
+  /* Estilos para la tabla de goleadores */
+  .goleadores-section {
+    max-width: 1200px;
+    background: white;
+    margin: 0 auto 50px;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+  }
+
+  .goleadores-stats {
+    display: flex;
+    justify-content: space-around;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 15px;
+    margin-bottom: 30px;
+  }
+
+  .goleadores-stats .stat-box {
+    text-align: center;
+  }
+
+  .goleadores-stats .stat-number {
+    font-size: 2em;
+    font-weight: bold;
+    color: #667eea;
+  }
+
+  .goleadores-stats .stat-label {
+    color: #6c757d;
+    font-size: 0.9em;
+    margin-top: 5px;
+  }
+
+  .goleadores-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .goleadores-table thead {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+  }
+
+  .goleadores-table th {
+    padding: 15px;
+    text-align: left;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 14px;
+  }
+
+  .goleadores-table td {
+    padding: 15px;
+    border-bottom: 1px solid #e9ecef;
+  }
+
+  .goleadores-table tbody tr {
+    transition: background 0.2s;
+  }
+
+  .goleadores-table tbody tr:hover {
+    background: #f8f9fa;
+  }
+
+  .goleadores-table tbody tr:nth-child(1) {
+    background: linear-gradient(to right, #ffd70020, transparent);
+  }
+
+  .goleadores-table tbody tr:nth-child(2) {
+    background: linear-gradient(to right, #c0c0c020, transparent);
+  }
+
+  .goleadores-table tbody tr:nth-child(3) {
+    background: linear-gradient(to right, #cd7f3220, transparent);
+  }
+
+  .position-cell {
+    font-weight: bold;
+    color: #667eea;
+    font-size: 18px;
+  }
+
+  .player-name-cell {
+    font-weight: 600;
+    color: #212529;
+  }
+
+  .team-name-cell {
+    color: #6c757d;
+  }
+
+  .goals-cell {
+    font-weight: bold;
+    color: #28a745;
+    font-size: 20px;
+    text-align: center;
+  }
+
+  .trophy-emoji {
+    font-size: 24px;
+    margin-left: 8px;
+  }
   
   @media (max-width: 768px) {
     body {
@@ -338,7 +443,7 @@
       grid-template-columns: 1fr;
     }
     
-    .partidos-section, .equipos-section {
+    .partidos-section, .equipos-section, .goleadores-section {
       padding: 20px 15px;
     }
     
@@ -361,6 +466,17 @@
       font-size: 0.85em;
       flex-wrap: wrap;
       gap: 8px;
+    }
+
+    .goleadores-stats {
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .goleadores-table th,
+    .goleadores-table td {
+      padding: 10px;
+      font-size: 14px;
     }
   }
 </style>
@@ -429,6 +545,39 @@
   </div>
 </div>
 
+<!-- SECCIÓN DE GOLEADORES -->
+<div class="goleadores-section">
+  <h2 class="section-header">⚽ Tabla de Goleadores</h2>
+  
+  <div class="goleadores-stats">
+    <div class="stat-box">
+      <div class="stat-number" id="totalJugadores">0</div>
+      <div class="stat-label">Jugadores</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-number" id="totalGoles">0</div>
+      <div class="stat-label">Goles Totales</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-number" id="totalEquipos">0</div>
+      <div class="stat-label">Equipos</div>
+    </div>
+  </div>
+
+  <table class="goleadores-table">
+    <thead>
+      <tr>
+        <th>Posición</th>
+        <th>Jugador</th>
+        <th>Equipo</th>
+        <th style="text-align: center;">Goles</th>
+      </tr>
+    </thead>
+    <tbody id="goleadoresBody">
+    </tbody>
+  </table>
+</div>
+
 <!-- SECCIÓN DE PARTIDOS -->
 <div class="partidos-section">
   <h2 class="section-header">⚽ Próximos Partidos</h2>
@@ -440,7 +589,7 @@
 <script>
   const grupoA = [
     { nombre: "Los Callejeros FC", gf: 5, gc: 1, puntos: 3 },
-    { nombre: "Los Papis", gf: 1, gc: 5, puntos: 0 },
+    { nombre: "Los Papis", gf: 1, gc: 6, puntos: 0 },
     { nombre: "FC SOWF", gf: 0, gc: 0, puntos: 0 },
     { nombre: "Los Descortezadores", gf: 0, gc: 0, puntos: 0 }
   ];
@@ -455,6 +604,16 @@
     { nombre: "Girls", gf: 0, gc: 0, puntos: 0 },
     { nombre: "Agronenas", gf: 0, gc: 0, puntos: 0 },
     { nombre: "Equipo 3", gf: 0, gc: 0, puntos: 0 }
+  ];
+
+  // ARREGLO DE GOLEADORES - Edita aquí para agregar o modificar jugadores
+  const goleadores = [
+    { nombre: "Rey de Jesus", equipo: "Los Callejeros FC", goles: 2 },
+    { nombre: "Perpetuo", equipo: "Los Callejeros FC", goles: 2 },
+    { nombre: "Francisco Rey", equipo: "Los Callejeros FC", goles: 1 },
+    { nombre: "Luis Angel", equipo: "Karnaugh", goles: 2 },
+   { nombre: "Rolando Abimael", equipo: "Karnaugh", goles: 1 },
+   { nombre: "Felix", equipo: "Karnaugh", goles: 3 },
   ];
 
   function ordenarYMostrar(grupo, tablaId) {
@@ -476,9 +635,59 @@
     });
   }
 
+  function actualizarTablaGoleadores() {
+    // Ordenar por goles (mayor a menor)
+    goleadores.sort((a, b) => b.goles - a.goles);
+    
+    const tbody = document.getElementById('goleadoresBody');
+    
+    if (goleadores.length === 0) {
+      tbody.innerHTML = `
+        <tr>
+          <td colspan="4" style="text-align: center; color: #999; padding: 40px;">
+            No hay goleadores registrados
+          </td>
+        </tr>
+      `;
+      return;
+    }
+    
+    tbody.innerHTML = goleadores.map((g, index) => {
+      let trophy = '';
+      if (index === 0) trophy = '<span class="trophy-emoji">🥇</span>';
+      else if (index === 1) trophy = '<span class="trophy-emoji">🥈</span>';
+      else if (index === 2) trophy = '<span class="trophy-emoji">🥉</span>';
+      
+      return `
+        <tr>
+          <td class="position-cell">#${index + 1}${trophy}</td>
+          <td class="player-name-cell">${g.nombre}</td>
+          <td class="team-name-cell">${g.equipo}</td>
+          <td class="goals-cell">${g.goles}</td>
+        </tr>
+      `;
+    }).join('');
+    
+    actualizarEstadisticasGoleadores();
+  }
+
+  function actualizarEstadisticasGoleadores() {
+    // Total de jugadores
+    document.getElementById('totalJugadores').textContent = goleadores.length;
+    
+    // Total de goles
+    const totalGoles = goleadores.reduce((sum, g) => sum + g.goles, 0);
+    document.getElementById('totalGoles').textContent = totalGoles;
+    
+    // Total de equipos únicos
+    const equipos = new Set(goleadores.map(g => g.equipo));
+    document.getElementById('totalEquipos').textContent = equipos.size;
+  }
+
   ordenarYMostrar(grupoA, "tablaA");
   ordenarYMostrar(grupoB, "tablaB");
   ordenarYMostrar(grupoFemenil, "tablaFemenil");
+  actualizarTablaGoleadores();
 
   const coloresEquipos = {
     "Los Callejeros FC": "rosa",
@@ -602,26 +811,3 @@
 
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
