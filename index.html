@@ -326,6 +326,10 @@
     box-shadow: 0 20px 60px rgba(0,0,0,0.3);
   }
 
+  .goleadores-section.femenina {
+    background: linear-gradient(135deg, #fff5f7 0%, #ffffff 100%);
+  }
+
   .goleadores-stats {
     display: flex;
     justify-content: space-around;
@@ -345,6 +349,10 @@
     color: #667eea;
   }
 
+  .goleadores-section.femenina .goleadores-stats .stat-number {
+    color: #ec4899;
+  }
+
   .goleadores-stats .stat-label {
     color: #6c757d;
     font-size: 0.9em;
@@ -359,6 +367,10 @@
   .goleadores-table thead {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
+  }
+
+  .goleadores-section.femenina .goleadores-table thead {
+    background: linear-gradient(135deg, #ec4899 0%, #be185d 100%);
   }
 
   .goleadores-table th {
@@ -400,6 +412,10 @@
     font-size: 18px;
   }
 
+  .goleadores-section.femenina .position-cell {
+    color: #ec4899;
+  }
+
   .player-name-cell {
     font-weight: 600;
     color: #212529;
@@ -414,6 +430,10 @@
     color: #28a745;
     font-size: 20px;
     text-align: center;
+  }
+
+  .goleadores-section.femenina .goals-cell {
+    color: #e91e63;
   }
 
   .trophy-emoji {
@@ -545,9 +565,9 @@
   </div>
 </div>
 
-<!-- SECCIÓN DE GOLEADORES -->
+<!-- SECCIÓN DE GOLEADORES VARONIL -->
 <div class="goleadores-section">
-  <h2 class="section-header">⚽ Tabla de Goleadores</h2>
+  <h2 class="section-header">⚽ Tabla de Goleadores - Varonil</h2>
   
   <div class="goleadores-stats">
     <div class="stat-box">
@@ -578,6 +598,39 @@
   </table>
 </div>
 
+<!-- SECCIÓN DE GOLEADORAS FEMENIL -->
+<div class="goleadores-section femenina">
+  <h2 class="section-header">⚽ Tabla de Goleadoras - Femenil 👩‍🦰</h2>
+  
+  <div class="goleadores-stats">
+    <div class="stat-box">
+      <div class="stat-number" id="totalJugadorasFem">0</div>
+      <div class="stat-label">Jugadoras</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-number" id="totalGolesFem">0</div>
+      <div class="stat-label">Goles Totales</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-number" id="totalEquiposFem">0</div>
+      <div class="stat-label">Equipos</div>
+    </div>
+  </div>
+
+  <table class="goleadores-table">
+    <thead>
+      <tr>
+        <th>Posición</th>
+        <th>Jugadora</th>
+        <th>Equipo</th>
+        <th style="text-align: center;">Goles</th>
+      </tr>
+    </thead>
+    <tbody id="goleadorasBody">
+    </tbody>
+  </table>
+</div>
+
 <!-- SECCIÓN DE PARTIDOS -->
 <div class="partidos-section">
   <h2 class="section-header">⚽ Próximos Partidos</h2>
@@ -590,8 +643,8 @@
   const grupoA = [
     { nombre: "Los Callejeros FC", gf: 5, gc: 1, puntos: 3 },
     { nombre: "Los Papis", gf: 1, gc: 5, puntos: 0 },
-    { nombre: "FC SOWF", gf: 0, gc: 0, puntos: 0 },
-    { nombre: "Los Descortezadores", gf: 0, gc: 0, puntos: 0 }
+    { nombre: "FC SOWF", gf: 1, gc: 5, puntos: 0 },
+    { nombre: "Los Descortezadores", gf: 5, gc: 1, puntos: 3 }
   ];
 
   const grupoB = [
@@ -601,20 +654,29 @@
   ];
 
   const grupoFemenil = [
-    { nombre: "Girls", gf: 0, gc: 0, puntos: 0 },
-    { nombre: "Agronenas", gf: 0, gc: 0, puntos: 0 },
+    { nombre: "Girls", gf: 1, gc: 2, puntos: 0 },
+    { nombre: "Agronenas", gf: 2, gc: 1, puntos: 3 },
     { nombre: "Error 104: Rival no encontrado", gf: 0, gc: 0, puntos: 0 }
   ];
 
-  // ARREGLO DE GOLEADORES - Edita aquí para agregar o modificar jugadores
+  // ARREGLO DE GOLEADORES VARONIL - Edita aquí para agregar o modificar jugadores
   const goleadores = [
     { nombre: "Rey de Jesus", equipo: "Los Callejeros FC", goles: 2 },
+    { nombre: "Luis", equipo: "Los Descortezadores", goles: 2 },
+    { nombre: "Enrique", equipo: "Los Descortezadores", goles: 2 },
     { nombre: "Perpetuo", equipo: "Los Callejeros FC", goles: 2 },
     { nombre: "Francisco Rey", equipo: "Los Callejeros FC", goles: 1 },
     { nombre: "Luis Angel", equipo: "Karnaugh", goles: 2 },
     { nombre: "Rolando Abimael", equipo: "Karnaugh", goles: 1 },
     { nombre: "Felix", equipo: "Karnaugh", goles: 3 },
     { nombre: "abisai", equipo: "Los papis", goles: 1 },
+    { nombre: "Oscar", equipo: "FC SOWF", goles: 1 }
+  ];
+
+  // ARREGLO DE GOLEADORAS FEMENIL - Edita aquí para agregar o modificar jugadoras
+  const goleadoras = [
+    { nombre: "Selina", equipo: "Las agronenas", goles: 2 },
+    { nombre: "Alejandra", equipo: "Girls", goles: 1 }
   ];
 
   function ordenarYMostrar(grupo, tablaId) {
@@ -653,7 +715,10 @@
       return;
     }
     
-    tbody.innerHTML = goleadores.map((g, index) => {
+    // Mostrar solo los primeros 5
+    const top5 = goleadores.slice(0, 5);
+    
+    tbody.innerHTML = top5.map((g, index) => {
       let trophy = '';
       if (index === 0) trophy = '<span class="trophy-emoji">🥇</span>';
       else if (index === 1) trophy = '<span class="trophy-emoji">🥈</span>';
@@ -685,10 +750,63 @@
     document.getElementById('totalEquipos').textContent = equipos.size;
   }
 
+  function actualizarTablaGoleadoras() {
+    // Ordenar por goles (mayor a menor)
+    goleadoras.sort((a, b) => b.goles - a.goles);
+    
+    const tbody = document.getElementById('goleadorasBody');
+    
+    if (goleadoras.length === 0) {
+      tbody.innerHTML = `
+        <tr>
+          <td colspan="4" style="text-align: center; color: #999; padding: 40px;">
+            No hay goleadoras registradas
+          </td>
+        </tr>
+      `;
+      return;
+    }
+    
+    // Mostrar solo las primeras 5
+    const top5 = goleadoras.slice(0, 5);
+    
+    tbody.innerHTML = top5.map((g, index) => {
+      let trophy = '';
+      if (index === 0) trophy = '<span class="trophy-emoji">🥇</span>';
+      else if (index === 1) trophy = '<span class="trophy-emoji">🥈</span>';
+      else if (index === 2) trophy = '<span class="trophy-emoji">🥉</span>';
+      
+      return `
+        <tr>
+          <td class="position-cell">#${index + 1}${trophy}</td>
+          <td class="player-name-cell">${g.nombre}</td>
+          <td class="team-name-cell">${g.equipo}</td>
+          <td class="goals-cell">${g.goles}</td>
+        </tr>
+      `;
+    }).join('');
+    
+    actualizarEstadisticasGoleadoras();
+  }
+
+  function actualizarEstadisticasGoleadoras() {
+    // Total de jugadoras
+    document.getElementById('totalJugadorasFem').textContent = goleadoras.length;
+    
+    // Total de goles
+    const totalGoles = goleadoras.reduce((sum, g) => sum + g.goles, 0);
+    document.getElementById('totalGolesFem').textContent = totalGoles;
+    
+    // Total de equipos únicos
+    const equipos = new Set(goleadoras.map(g => g.equipo));
+    document.getElementById('totalEquiposFem').textContent = equipos.size;
+  }
+
   ordenarYMostrar(grupoA, "tablaA");
   ordenarYMostrar(grupoB, "tablaB");
   ordenarYMostrar(grupoFemenil, "tablaFemenil");
   actualizarTablaGoleadores();
+  actualizarTablaGoleadoras();
 
   const coloresEquipos = {
     "Los Callejeros FC": "rosa",
@@ -730,10 +848,10 @@
   // 📅 Partidos con árbitros (ninguno arbitra su propio juego)
   const partidos = [
   /*{ jornada: 1, equipo1: "Los Callejeros FC", equipo2: "Los Papis", fecha: "Lunes 10 Noviembre ", hora: "2:00 pm", arbitro: "Karnaugh", categoria: "varonil" },
-  { jornada: 1, equipo1: "Karnaugh", equipo2: "Los Chicos que Lloran", fecha: "Lunes 10 Noviembre ", hora: "3:00 pm", arbitro: "FC SOWF", categoria: "varonil" },*/
+  { jornada: 1, equipo1: "Karnaugh", equipo2: "Los Chicos que Lloran", fecha: "Lunes 10 Noviembre ", hora: "3:00 pm", arbitro: "FC SOWF", categoria: "varonil" },
    //Partido Femenil
   { jornada: 2, equipo1: "Girls", equipo2: "Agronenas", fecha: "Martes 11 Noviembre", hora: "2:00 pm", arbitro: "Nottingham Forest", categoria: "femenil" },
-  { jornada: 2, equipo1: "Los Descortezadores", equipo2: "FC SOWF", fecha: "Martes 11 Noviembre Martes", hora: "3:00 pm", arbitro: "Los papis", categoria: "varonil" },
+  { jornada: 2, equipo1: "Los Descortezadores", equipo2: "FC SOWF", fecha: "Martes 11 Noviembre Martes", hora: "3:00 pm", arbitro: "Los papis", categoria: "varonil" },*/
    
   { jornada: 3, equipo1: "FC SOWF", equipo2: "Los Callejeros FC", fecha: "Miercoles 12 Noviembre", hora: "2:00 pm", arbitro: "Los Descortezadores", categoria: "varonil" },
    { jornada: 3, equipo1: "Karnaugh", equipo2: "Nottingham Forest", fecha: "Miercoles 12 Noviembre Miercoles", hora: "3:00 pm", arbitro: "Los Callejeros FC", categoria: "varonil" },
@@ -812,9 +930,3 @@
 
 </body>
 </html>
-
-
-
-
-
-
