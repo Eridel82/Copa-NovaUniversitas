@@ -359,9 +359,15 @@
     margin-top: 5px;
   }
 
+  .goleadores-table-wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
   .goleadores-table {
     width: 100%;
     border-collapse: collapse;
+    min-width: 500px;
   }
 
   .goleadores-table thead {
@@ -493,10 +499,37 @@
       gap: 15px;
     }
 
+    .goleadores-table-wrapper {
+      margin: 0 -20px;
+      padding: 0 20px;
+    }
+
+    .goleadores-table {
+      min-width: 100%;
+      font-size: 13px;
+    }
+
     .goleadores-table th,
     .goleadores-table td {
-      padding: 10px;
-      font-size: 14px;
+      padding: 10px 8px;
+      font-size: 13px;
+    }
+
+    .position-cell {
+      font-size: 16px;
+    }
+
+    .goals-cell {
+      font-size: 18px;
+    }
+
+    .trophy-emoji {
+      font-size: 18px;
+    }
+
+    .player-name-cell,
+    .team-name-cell {
+      font-size: 13px;
     }
   }
 </style>
@@ -584,18 +617,20 @@
     </div>
   </div>
 
-  <table class="goleadores-table">
-    <thead>
-      <tr>
-        <th>Posición</th>
-        <th>Jugador</th>
-        <th>Equipo</th>
-        <th style="text-align: center;">Goles</th>
-      </tr>
-    </thead>
-    <tbody id="goleadoresBody">
-    </tbody>
-  </table>
+  <div class="goleadores-table-wrapper">
+    <table class="goleadores-table">
+      <thead>
+        <tr>
+          <th>Posición</th>
+          <th>Jugador</th>
+          <th>Equipo</th>
+          <th style="text-align: center;">Goles</th>
+        </tr>
+      </thead>
+      <tbody id="goleadoresBody">
+      </tbody>
+    </table>
+  </div>
 </div>
 
 <!-- SECCIÓN DE GOLEADORAS FEMENIL -->
@@ -617,18 +652,20 @@
     </div>
   </div>
 
-  <table class="goleadores-table">
-    <thead>
-      <tr>
-        <th>Posición</th>
-        <th>Jugadora</th>
-        <th>Equipo</th>
-        <th style="text-align: center;">Goles</th>
-      </tr>
-    </thead>
-    <tbody id="goleadorasBody">
-    </tbody>
-  </table>
+  <div class="goleadores-table-wrapper">
+    <table class="goleadores-table">
+      <thead>
+        <tr>
+          <th>Posición</th>
+          <th>Jugadora</th>
+          <th>Equipo</th>
+          <th style="text-align: center;">Goles</th>
+        </tr>
+      </thead>
+      <tbody id="goleadorasBody">
+      </tbody>
+    </table>
+  </div>
 </div>
 
 <!-- SECCIÓN DE PARTIDOS -->
@@ -662,8 +699,8 @@
   // ARREGLO DE GOLEADORES VARONIL - Edita aquí para agregar o modificar jugadores
   const goleadores = [
     { nombre: "Rey de Jesus", equipo: "Los Callejeros FC", goles: 2 },
-    { nombre: "Luis", equipo: "Los Descortezadores", goles: 4 },
-    { nombre: "Enrique", equipo: "Los Descortezadores", goles: 1 },
+    { nombre: "Luis", equipo: "Los Descortezadores", goles: 2 },
+    { nombre: "Enrique", equipo: "Los Descortezadores", goles: 2 },
     { nombre: "Perpetuo", equipo: "Los Callejeros FC", goles: 2 },
     { nombre: "Francisco Rey", equipo: "Los Callejeros FC", goles: 1 },
     { nombre: "Luis Angel", equipo: "Karnaugh", goles: 2 },
@@ -675,7 +712,7 @@
 
   // ARREGLO DE GOLEADORAS FEMENIL - Edita aquí para agregar o modificar jugadoras
   const goleadoras = [
-    { nombre: "Celina", equipo: "Las agronenas", goles: 2 },
+    { nombre: "Selina", equipo: "Las agronenas", goles: 2 },
     { nombre: "Alejandra", equipo: "Girls", goles: 1 }
   ];
 
@@ -848,20 +885,18 @@
   // 📅 Partidos con árbitros (ninguno arbitra su propio juego)
   const partidos = [
   /*{ jornada: 1, equipo1: "Los Callejeros FC", equipo2: "Los Papis", fecha: "Lunes 10 Noviembre ", hora: "2:00 pm", arbitro: "Karnaugh", categoria: "varonil" },
-  { jornada: 1, equipo1: "Karnaugh", equipo2: "Los Chicos que Lloran", fecha: "Lunes 10 Noviembre ", hora: "3:00 pm", arbitro: "FC SOWF", categoria: "varonil" },
+  { jornada: 1, equipo1: "Karnaugh", equipo2: "Los Chicos que Lloran", fecha: "Lunes 10 Noviembre ", hora: "3:00 pm", arbitro: "FC SOWF", categoria: "varonil" },*/
    //Partido Femenil
   { jornada: 2, equipo1: "Girls", equipo2: "Agronenas", fecha: "Martes 11 Noviembre", hora: "2:00 pm", arbitro: "Nottingham Forest", categoria: "femenil" },
-  { jornada: 2, equipo1: "Los Descortezadores", equipo2: "FC SOWF", fecha: "Martes 11 Noviembre Martes", hora: "3:00 pm", arbitro: "Los papis", categoria: "varonil" },*/
+  { jornada: 2, equipo1: "Los Descortezadores", equipo2: "FC SOWF", fecha: "Martes 11 Noviembre Martes", hora: "3:00 pm", arbitro: "Los papis", categoria: "varonil" },
    
   { jornada: 3, equipo1: "FC SOWF", equipo2: "Los Callejeros FC", fecha: "Miercoles 12 Noviembre", hora: "2:00 pm", arbitro: "Los Descortezadores", categoria: "varonil" },
    { jornada: 3, equipo1: "Karnaugh", equipo2: "Nottingham Forest", fecha: "Miercoles 12 Noviembre Miercoles", hora: "3:00 pm", arbitro: "Los Callejeros FC", categoria: "varonil" },
-
    //partido Femenil
-  { jornada: 4, equipo1: "Girls", equipo2: "Error 104", fecha: "Jueves 13 Noviembre", hora: "2:00 pm", arbitro: "Los Papis", categoria: "femenil" },
+  { jornada: 4, equipo1: "Agronenas", equipo2: "Error 104", fecha: "Jueves 13 Noviembre", hora: "2:00 pm", arbitro: "Los Callejeros FC", categoria: "femenil" },
   { jornada: 4, equipo1: "Los Descortezadores", equipo2: "Los Papis", fecha: "Jueves 13 Noviembre", hora: "3:00 pm", arbitro: "Nottingham Forest", categoria: "varonil" },
-
    //partido Femenil
-  { jornada: 5, equipo1: "Agronenas", equipo2: "Error 104", fecha: "Viernes 14 Noviembre", hora: "2:00 pm", arbitro: "Los Callejeros FC", categoria: "femenil" },
+  { jornada: 5, equipo1: "Girls", equipo2: "Error 104", fecha: "Viernes 14 Noviembre", hora: "2:00 pm", arbitro: "Los Descortezadores", categoria: "femenil" },
   { jornada: 5, equipo1: "Nottingham Forest", equipo2: "Los Chicos que Lloran", fecha: "Viernes 14 Noviembre", hora: "3:00 pm", arbitro: "Los Callejeros FC", categoria: "varonil" },
   
    /*// Partidos cruzados entre grupos
@@ -932,7 +967,3 @@
 
 </body>
 </html>
-
-
-
-
