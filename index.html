@@ -682,8 +682,8 @@
   const resultadosPartidos = [
     // GRUPO A
     { equipo1: "Los Callejeros FC", goles1: 5, equipo2: "Los Papis", goles2: 1, grupo: "A" },
-    { equipo1: "Los Descortezadores", goles1: 5, equipo2: "FC SOWF", goles2: 1, grupo: "A" },
-    { equipo1: "FC SOWF", goles1: 0, equipo2: "Los Callejeros FC", goles2: 6, grupo: "A" },
+    { equipo1: "Los Descortezadores", goles1: 5, goles2: 1, grupo: "A" },
+    { equipo1: "Los Callejeros FC", goles1: 6, goles2: 0, grupo: "A" },
     { equipo1: "Los Descortezadores", goles1: 1,equipo2: "Los Papis", goles2: 0, grupo: "A" }, // Empate 0-0
     
     // GRUPO B
@@ -698,7 +698,7 @@
   ];
 
   // Equipos iniciales (solo nombres)
-  const equiposGrupoA = ["Los Callejeros FC", "Los Papis", "FC SOWF", "Los Descortezadores"];
+  const equiposGrupoA = ["Los Callejeros FC", "Los Papis", "Los Descortezadores"];
   const equiposGrupoB = ["Karnaugh", "Los Chicos que Lloran", "Nottingham Forest"];
   const equiposGrupoFemenil = ["Girls", "Agronenas", "Error 104: Rival no encontrado"];
 
@@ -724,7 +724,16 @@
         const equipo1 = tabla.find(e => e.nombre === resultado.equipo1);
         const equipo2 = tabla.find(e => e.nombre === resultado.equipo2);
 
-        if (!equipo1 || !equipo2) return;
+        if (!equipo1) return;
+       
+        if (!equipo2) {
+          equipo1.pj++;
+          equipo1.gf += resultado.goles1;
+          equipo1.gc += resultado.goles2 || 0;
+          equipo1.pg++;
+          equipo1.puntos += 3;
+          return;
+         }
 
         // Actualizar estadísticas
         equipo1.pj++;
@@ -1066,6 +1075,7 @@
 
 </body>
 </html>
+
 
 
 
