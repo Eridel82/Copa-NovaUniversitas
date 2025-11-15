@@ -917,8 +917,8 @@
     tbody.innerHTML = top5.map((g, index) => {
       let trophy = '';
       if (index === 0) trophy = '<span class="trophy-emoji">🥇</span>';
-      else if (index === 1) trophy = '<span class="trophy-emoji">🥈</span>';
-      else if (index === 2) trophy = '<span class="trophy-emoji">🥉</span>';
+      else if (index === 1) trophy = '<span class="trophy-emoji"></span>';
+      else if (index === 2) trophy = '<span class="trophy-emoji"></span>';
       
       return `
         <tr>
@@ -1075,6 +1075,7 @@
 
 </body>
 </html>
+
 
 
 
