@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Copa NovaUniversitas - Fase Final</title>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: "Inter", "Segoe UI", sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    padding: 20px;
+  }
+  
+  .header {
+    text-align: center;
+    color: white;
+    margin-bottom: 40px;
+    padding: 40px 20px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    max-width: 1400px;
+    margin: 0 auto 40px;
+  }
+  
+  .header h1 {
+    font-size: 3em;
+    font-weight: 800;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+    letter-spacing: -1px;
+  }
+  
+  .header .subtitle {
+    font-size: 1.2em;
+    opacity: 0.9;
+    font-weight: 300;
+  }
+
+  .nav-buttons {
+    margin-top: 20px;
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .nav-button {
+    display: inline-block;
+    padding: 12px 30px;
+    background: white;
+    color: #667eea;
+    text-decoration: none;
+    border-radius: 25px;
+    font-weight: 600;
+    transition: all 0.3s;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  }
+
+  .nav-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+  }
+
+  .nav-button.active {
+    background: linear-gradient(135deg, #5100ff 0%, #c330f9 100%);
+    color: #2c3e50;
+  }
+  
+  .trophy-icon {
+    font-size: 4em;
+    margin-bottom: 15px;
+    animation: bounce 2s infinite;
+  }
+  
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+  
+  .section {
+    max-width: 1400px;
+    background: white;
+    margin: 0 auto 50px;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+  }
+
+  .section.femenina {
+    background: linear-gradient(135deg, #fff5f7 0%, #ffffff 100%);
+  }
+  
+  .section-header {
+    text-align: center;
+    margin-bottom: 40px;
+    color: #2c3e50;
+    font-size: 2em;
+    font-weight: 700;
+  }
+
+  .section.femenina .section-header {
+    color: #ec4899;
+  }
+
+  /* Bracket Styles */
+  .bracket-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 40px;
+    margin: 40px 0;
+  }
+
+  .bracket-round {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 80px;
+  }
+
+  .bracket-match {
+    background: hsl(275, 100%, 92%);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    position: relative;
+  }
+
+  .section.femenina .bracket-match {
+    background: linear-gradient(135deg, #fce7f3 0%, #fbcfe8 100%);
+  }
+
+  .match-title {
+    text-align: center;
+    font-weight: 700;
+    color: #667eea;
+    margin-bottom: 15px;
+    font-size: 0.9em;
+    text-transform: uppercase;
+  }
+
+  .section.femenina .match-title {
+    color: #ec4899;
+  }
+
+  .match-teams {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .team-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 15px;
+    background: white;
+    border-radius: 8px;
+    transition: all 0.2s;
+  }
+
+  .team-row:hover {
+    transform: translateX(5px);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+
+  .team-row.winner {
+    background: linear-gradient(90deg, hsl(236, 100%, 82%) 0%, #ffffff 100%);
+    font-weight: 700;
+    border: 2px solid #7825ff;
+  }
+
+  .section.femenina .team-row.winner {
+    background: linear-gradient(90deg, #fce7f3 0%, #ffffff 100%);
+    border: 2px solid #ec4899;
+  }
+
+  .team-name {
+    flex: 1;
+    font-weight: 600;
+    color: #2c3e50;
+  }
+
+  .team-score {
+    font-size: 1.3em;
+    font-weight: 700;
+    color: #667eea;
+    min-width: 40px;
+    text-align: center;
+  }
+
+  .section.femenina .team-score {
+    color: #ec4899;
+  }
+
+  .match-aggregate {
+    text-align: center;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 2px dashed #dee2e6;
+    font-size: 0.9em;
+    color: #6c757d;
+    font-weight: 700;
+  }
+
+  .match-aggregate.winner-aggregate {
+    color: #28a745;
+    font-size: 1em;
+  }
+
+  .final-container {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .champion-section {
+    text-align: center;
+    padding: 40px;
+    background: linear-gradient(135deg, #1e00ff 0%, #c74eff 100%);
+    border-radius: 20px;
+    margin-top: 40px;
+    box-shadow: 0 10px 30px rgba(227, 47, 255, 0.4);
+  }
+
+  .section.femenina .champion-section {
+    background: linear-gradient(135deg, #ff69b4 0%, #ffb6c1 100%);
+    box-shadow: 0 10px 30px rgba(236, 72, 153, 0.4);
+  }
+
+  .champion-icon {
+    font-size: 5em;
+    margin-bottom: 15px;
+    animation: rotate 3s linear infinite;
+  }
+
+  @keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  .champion-title {
+    font-size: 2em;
+    font-weight: 800;
+    color: #2c3e50;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+  }
+
+  .champion-name {
+    font-size: 2.5em;
+    font-weight: 900;
+    color: #fff;
+    text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+    margin-bottom: 20px;
+  }
+
+  .champion-stats {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 20px;
+  }
+
+  .champion-stat {
+    background: rgba(255,255,255,0.3);
+    padding: 15px 25px;
+    border-radius: 10px;
+  }
+
+  .champion-stat-value {
+    font-size: 2em;
+    font-weight: 900;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+  }
+
+  .champion-stat-label {
+    font-size: 0.9em;
+    color: #2c3e50;
+    font-weight: 600;
+  }
+
+  /* Goleadores Styles */
+  .goleadores-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    margin-top: 30px;
+  }
+
+  .goleador-card {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 25px;
+    border-radius: 15px;
+    color: white;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s;
+  }
+
+  .goleador-card:hover {
+    transform: translateY(-5px);
+  }
+
+  .section.femenina .goleador-card {
+    background: linear-gradient(135deg, #ec4899 0%, #be185d 100%);
+  }
+
+  .goleador-position {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-size: 3em;
+    opacity: 0.3;
+    font-weight: 900;
+  }
+
+  .goleador-trophy {
+    font-size: 3em;
+    margin-bottom: 10px;
+  }
+
+  .goleador-name {
+    font-size: 1.5em;
+    font-weight: 700;
+    margin-bottom: 5px;
+  }
+
+  .goleador-team {
+    font-size: 0.9em;
+    opacity: 0.9;
+    margin-bottom: 15px;
+  }
+
+  .goleador-goals {
+    font-size: 3em;
+    font-weight: 900;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+  }
+
+  .goleador-label {
+    font-size: 0.8em;
+    opacity: 0.9;
+    text-transform: uppercase;
+  }
+
+  @media (max-width: 768px) {
+    body {
+      padding: 10px;
+    }
+    
+    .header h1 {
+      font-size: 2em;
+    }
+    
+    .bracket-container {
+      flex-direction: column;
+      gap: 40px;
+    }
+
+    .bracket-round {
+      width: 100%;
+      gap: 30px;
+    }
+
+    .section {
+      padding: 20px 15px;
+    }
+
+    .goleadores-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .champion-stats {
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .nav-buttons {
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .nav-button {
+      width: 100%;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="trophy-icon">🏆</div>
+  <h1>Copa NovaUniversitas</h1>
+  <div class="subtitle">Fase Final - Temporada 2025</div>
+  <div class="nav-buttons">
+    <a href="index.html" class="nav-button">📊 Fase de Grupos</a>
+    <a href="#" class="nav-button active">🏆 Fase Final</a>
+  </div>
+</div>
+
+<!-- SEMIFINALES Y FINAL VARONIL -->
+<div class="section">
+  <h2 class="section-header">⚽ Llave Varonil</h2>
+  
+  <div class="bracket-container">
+    <!-- SEMIFINALES -->
+    <div class="bracket-round">
+      <div class="bracket-match">
+        <div class="match-title">Semifinal 1 - IDA</div>
+        <div class="match-teams">
+          <div class="team-row ">
+            <span class="team-name">1er Lugar grupo A</span>
+            <span class="team-score">0</span>
+          </div>
+          <div class="team-row">
+            <span class="team-name">2do Lugar grupo B</span>
+            <span class="team-score">0</span>
+          </div>
+        </div>
+      </div>
+
+      <!--<div class="bracket-match">
+        <div class="match-title">Semifinal 1 - VUELTA</div>
+        <div class="match-teams">
+          <div class="team-row">
+            <span class="team-name">2do Lugar grupo B</span>
+            <span class="team-score">0</span>
+          </div>
+          <div class="team-row winner">
+            <span class="team-name">1er Lugar grupo A</span>
+            <span class="team-score">0</span>
+          </div>
+        </div>
+        <div class="match-aggregate winner-aggregate">
+          ✅
+        </div>
+      </div>-->
+
+      <div class="bracket-match">
+        <div class="match-title">Semifinal 2 - IDA</div>
+        <div class="match-teams">
+          <div class="team-row ">
+            <span class="team-name">1er Lugar grupo B</span>
+            <span class="team-score">0</span>
+          </div>
+          <div class="team-row">
+            <span class="team-name">2do Lugar grupo A</span>
+            <span class="team-score">0</span>
+          </div>
+        </div>
+      </div>
+
+      <!--<div class="bracket-match">
+        <div class="match-title">Semifinal 2 - VUELTA</div>
+        <div class="match-teams">
+          <div class="team-row">
+            <span class="team-name">2do Lugar grupo A</span>
+            <span class="team-score">3</span>
+          </div>
+          <div class="team-row winner">
+            <span class="team-name">1er Lugar grupo B</span>
+            <span class="team-score">1</span>
+          </div>
+        </div>
+        <div class="match-aggregate winner-aggregate">
+          ✅ 
+        </div>
+      </div>
+    </div>-->
+
+    <!-- FINAL 
+    <div class="bracket-round">
+      <div class="final-container">
+        <div class="bracket-match">
+          <div class="match-title">🏆 GRAN FINAL</div>
+          <div class="match-teams">
+            <div class="team-row winner">
+              <span class="team-name"></span>
+              <span class="team-score"></span>
+            </div>
+            <div class="team-row">
+              <span class="team-name"></span>
+              <span class="team-score">2</span>
+            </div>
+          </div>
+        </div>-->
+
+        <!--<div class="champion-section">
+          <div class="champion-icon">👑</div>
+          <div class="champion-title">🏆 CAMPEÓN VARONIL 🏆</div>
+          <div class="champion-name"></div>
+          <div class="champion-stats">
+            <div class="champion-stat">
+              <div class="champion-stat-value"></div>
+              <div class="champion-stat-label">Partidos</div>
+            </div>
+            <div class="champion-stat">
+              <div class="champion-stat-value"></div>
+              <div class="champion-stat-label">Victorias</div>
+            </div>
+            <div class="champion-stat">
+              <div class="champion-stat-value"></div>
+              <div class="champion-stat-label">Goles</div>
+            </div>
+          </div>
+        </div>-->
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FINAL FEMENIL -->
+<div class="section femenina">
+  <h2 class="section-header">⚽ Final Femenil 👩‍🦰</h2>
+  
+  <div class="final-container">
+    <div class="bracket-match">
+      <div class="match-title">🏆 GRAN FINAL</div>
+      <div class="match-teams">
+        <!--winner se agrega a la class para reslatar al ganador-->
+        <div class="team-row ">
+          <span class="team-name">1er Lugar del grupo</span>
+          <span class="team-score">0</span>
+        </div>
+        <div class="team-row">
+          <span class="team-name">2do Lugar del grupo</span>
+          <span class="team-score">0</span>
+        </div>
+      </div>
+    </div>
+
+    
+    <!--<div class="champion-section">
+      <div class="champion-icon">👑</div>
+      <div class="champion-title">🏆 CAMPEONA FEMENIL 🏆</div>
+      <div class="champion-name"></div>
+      <div class="champion-stats">
+        <div class="champion-stat">
+          <div class="champion-stat-value"></div>
+          <div class="champion-stat-label">Partido</div>
+        </div>
+        <div class="champion-stat">
+          <div class="champion-stat-value"></div>
+          <div class="champion-stat-label">Victoria</div>
+        </div>
+        <div class="champion-stat">
+          <div class="champion-stat-value"></div>
+          <div class="champion-stat-label">Goles</div>
+        </div>
+      </div>
+    </div>-->
+  </div>
+</div>
+
+<!-- GOLEADORES FASE FINAL 
+<div class="section">
+  <h2 class="section-header">⚽ Goleadores de Fase Final - Varonil</h2>
+  
+  <div class="goleadores-grid" id="goleadoresVaronilFinal">
+    <div class="goleador-card">
+      <div class="goleador-position">#1</div>
+      <div class="goleador-trophy">🥇</div>
+      <div class="goleador-name">Rey de Jesus</div>
+      <div class="goleador-team">Los Callejeros FC</div>
+      <div class="goleador-goals">5</div>
+      <div class="goleador-label">Goles</div>
+    </div>
+  </div>
+</div>
+
+<div class="section femenina">
+  <h2 class="section-header">⚽ Goleadoras de Fase Final - Femenil 👩‍🦰</h2>
+  
+  <div class="goleadores-grid" id="goleadoresFemenilFinal">
+    <div class="goleador-card">
+      <div class="goleador-position">#1</div>
+      <div class="goleador-trophy">🥇</div>
+      <div class="goleador-name">Selina</div>
+      <div class="goleador-team">Agronenas</div>
+      <div class="goleador-goals">2</div>
+      <div class="goleador-label">Goles</div>
+    </div>
+  </div>
+</div>-->
+
+</body>
+</html>
