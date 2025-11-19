@@ -54,6 +54,27 @@
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(-10px); }
   }
+  .nav-button {
+    display: inline-block;
+    padding: 12px 30px;
+    background: white;
+    color: #667eea;
+    text-decoration: none;
+    border-radius: 25px;
+    font-weight: 600;
+    transition: all 0.3s;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  }
+
+  .nav-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+  }
+
+  .nav-button.active {
+    background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+    color: #2c3e50;
+  }
   
   .grupo-container {
     display: grid;
@@ -540,6 +561,8 @@
   <div class="trophy-icon">🏆</div>
   <h1>Copa NovaUniversitas</h1>
   <div class="subtitle">Temporada 2025 - Fase de Grupos</div>
+  <br>
+  <a href="fase-final.html" class="nav-button">🏆 Fase Final</a>
 </div>
 
 <div class="grupo-container">
@@ -1081,18 +1104,3 @@
 
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
