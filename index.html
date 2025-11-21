@@ -721,6 +721,7 @@
     { equipo1: "Error 104: Rival no encontrado", goles1: 0, equipo2: "Girls", goles2: 1, grupo: "Femenil" },
     { equipo1: "Error 104: Rival no encontrado", goles1: 0, equipo2: "Agronenas", goles2: 2, grupo: "Femenil" },
     { equipo1: "Error 104: Rival no encontrado", goles1: 1, equipo2: "Girls", goles2: 6, grupo: "Femenil" },
+    { equipo1: "Error 104: Rival no encontrado", goles1: 1, equipo2: "Agronenas", goles2: 1, grupo: "Femenil" },
 
     //Partido Cruzado
     { equipo1: "Karnaugh", goles1: 2, goles2: 0, grupo: "B" },
@@ -767,6 +768,7 @@
           return;
          }
 
+
         // Actualizar estadísticas
         equipo1.pj++;
         equipo2.pj++;
@@ -792,7 +794,7 @@
           equipo1.pe++;
           equipo2.pe++;
           equipo1.puntos += 1;
-          equipo2.puntos += 1;
+          equipo2.puntos += 2;
           equipo1.enfrentamientos[equipo2.nombre] = 'D'; // Draw
           equipo2.enfrentamientos[equipo1.nombre] = 'D';
         }
@@ -1116,6 +1118,7 @@
 
 </body>
 </html>
+
 
 
 
