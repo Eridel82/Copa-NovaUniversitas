@@ -3,25 +3,24 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Copa NovaUniversitas - Tabla de Posiciones</title>
+<title>Copa NovaUniversitas</title>
 <style>
   * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
   }
-  
+
   body {
     font-family: "Inter", "Segoe UI", sans-serif;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     min-height: 100vh;
     padding: 20px;
   }
-  
+
   .header {
     text-align: center;
     color: white;
-    margin-bottom: 40px;
     padding: 40px 20px;
     background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(10px);
@@ -29,7 +28,7 @@
     max-width: 1200px;
     margin: 0 auto 40px;
   }
-  
+
   .header h1 {
     font-size: 3em;
     font-weight: 800;
@@ -37,45 +36,25 @@
     text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
     letter-spacing: -1px;
   }
-  
+
   .header .subtitle {
     font-size: 1.2em;
     opacity: 0.9;
     font-weight: 300;
   }
-  
+
   .trophy-icon {
     font-size: 4em;
     margin-bottom: 15px;
     animation: bounce 2s infinite;
   }
-  
+
   @keyframes bounce {
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(-10px); }
   }
-  .nav-button {
-    display: inline-block;
-    padding: 12px 30px;
-    background: white;
-    color: #667eea;
-    text-decoration: none;
-    border-radius: 25px;
-    font-weight: 600;
-    transition: all 0.3s;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-  }
 
-  .nav-button:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 6px 20px rgba(0,0,0,0.3);
-  }
-
-  .nav-button.active {
-    background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
-    color: #2c3e50;
-  }
-  
+  /* TABLAS */
   .grupo-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
@@ -83,7 +62,7 @@
     max-width: 1200px;
     margin: 0 auto 50px;
   }
-  
+
   .tabla {
     background: white;
     border-radius: 20px;
@@ -91,11 +70,11 @@
     box-shadow: 0 20px 60px rgba(0,0,0,0.3);
     transition: transform 0.3s ease;
   }
-  
+
   .tabla:hover {
     transform: translateY(-5px);
   }
-  
+
   .tabla-header {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
@@ -105,20 +84,20 @@
     text-align: center;
     letter-spacing: 1px;
   }
-  
+
   .tabla-header.femenina {
     background: linear-gradient(135deg, #ec4899 0%, #be185d 100%);
   }
-  
+
   table {
     width: 100%;
     border-collapse: collapse;
   }
-  
+
   thead {
     background: #f8f9fa;
   }
-  
+
   th {
     padding: 15px 10px;
     text-align: center;
@@ -128,60 +107,60 @@
     text-transform: uppercase;
     letter-spacing: 0.5px;
   }
-  
+
   td {
     padding: 15px 10px;
     text-align: center;
     border-bottom: 1px solid #f0f0f0;
     color: #333;
   }
-  
+
   tbody tr {
     transition: all 0.2s ease;
   }
-  
+
   tbody tr:hover {
     background: #f8f9ff;
-    transform: scale(1.01);
   }
-  
+
   tbody tr:first-child {
     background: linear-gradient(90deg, #fff3cd 0%, #ffffff 100%);
     font-weight: 600;
   }
-  
+
   .tabla.femenina tbody tr:first-child {
     background: linear-gradient(90deg, #fce7f3 0%, #ffffff 100%);
     font-weight: 600;
   }
-  
+
   tbody tr:nth-child(2) {
     background: linear-gradient(90deg, #e7f3ff 0%, #ffffff 100%);
     font-weight: 500;
   }
-  
+
   .tabla.femenina tbody tr:nth-child(2) {
     background: linear-gradient(90deg, #fbcfe8 0%, #ffffff 100%);
     font-weight: 500;
   }
-  
+
   .equipo-cell {
     text-align: left;
     font-weight: 600;
     color: #2c3e50;
   }
-  
+
   .pts-cell {
     font-weight: 700;
     font-size: 1.1em;
     color: #667eea;
   }
-  
+
   .tabla.femenina .pts-cell {
     color: #ec4899;
   }
-  
-  .equipos-section, .partidos-section {
+
+  /* PARTIDOS */
+  .partidos-section {
     max-width: 1200px;
     background: white;
     margin: 0 auto 50px;
@@ -189,7 +168,7 @@
     border-radius: 20px;
     box-shadow: 0 20px 60px rgba(0,0,0,0.3);
   }
-  
+
   .section-header {
     text-align: center;
     margin-bottom: 30px;
@@ -197,124 +176,36 @@
     font-size: 2em;
     font-weight: 700;
   }
-  
-  .equipos-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
-  }
-  
-  .equipo-card {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    padding: 25px;
-    border-radius: 15px;
-    text-align: center;
-    color: white;
-    transition: all 0.3s ease;
-    cursor: pointer;
-  }
-  
-  .equipo-card:hover {
-    transform: translateY(-8px) scale(1.03);
-    box-shadow: 0 15px 30px rgba(102, 126, 234, 0.4);
-  }
 
-    .partido-card.partidazo {
-    background: linear-gradient(135deg, #ff6b6b 0%, #feca57 100%);
-    border-left: 6px solid #ff0000;
-    border: 3px solid #ffd700;
-    position: relative;
-    overflow: hidden;
-    animation: pulse 2s infinite;
-  }
-
-  @keyframes pulse {
-    0%, 100% {
-      box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
-    }
-    50% {
-      box-shadow: 0 8px 25px rgba(255, 107, 107, 0.8);
-    }
-  }
-
-  .partido-card.partidazo .vs-badge {
-    background: linear-gradient(135deg, #ff0000 0%, #ff6b6b 100%);
-    font-size: 1em;
-    padding: 8px 20px;
-    box-shadow: 0 4px 10px rgba(255, 0, 0, 0.3);
-    animation: bounce-badge 1s infinite;
-  }
-
-  @keyframes bounce-badge {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.1); }
-  }
-
-  .partido-card.partidazo .partido-equipos .equipo-nombre {
-    color: #2c3e50;
-    font-weight: 900;
-    font-size: 1.05em;
-  }
-
-  .partido-card.partidazo .partido-info {
-    border-top-color: rgba(255, 215, 0, 0.5);
-    font-weight: 700;
-  }
-
-  .partido-card.partidazo:hover {
-    transform: translateX(10px) scale(1.02);
-    box-shadow: 0 10px 30px rgba(255, 107, 107, 0.6);
-  }
-  
-  .equipo-icon {
-    font-size: 3em;
-    margin-bottom: 10px;
-  }
-  
-  .equipo-nombre {
-    font-size: 1.5em;
-    font-weight: 700;
-    margin-bottom: 8px;
-  }
-  
-  .equipo-grupo {
-    background: rgba(255, 255, 255, 0.2);
-    padding: 5px 15px;
-    border-radius: 20px;
-    font-size: 0.9em;
-    display: inline-block;
-    margin-bottom: 15px;
-  }
-  
-  .equipo-stats {
+  .jornada-titulo {
     display: flex;
-    justify-content: space-around;
-    margin-top: 15px;
-    padding-top: 15px;
-    border-top: 1px solid rgba(255, 255, 255, 0.3);
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+    margin-top: 10px;
   }
-  
-  .stat {
-    text-align: center;
-  }
-  
-  .stat-value {
-    font-size: 1.5em;
+
+  .jornada-titulo h3 {
+    font-size: 1.3em;
+    color: #2c3e50;
     font-weight: 700;
-    display: block;
   }
-  
-  .stat-label {
-    font-size: 0.8em;
-    opacity: 0.9;
+
+  .fecha-jornada {
+    font-size: 0.95em;
+    color: #667eea;
+    font-weight: 600;
   }
-  
+
   .partidos-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 20px;
+    margin-bottom: 30px;
   }
-  
+
   .partido-card {
     background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
     padding: 20px;
@@ -322,22 +213,22 @@
     border-left: 4px solid #667eea;
     transition: all 0.3s ease;
   }
-  
+
   .partido-card.femenino {
     background: linear-gradient(135deg, #fce7f3 0%, #fbcfe8 100%);
     border-left: 4px solid #ec4899;
   }
-  
+
   .partido-card:hover {
     transform: translateX(5px);
     box-shadow: 0 5px 15px rgba(0,0,0,0.1);
     border-left-color: #764ba2;
   }
-  
+
   .partido-card.femenino:hover {
     border-left-color: #be185d;
   }
-  
+
   .partido-equipos {
     display: flex;
     align-items: center;
@@ -345,16 +236,14 @@
     margin-bottom: 15px;
     gap: 8px;
   }
-  
+
   .partido-equipos .equipo-nombre {
     font-weight: 700;
     color: #2c3e50;
     flex: 1;
     font-size: 0.95em;
-    overflow: hidden;
-    text-overflow: ellipsis;
   }
-  
+
   .vs-badge {
     background: #667eea;
     color: white;
@@ -363,28 +252,25 @@
     font-weight: 600;
     font-size: 0.85em;
     margin: 0 10px;
+    flex-shrink: 0;
   }
-  
+
   .partido-card.femenino .vs-badge {
     background: #ec4899;
   }
-  
+
   .partido-info {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    gap: 5px;
     color: #6c757d;
-    font-size: 0.9em;
+    font-size: 0.88em;
     padding-top: 10px;
     border-top: 1px solid #dee2e6;
-  }
-  
-  .fecha, .hora {
-    display: flex;
-    align-items: center;
-    gap: 5px;
+    line-height: 1.6;
   }
 
-  /* Estilos para la tabla de goleadores */
+  /* GOLEADORES */
   .goleadores-section {
     max-width: 1200px;
     background: white;
@@ -407,21 +293,17 @@
     margin-bottom: 30px;
   }
 
-  .goleadores-stats .stat-box {
-    text-align: center;
-  }
+  .stat-box { text-align: center; }
 
-  .goleadores-stats .stat-number {
+  .stat-number {
     font-size: 2em;
     font-weight: bold;
     color: #667eea;
   }
 
-  .goleadores-section.femenina .goleadores-stats .stat-number {
-    color: #ec4899;
-  }
+  .goleadores-section.femenina .stat-number { color: #ec4899; }
 
-  .goleadores-stats .stat-label {
+  .stat-label {
     color: #6c757d;
     font-size: 0.9em;
     margin-top: 5px;
@@ -453,6 +335,7 @@
     font-weight: 600;
     text-transform: uppercase;
     font-size: 14px;
+    color: white;
   }
 
   .goleadores-table td {
@@ -460,25 +343,11 @@
     border-bottom: 1px solid #e9ecef;
   }
 
-  .goleadores-table tbody tr {
-    transition: background 0.2s;
-  }
+  .goleadores-table tbody tr:hover { background: #f8f9fa; }
 
-  .goleadores-table tbody tr:hover {
-    background: #f8f9fa;
-  }
-
-  .goleadores-table tbody tr:nth-child(1) {
-    background: linear-gradient(to right, #ffd70020, transparent);
-  }
-
-  .goleadores-table tbody tr:nth-child(2) {
-    background: linear-gradient(to right, #c0c0c020, transparent);
-  }
-
-  .goleadores-table tbody tr:nth-child(3) {
-    background: linear-gradient(to right, #cd7f3220, transparent);
-  }
+  .goleadores-table tbody tr:nth-child(1) { background: linear-gradient(to right, #ffd70020, transparent); }
+  .goleadores-table tbody tr:nth-child(2) { background: linear-gradient(to right, #c0c0c020, transparent); }
+  .goleadores-table tbody tr:nth-child(3) { background: linear-gradient(to right, #cd7f3220, transparent); }
 
   .position-cell {
     font-weight: bold;
@@ -486,18 +355,10 @@
     font-size: 18px;
   }
 
-  .goleadores-section.femenina .position-cell {
-    color: #ec4899;
-  }
+  .goleadores-section.femenina .position-cell { color: #ec4899; }
 
-  .player-name-cell {
-    font-weight: 600;
-    color: #212529;
-  }
-
-  .team-name-cell {
-    color: #6c757d;
-  }
+  .player-name-cell { font-weight: 600; color: #212529; }
+  .team-name-cell { color: #6c757d; }
 
   .goals-cell {
     font-weight: bold;
@@ -506,99 +367,25 @@
     text-align: center;
   }
 
-  .goleadores-section.femenina .goals-cell {
-    color: #e91e63;
-  }
+  .goleadores-section.femenina .goals-cell { color: #e91e63; }
 
-  .trophy-emoji {
-    font-size: 24px;
-    margin-left: 8px;
-  }
-  
+  .trophy-emoji { font-size: 20px; margin-left: 6px; }
+
+  /* RESPONSIVE */
   @media (max-width: 768px) {
-    body {
-      padding: 10px;
-    }
-    
-    .header h1 {
-      font-size: 2em;
-    }
-    
-    .header {
-      padding: 30px 15px;
-      margin-bottom: 30px;
-    }
-    
-    .grupo-container {
-      grid-template-columns: 1fr;
-    }
-    
-    .partidos-grid, .equipos-grid {
-      grid-template-columns: 1fr;
-    }
-    
-    .partidos-section, .equipos-section, .goleadores-section {
-      padding: 20px 15px;
-    }
-    
-    .partido-card {
-      padding: 15px;
-    }
-    
-    .partido-equipos .equipo-nombre {
-      font-size: 0.85em;
-    }
-    
-    .vs-badge {
-      padding: 4px 10px;
-      font-size: 0.75em;
-      margin: 0 5px;
-      flex-shrink: 0;
-    }
-    
-    .partido-info {
-      font-size: 0.85em;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-
-    .goleadores-stats {
-      flex-direction: column;
-      gap: 15px;
-    }
-
-    .goleadores-table-wrapper {
-      margin: 0 -20px;
-      padding: 0 20px;
-    }
-
-    .goleadores-table {
-      min-width: 100%;
-      font-size: 13px;
-    }
-
-    .goleadores-table th,
-    .goleadores-table td {
-      padding: 10px 8px;
-      font-size: 13px;
-    }
-
-    .position-cell {
-      font-size: 16px;
-    }
-
-    .goals-cell {
-      font-size: 18px;
-    }
-
-    .trophy-emoji {
-      font-size: 18px;
-    }
-
-    .player-name-cell,
-    .team-name-cell {
-      font-size: 13px;
-    }
+    body { padding: 10px; }
+    .header h1 { font-size: 2em; }
+    .header { padding: 30px 15px; }
+    .grupo-container { grid-template-columns: 1fr; }
+    .partidos-grid { grid-template-columns: 1fr; }
+    .partidos-section, .goleadores-section { padding: 20px 15px; }
+    .partido-card { padding: 15px; }
+    .partido-equipos .equipo-nombre { font-size: 0.85em; }
+    .vs-badge { padding: 4px 10px; font-size: 0.75em; margin: 0 5px; }
+    .goleadores-stats { flex-direction: column; gap: 15px; }
+    .goleadores-table th, .goleadores-table td { padding: 10px 8px; font-size: 13px; }
+    .position-cell { font-size: 16px; }
+    .goals-cell { font-size: 18px; }
   }
 </style>
 </head>
@@ -607,29 +394,25 @@
 <div class="header">
   <div class="trophy-icon">🏆</div>
   <h1>Copa NovaUniversitas</h1>
-  <div class="subtitle">Temporada 2025 - Fase de Grupos</div>
-  <br>
-  <a href="fase-final.html" class="nav-button">🏆 Fase Final</a>
+  <div class="subtitle">Temporada 2026— Fase de Grupos</div>
 </div>
 
+<!-- PRÓXIMOS PARTIDOS -->
 <div class="partidos-section">
-  <!--<h2 class="section-header">⚽ Próximos Partidos</h2>-->
-  <h2 class="section-header">⚽ Final</h2>
-  <div id="contenedorJornadas">
-   <img src="i2.jpg" style="width: 100%; display: block; margin: 20px auto;">
-    <img src="i1.jpg" style="width: 100%; display: block; margin: 20px auto;">
-  </div>
+  <h2 class="section-header">📅 Próximos Partidos</h2>
+  <div id="contenedorJornadas"></div>
 </div>
 
+<!-- TABLAS -->
 <div class="grupo-container">
-  <!-- GRUPO A -->
+  <!-- VARONIL -->
   <div class="tabla">
-    <div class="tabla-header">GRUPO A</div>
-    <table id="tablaA">
+    <div class="tabla-header">⚽ VARONIL</div>
+    <table id="tablaVaronil">
       <thead>
         <tr>
           <th>Pos</th>
-          <th style="text-align: left; padding-left: 20px;">Equipo</th>
+          <th style="text-align:left;padding-left:20px;">Equipo</th>
           <th>GF</th>
           <th>GC</th>
           <th>DG</th>
@@ -640,32 +423,14 @@
     </table>
   </div>
 
-  <!-- GRUPO B -->
-  <div class="tabla">
-    <div class="tabla-header">GRUPO B</div>
-    <table id="tablaB">
-      <thead>
-        <tr>
-          <th>Pos</th>
-          <th style="text-align: left; padding-left: 20px;">Equipo</th>
-          <th>GF</th>
-          <th>GC</th>
-          <th>DG</th>
-          <th>Pts</th>
-        </tr>
-      </thead>
-      <tbody></tbody>
-    </table>
-  </div>
-
-  <!-- GRUPO FEMENIL -->
+  <!-- FEMENIL -->
   <div class="tabla femenina">
-    <div class="tabla-header femenina">FEMENIL 👩‍🦰</div>
+    <div class="tabla-header femenina">👩 FEMENIL</div>
     <table id="tablaFemenil">
       <thead>
         <tr>
           <th>Pos</th>
-          <th style="text-align: left; padding-left: 20px;">Equipo</th>
+          <th style="text-align:left;padding-left:20px;">Equipo</th>
           <th>GF</th>
           <th>GC</th>
           <th>DG</th>
@@ -677,25 +442,9 @@
   </div>
 </div>
 
-<!-- SECCIÓN DE GOLEADORES VARONIL -->
+<!-- GOLEADORES VARONIL -->
 <div class="goleadores-section">
-  <h2 class="section-header">⚽ Tabla de Goleadores - Varonil</h2>
-  
-  <div class="goleadores-stats">
-    <div class="stat-box">
-      <div class="stat-number" id="totalJugadores">0</div>
-      <div class="stat-label">Jugadores</div>
-    </div>
-    <div class="stat-box">
-      <div class="stat-number" id="totalGoles">0</div>
-      <div class="stat-label">Goles Totales</div>
-    </div>
-    <div class="stat-box">
-      <div class="stat-number" id="totalEquipos">0</div>
-      <div class="stat-label">Equipos</div>
-    </div>
-  </div>
-
+  <h2 class="section-header">⚽ Goleadores — Varonil</h2>
   <div class="goleadores-table-wrapper">
     <table class="goleadores-table">
       <thead>
@@ -703,34 +452,17 @@
           <th>Posición</th>
           <th>Jugador</th>
           <th>Equipo</th>
-          <th style="text-align: center;">Goles</th>
+          <th style="text-align:center;">Goles</th>
         </tr>
       </thead>
-      <tbody id="goleadoresBody">
-      </tbody>
+      <tbody id="goleadoresBody"></tbody>
     </table>
   </div>
 </div>
 
-<!-- SECCIÓN DE GOLEADORAS FEMENIL -->
+<!-- GOLEADORAS FEMENIL -->
 <div class="goleadores-section femenina">
-  <h2 class="section-header">⚽ Tabla de Goleadoras - Femenil 👩‍🦰</h2>
-  
-  <div class="goleadores-stats">
-    <div class="stat-box">
-      <div class="stat-number" id="totalJugadorasFem">0</div>
-      <div class="stat-label">Jugadoras</div>
-    </div>
-    <div class="stat-box">
-      <div class="stat-number" id="totalGolesFem">0</div>
-      <div class="stat-label">Goles Totales</div>
-    </div>
-    <div class="stat-box">
-      <div class="stat-number" id="totalEquiposFem">0</div>
-      <div class="stat-label">Equipos</div>
-    </div>
-  </div>
-
+  <h2 class="section-header">⚽ Goleadoras — Femenil 👩</h2>
   <div class="goleadores-table-wrapper">
     <table class="goleadores-table">
       <thead>
@@ -738,189 +470,89 @@
           <th>Posición</th>
           <th>Jugadora</th>
           <th>Equipo</th>
-          <th style="text-align: center;">Goles</th>
+          <th style="text-align:center;">Goles</th>
         </tr>
       </thead>
-      <tbody id="goleadorasBody">
-      </tbody>
+      <tbody id="goleadorasBody"></tbody>
     </table>
   </div>
 </div>
 
-<!-- SECCIÓN DE PARTIDOS -->
-
- 
- 
-
 <script>
-  // 📊 RESULTADOS DE PARTIDOS - Ingresa aquí los resultados
-  // Formato: { equipo1: "Nombre", goles1: X, equipo2: "Nombre", goles2: Y, grupo: "A/B/Femenil" }
+  // =============================================
+  // 📊 RESULTADOS — agregar aquí conforme se jueguen
+  // =============================================
   const resultadosPartidos = [
-    // GRUPO A
-    { equipo1: "Los Callejeros FC", goles1: 5, equipo2: "Los Papis", goles2: 1, grupo: "A" },
-    //1 + 6 por Nottingham
-    { equipo1: "Los Descortezadores", goles1: 5, goles2: 7, grupo: "A" },
-   // 2 + 5 nottingam
-    { equipo1: "Los Callejeros FC", goles1: 6, goles2: 7, grupo: "A" },
-    { equipo1: "Los Descortezadores", goles1: 1,equipo2: "Los Papis", goles2: 0, grupo: "A" }, // Empate 0-0
-    
-    // GRUPO B
-    { equipo1: "Karnaugh", goles1: 6, equipo2: "Los Chicos que Lloran", goles2: 0, grupo: "B" },
-    { equipo1: "Nottingham Forest", goles1: 4, equipo2: "Karnaugh", goles2: 1, grupo: "B" },
-    { equipo1: "Nottingham Forest", goles1: 5, equipo2: "Los Chicos que Lloran", goles2: 2, grupo: "B" },
-    
-    // GRUPO FEMENIL
-    { equipo1: "Agronenas", goles1: 2, equipo2: "Girls", goles2: 1, grupo: "Femenil" },
-    { equipo1: "Error 104: Rival no encontrado", goles1: 0, equipo2: "Girls", goles2: 1, grupo: "Femenil" },
-    { equipo1: "Error 104: Rival no encontrado", goles1: 0, equipo2: "Agronenas", goles2: 2, grupo: "Femenil" },
-    { equipo1: "Error 104: Rival no encontrado", goles1: 1, equipo2: "Girls", goles2: 6, grupo: "Femenil" },
-    { equipo1: "Error 104: Rival no encontrado", goles1: 1, equipo2: "Agronenas", goles2: 1, grupo: "Femenil" },
-
-    //Partido Cruzado
-    { equipo1: "Karnaugh", goles1: 2, goles2: 0, grupo: "B" },
-    { equipo1: "Nottingham Forest", goles1: 6, goles2: 2, grupo:"B"},
-    { equipo1: "Los Chicos que Lloran", goles1: 2, goles2: 1, grupo: "B"},
-    { equipo1: "Nottingham Forest", goles1: 5, goles2: 2, grupo:"B"},
-    { equipo1: "Los Descortezadores", goles1: 2, goles2: 2, grupo: "A" },
+    // Ejemplo: { equipo1: "Warriors SF", goles1: 2, equipo2: "Sunderland FC", goles2: 1, grupo: "Varonil" }
   ];
 
-  // Equipos iniciales (solo nombres)
-  const equiposGrupoA = ["Los Callejeros FC", "Los Papis", "Los Descortezadores"];
-  const equiposGrupoB = ["Karnaugh", "Los Chicos que Lloran", "Nottingham Forest"];
-  const equiposGrupoFemenil = ["Girls", "Agronenas", "Error 104: Rival no encontrado"];
+  // =============================================
+  // 👕 EQUIPOS
+  // =============================================
+  const equiposVaronil  = ["Warriors SF", "Sunderland FC", "Atlético San Luis", "Niños del Campo"];
+  const equiposFemenil  = ["Las Chicas Súper Poderosas", "Agronenas", "Fénix FC"];
 
-  // Función para calcular tabla desde resultados
+  // =============================================
+  // ⚙️ CÁLCULO DE TABLA
+  // =============================================
   function calcularTabla(equiposNombres, grupoNombre) {
     const tabla = equiposNombres.map(nombre => ({
-      nombre: nombre,
-      pj: 0,      // Partidos jugados
-      pg: 0,      // Partidos ganados
-      pe: 0,      // Partidos empatados
-      pp: 0,      // Partidos perdidos
-      gf: 0,      // Goles a favor
-      gc: 0,      // Goles en contra
-      dg: 0,      // Diferencia de goles
-      puntos: 0,
-      enfrentamientos: {} // Para desempate directo
+      nombre, pj:0, pg:0, pe:0, pp:0, gf:0, gc:0, dg:0, puntos:0, enfrentamientos:{}
     }));
 
-    // Procesar cada resultado del grupo
     resultadosPartidos
       .filter(r => r.grupo === grupoNombre)
-      .forEach(resultado => {
-        const equipo1 = tabla.find(e => e.nombre === resultado.equipo1);
-        const equipo2 = tabla.find(e => e.nombre === resultado.equipo2);
-
-        if (!equipo1) return;
-       
-        if (!equipo2) {
-          equipo1.pj++;
-          equipo1.gf += resultado.goles1;
-          equipo1.gc += resultado.goles2 || 0;
-          equipo1.pg++;
-          equipo1.puntos += 3;
+      .forEach(r => {
+        const e1 = tabla.find(e => e.nombre === r.equipo1);
+        const e2 = tabla.find(e => e.nombre === r.equipo2);
+        if (!e1) return;
+        if (!e2) {
+          e1.pj++; e1.gf += r.goles1; e1.gc += r.goles2 || 0; e1.pg++; e1.puntos += 3;
           return;
-         }
+        }
+        e1.pj++; e2.pj++;
+        e1.gf += r.goles1; e1.gc += r.goles2;
+        e2.gf += r.goles2; e2.gc += r.goles1;
 
-
-        // Actualizar estadísticas
-        equipo1.pj++;
-        equipo2.pj++;
-        equipo1.gf += resultado.goles1;
-        equipo1.gc += resultado.goles2;
-        equipo2.gf += resultado.goles2;
-        equipo2.gc += resultado.goles1;
-
-        // Determinar ganador
-        if (resultado.goles1 > resultado.goles2) {
-          equipo1.pg++;
-          equipo1.puntos += 3;
-          equipo2.pp++;
-          equipo1.enfrentamientos[equipo2.nombre] = 'W'; // Win
-          equipo2.enfrentamientos[equipo1.nombre] = 'L'; // Loss
-        } else if (resultado.goles1 < resultado.goles2) {
-          equipo2.pg++;
-          equipo2.puntos += 3;
-          equipo1.pp++;
-          equipo2.enfrentamientos[equipo1.nombre] = 'W';
-          equipo1.enfrentamientos[equipo2.nombre] = 'L';
+        if (r.goles1 > r.goles2) {
+          e1.pg++; e1.puntos += 3; e2.pp++;
+          e1.enfrentamientos[e2.nombre] = 'W'; e2.enfrentamientos[e1.nombre] = 'L';
+        } else if (r.goles1 < r.goles2) {
+          e2.pg++; e2.puntos += 3; e1.pp++;
+          e2.enfrentamientos[e1.nombre] = 'W'; e1.enfrentamientos[e2.nombre] = 'L';
         } else {
-          equipo1.pe++;
-          equipo2.pe++;
-          equipo1.puntos += 2;
-          equipo2.puntos += 1;
-          equipo1.enfrentamientos[equipo2.nombre] = 'D'; // Draw
-          equipo2.enfrentamientos[equipo1.nombre] = 'D';
+          e1.pe++; e2.pe++; e1.puntos += 1; e2.puntos += 1;
+          e1.enfrentamientos[e2.nombre] = 'D'; e2.enfrentamientos[e1.nombre] = 'D';
         }
       });
 
-    // Calcular diferencia de goles
     tabla.forEach(e => e.dg = e.gf - e.gc);
-
     return tabla;
   }
 
-  const grupoA = calcularTabla(equiposGrupoA, "A");
-  const grupoB = calcularTabla(equiposGrupoB, "B");
-  const grupoFemenil = calcularTabla(equiposGrupoFemenil, "Femenil");
-
-  // ARREGLO DE GOLEADORES VARONIL - Edita aquí para agregar o modificar jugadores
+  // =============================================
+  // 🥅 GOLEADORES — agregar aquí
+  // =============================================
   const goleadores = [
-    { nombre: "Rey de Jesus", equipo: "Los Callejeros FC", goles: 4 },
-    {nombre: "Eridel", equipo: "Nottingham Forest", goles: 8 },
-    {nombre: "Cesar", equipo: "Nottingham Forest", goles: 12 },
-    { nombre: "Luis", equipo: "Los Descortezadores", goles: 10 },
-    { nombre: "Enrique", equipo: "Los Descortezadores", goles: 2 },
-    { nombre: "Perpetuo", equipo: "Los Callejeros FC", goles: 8 },
-    { nombre: "Francisco Rey", equipo: "Los Callejeros FC", goles: 2 },
-    { nombre: "Abraham", equipo: "Los Callejeros FC", goles: 2 },
-    { nombre: "Luis Angel", equipo: "Karnaugh", goles: 2 },
-    { nombre: "Rolando Abimael", equipo: "Karnaugh", goles: 1 },
-    { nombre: "Felix", equipo: "Karnaugh", goles: 4 },
-    { nombre: "Rolando", equipo: "Karnaugh", goles: 1 },
-    { nombre: "Abisai", equipo: "Los papis", goles: 2 },
-    { nombre: "Oscar", equipo: "FC SOWF", goles: 1 },
-    {nombre: "Victor", equipo: "Nottingham Forest", goles: 1 },
-    {nombre: "Eder", equipo: "Los Chicos que Lloran", goles: 3 },
-    {nombre: "Emanuel", equipo: "Los Chicos que Lloran", goles: 1 },
-    {nombre: "Daniel", equipo: "Nottingham Forest", goles: 1 },
-    {nombre: "Victor", equipo: "Nottingham Forest", goles: 2 },
-    {nombre: "Jorge", equipo: "Nottingham Forest", goles: 1 },
-    {nombre: "cristopher", equipo: "Los Chicos que Lloran", goles: 1 },
-    {nombre: "Brayan", equipo: "Los Callejeros FC", goles: 2 },
+    // { nombre: "Jugador", equipo: "Warriors SF", goles: 3 }
   ];
 
-  // ARREGLO DE GOLEADORAS FEMENIL - Edita aquí para agregar o modificar jugadoras
   const goleadoras = [
-    {nombre: "Conta Mayra", equipo: "Girls", goles: 3 },
-    { nombre: "Celina", equipo: "Las agronenas", goles: 3 },
-    { nombre: "Azucena", equipo: "Girls", goles: 2},
-    { nombre: "Alejandra", equipo: "Girls", goles: 1 },
-    { nombre: "Martha", equipo: "Girls", goles: 1 },
+    // { nombre: "Jugadora", equipo: "Agronenas", goles: 2 }
   ];
 
-  function ordenarYMostrar(grupo, tablaId) {
-    // Ordenar con criterios de desempate:
-    // 1. Puntos
-    // 2. Diferencia de goles
-    // 3. Goles a favor
-    // 4. Enfrentamiento directo (si jugaron entre ellos)
+  // =============================================
+  // 🏗️ RENDER TABLAS
+  // =============================================
+  function ordenarYMostrar(grupo, tablaId, esFem) {
     grupo.sort((a, b) => {
-      // 1. Por puntos
       if (b.puntos !== a.puntos) return b.puntos - a.puntos;
-      
-      // 2. Por diferencia de goles
       if (b.dg !== a.dg) return b.dg - a.dg;
-      
-      // 3. Por goles a favor
       if (b.gf !== a.gf) return b.gf - a.gf;
-      
-      // 4. Por enfrentamiento directo
       if (a.enfrentamientos[b.nombre]) {
-        if (a.enfrentamientos[b.nombre] === 'W') return -1; // a ganó a b
-        if (a.enfrentamientos[b.nombre] === 'L') return 1;  // b ganó a a
+        if (a.enfrentamientos[b.nombre] === 'W') return -1;
+        if (a.enfrentamientos[b.nombre] === 'L') return 1;
       }
-      
       return 0;
     });
 
@@ -930,250 +562,119 @@
       tbody.innerHTML += `
         <tr>
           <td>${i + 1}</td>
-          <td class="equipo-cell" style="text-align: left; padding-left: 20px;">${e.nombre}</td>
+          <td class="equipo-cell" style="text-align:left;padding-left:20px;">${e.nombre}</td>
           <td>${e.gf}</td>
           <td>${e.gc}</td>
           <td>${e.dg > 0 ? '+' : ''}${e.dg}</td>
           <td class="pts-cell">${e.puntos}</td>
-        </tr>
-      `;
+        </tr>`;
     });
   }
 
-  function actualizarTablaGoleadores() {
-    // Ordenar por goles (mayor a menor)
-    goleadores.sort((a, b) => b.goles - a.goles);
-    
-    const tbody = document.getElementById('goleadoresBody');
-    
-    if (goleadores.length === 0) {
-      tbody.innerHTML = `
-        <tr>
-          <td colspan="4" style="text-align: center; color: #999; padding: 40px;">
-            No hay goleadores registrados
-          </td>
-        </tr>
-      `;
-      return;
-    }
-    
-    // Mostrar solo los primeros 5
-    const top5 = goleadores.slice(0, 5);
-    
-    tbody.innerHTML = top5.map((g, index) => {
-      let trophy = '';
-      if (index === 0) trophy = '<span class="trophy-emoji">🥇</span>';
-      else if (index === 1) trophy = '<span class="trophy-emoji"></span>';
-      else if (index === 2) trophy = '<span class="trophy-emoji"></span>';
-      
-      return `
-        <tr>
-          <td class="position-cell">#${index + 1}${trophy}</td>
+  // =============================================
+  // 🏗️ RENDER GOLEADORES
+  // =============================================
+  function renderGoleadores(arr, bodyId) {
+    arr.sort((a, b) => b.goles - a.goles);
+    const tbody = document.getElementById(bodyId);
+
+    if (arr.length === 0) {
+      tbody.innerHTML = `<tr><td colspan="4" style="text-align:center;color:#999;padding:40px;">Sin goles registrados aún</td></tr>`;
+    } else {
+      tbody.innerHTML = arr.slice(0, 10).map((g, i) => {
+        const trofeo = i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : '';
+        return `<tr>
+          <td class="position-cell">#${i + 1} <span class="trophy-emoji">${trofeo}</span></td>
           <td class="player-name-cell">${g.nombre}</td>
           <td class="team-name-cell">${g.equipo}</td>
           <td class="goals-cell">${g.goles}</td>
-        </tr>
-      `;
-    }).join('');
-    
-    actualizarEstadisticasGoleadores();
-  }
-
-  function actualizarEstadisticasGoleadores() {
-    // Total de jugadores
-    document.getElementById('totalJugadores').textContent = goleadores.length;
-    
-    // Total de goles
-    const totalGoles = goleadores.reduce((sum, g) => sum + g.goles, 0);
-    document.getElementById('totalGoles').textContent = totalGoles;
-    
-    // Total de equipos únicos
-    const equipos = new Set(goleadores.map(g => g.equipo));
-    document.getElementById('totalEquipos').textContent = equipos.size;
-  }
-
-  function actualizarTablaGoleadoras() {
-    // Ordenar por goles (mayor a menor)
-    goleadoras.sort((a, b) => b.goles - a.goles);
-    
-    const tbody = document.getElementById('goleadorasBody');
-    
-    if (goleadoras.length === 0) {
-      tbody.innerHTML = `
-        <tr>
-          <td colspan="4" style="text-align: center; color: #999; padding: 40px;">
-            No hay goleadoras registradas
-          </td>
-        </tr>
-      `;
-      return;
+        </tr>`;
+      }).join('');
     }
-    
-    // Mostrar solo las primeras 5
-    const top5 = goleadoras.slice(0, 5);
-    
-    tbody.innerHTML = top5.map((g, index) => {
-      let trophy = '';
-      if (index === 0) trophy = '<span class="trophy-emoji">🥇</span>';
-      else if (index === 1) trophy = '<span class="trophy-emoji"></span>';
-      else if (index === 2) trophy = '<span class="trophy-emoji"></span>';
-      
-      return `
-        <tr>
-          <td class="position-cell">#${index + 1}${trophy}</td>
-          <td class="player-name-cell">${g.nombre}</td>
-          <td class="team-name-cell">${g.equipo}</td>
-          <td class="goals-cell">${g.goles}</td>
-        </tr>
-      `;
-    }).join('');
-    
-    actualizarEstadisticasGoleadoras();
+
+
   }
 
-  function actualizarEstadisticasGoleadoras() {
-    // Total de jugadoras
-    document.getElementById('totalJugadorasFem').textContent = goleadoras.length;
-    
-    // Total de goles
-    const totalGoles = goleadoras.reduce((sum, g) => sum + g.goles, 0);
-    document.getElementById('totalGolesFem').textContent = totalGoles;
-    
-    // Total de equipos únicos
-    const equipos = new Set(goleadoras.map(g => g.equipo));
-    document.getElementById('totalEquiposFem').textContent = equipos.size;
-  }
-
-  ordenarYMostrar(grupoA, "tablaA");
-  ordenarYMostrar(grupoB, "tablaB");
-  ordenarYMostrar(grupoFemenil, "tablaFemenil");
-  actualizarTablaGoleadores();
-  actualizarTablaGoleadoras();
-
+  // =============================================
+  // 📅 PARTIDOS PROGRAMADOS
+  // =============================================
   const coloresEquipos = {
-    "Los Callejeros FC": "rosa",
-    "Nottingham Forest": "azul",
-    "Los Papis": "blanca",
-    "Los Descortezadores": "negra",
-    "FC SOWF": "negra",
-    "Karnaugh": "blanca",
-    "Los Chicos que Lloran": "blanca",
-    "Girls": "negra",
-    "Agronenas": "blanca",
-   "Equipo 3": "blanca"
+    "Warriors SF":                   "blanca",
+    "Sunderland FC":                 "roja",
+    "Atlético San Luis":             "azul",
+    "Niños del Campo":               "negra",
+    "Las Chicas Súper Poderosas":    "rosa",
+    "Agronenas":                     "azul",
+    "Fénix FC":                      "rosa"
   };
 
-  // 👕 Emojis según color
-  const emojiCamisa = {
-    blanca: "⚪",
-    negra: "⚫",
-    rosa: "🩷",
-    azul: "🔵",
-    roja: "🔴"
-  };
+  const emojiCamisa = { blanca:"⚪", negra:"⚫", rosa:"🩷", azul:"🔵", roja:"🔴" };
 
- // ⚙️ Función que asigna colores de camiseta
-  function asignarColores(equipo1, equipo2) {
-    const colorLocal = coloresEquipos[equipo1] || "blanca";
-    let colorVisita = coloresEquipos[equipo2] || "blanca";
-
-    // Evita que los dos usen el mismo color
-    if (colorLocal === colorVisita) {
-      // Alterna el visitante a un color distinto automáticamente
-      const opcionesAlternas = ["blanca", "negra"].filter(c => c !== colorLocal);
-      colorVisita = opcionesAlternas[Math.floor(Math.random() * opcionesAlternas.length)];
-    }
-
-    return { colorLocal, colorVisita };
+  function getEmoji(equipo) {
+    return emojiCamisa[coloresEquipos[equipo] || "blanca"];
   }
 
-  // 📅 Partidos con árbitros (ninguno arbitra su propio juego)
   const partidos = [
-  /*{ jornada: 1, equipo1: "Los Callejeros FC", equipo2: "Los Papis", fecha: "Lunes 10 Noviembre ", hora: "2:00 pm", arbitro: "Karnaugh", categoria: "varonil" },
-  { jornada: 1, equipo1: "Karnaugh", equipo2: "Los Chicos que Lloran", fecha: "Lunes 10 Noviembre ", hora: "3:00 pm", arbitro: "FC SOWF", categoria: "varonil" },
-   //Partido Femenil
-  { jornada: 2, equipo1: "Girls", equipo2: "Agronenas", fecha: "Martes 11 Noviembre", hora: "2:00 pm", arbitro: "Nottingham Forest", categoria: "femenil" },
-  { jornada: 2, equipo1: "Los Descortezadores", equipo2: "FC SOWF", fecha: "Martes 11 Noviembre Martes", hora: "3:00 pm", arbitro: "Los papis", categoria: "varonil" },
-   
-  { jornada: 3, equipo1: "FC SOWF", equipo2: "Los Callejeros FC", fecha: "Miercoles 12 Noviembre", hora: "2:00 pm", arbitro: "Los Descortezadores", categoria: "varonil" },
-   { jornada: 3, equipo1: "Karnaugh", equipo2: "Nottingham Forest", fecha: "Miercoles 12 Noviembre Miercoles", hora: "3:00 pm", arbitro: "Los Callejeros FC", categoria: "varonil" },
-   //partido Femenil
-  { jornada: 4, equipo1: "Girls", equipo2: "Error 104", fecha: "Jueves 13 Noviembre", hora: "2:00 pm", arbitro: "Los Callejeros FC", categoria: "femenil" },
-  { jornada: 4, equipo1: "Los Descortezadores", equipo2: "Los Papis", fecha: "Jueves 13 Noviembre", hora: "3:00 pm", arbitro: "Nottingham Forest", categoria: "varonil" },
-   //partido Femenil
-  { jornada: 5, equipo1: "Agronenas", equipo2: "Error 104", fecha: "Viernes 14 Noviembre", hora: "2:00 pm", arbitro: "Los Descortezadores", categoria: "femenil" },
-  { jornada: 5, equipo1: "Nottingham Forest", equipo2: "Los Chicos que Lloran", fecha: "Viernes 14 Noviembre", hora: "3:00 pm", arbitro: "Los Callejeros FC", categoria: "varonil" },
-  */
-   // Partidos cruzados entre grupos
-   //partido Femenil
-   /*{ jornada: 6, equipo1: "Error 104", equipo2: "Girls", fecha: "18 Noviembre", hora: "2:00 pm", arbitro: "Los Descortezadores", categoria: "femenil" },
-   { jornada: 6, equipo1: "Los Callejeros FC", equipo2: "Karnaugh", fecha: "18 Noviembre", hora: "3:00 pm", arbitro: "Nottingham Forest", categoria: "varonil" },
-   */
-  
-   //{ jornada: 7, equipo1: "Nottingham Forest", equipo2: "Los Descortezadores", fecha: "19 Noviembre", hora: "2:00 pm", arbitro: "Los callejeros FC", categoria: "varonil" },
-   //{ jornada: 7, equipo1: "Los chicos que lloran", equipo2: "Los Papis", fecha: "19 Noviembre", hora: "3:00 pm", arbitro: "Karnaugh", categoria: "varonil" },
-
-    //partido Femenil
-   /*{ jornada: 9, equipo1: "Error 104", equipo2: "Agronenas", fecha: "20 Noviembre", hora: "2:00 pm", arbitro: "Los chicos que lloran", categoria: "femenil" },
-    { jornada: 9, equipo1: "Los Callejeros FC", equipo2: "Nottingham Forest", fecha: "20 Noviembre", hora: "3:00 pm", arbitro: "Los papis", categoria: "varonil" },
-  
-   //partido Femenil
-  { jornada: 9, equipo1: "Agronenas", equipo2: "Girls", fecha: "21 Noviembre", hora: "2:00 pm", arbitro: "Los Descortezadores", categoria: "femenil" },
-  { jornada: 9, equipo1: "Los Callejeros FC", equipo2: "Nottingham Forest", fecha: "21 Noviembre", hora: "2:00 pm", arbitro: "Nottingham Forest", categoria: "varonil" },
-*/
-   /*{ jornada: 10, equipo1: "Nottingham Forest", equipo2: "Los Descortezadores", fecha: "Viernes 21 Noviembre", hora: "2:00 pm", arbitro: "Nottingham", categoria: "varonil" },
-  { jornada: 10, equipo1: "Los Papis", equipo2: "Karnaugh", fecha: " Viernes 21 Noviembre", hora: "3:00 pm", arbitro: "Callejeros", categoria: "varonil" },*/
-   // Partido agregado para balancear
-
-   //semis  ida
-   /*{ jornada: 1, equipo1: "Nottingham Forest", equipo2: "Los Callejeros FC", fecha: "Lunes 24 Noviembre", hora: "2:00 pm", arbitro: "Karnaugh", categoria: "varonil", partidazo: true},
-   { jornada: 1, equipo1: "Karnaugh", equipo2: "Los Descortezadores", fecha: " Viernes 24 Noviembre", hora: "3:00 pm", arbitro: "Nottingham Forest", categoria: "varonil",partidazo: true },
-   */
-   //semis vuelta
-   /*
-   { jornada: 2, equipo1: "Los Descortezadores", equipo2: "Karnaugh", fecha: " Martes 25 Noviembre", hora: "2:00 pm", arbitro: "Los Callejeros FC", categoria: "varonil",partidazo: true },
-   { jornada: 2, equipo1: "Los Callejeros FC", equipo2: "Nottingham Forest", fecha: "Martes 25 noviembre", hora: "3:00 pm", arbitro: "Los Descortezadores", categoria: "varonil",partidazo: true },
-  */
-   /*{ jornada: 1, equipo1: "Los Callejeros FC", equipo2: "Los Descortezadores", fecha: "Jueves 04 Diciembre", hora: "3:00 pm", arbitro: "Los Descortezadores", categoria: "varonil",partidazo: true }*/
+    {
+      jornada: 1,
+      fecha: "Jueves 13 de Febrero",
+      equipo1: "Agronenas",
+      color1: "azul",
+      equipo2: "Fénix FC",
+      color2: "rosa",
+      hora: "2:00 pm – 3:00 pm",
+      arbitro: "Pendiente",
+      categoria: "femenil"
+    },
+    {
+      jornada: 1,
+      fecha: "Jueves 13 de Febrero",
+      equipo1: "Atlético San Luis",
+      color1: "azul",
+      equipo2: "Niños del Campo",
+      color2: "negra",
+      hora: "3:00 pm – 4:00 pm",
+      arbitro: "Warriors SF",
+      categoria: "varonil"
+    }
   ];
 
-  // 🧩 Agrupar por jornada
+  // =============================================
+  // 🏗️ RENDER PARTIDOS
+  // =============================================
   const jornadas = {};
   partidos.forEach(p => {
     if (!jornadas[p.jornada]) jornadas[p.jornada] = [];
     jornadas[p.jornada].push(p);
   });
 
-  // 🏗️ Renderizar
   const contenedor = document.getElementById("contenedorJornadas");
 
-  Object.keys(jornadas).forEach(jornadaNum => {
-    const jornadaPartidos = jornadas[jornadaNum];
-    const fechaJornada = jornadaPartidos[0].fecha; // toma la del primer partido
+  Object.keys(jornadas).sort().forEach(num => {
+    const lista = jornadas[num];
+    const fecha = lista[0].fecha;
 
     let html = `
-      <h2>
-       <br>
-        <span>🏅 3er Lugar</span>
-        <span class="fecha-jornada">📅 ${fechaJornada}</span>
-      </h2>
+      <div class="jornada-titulo">
+        <h3>🏅 Jornada ${num}</h3>
+        <span class="fecha-jornada">📅 ${fecha}</span>
+      </div>
       <div class="partidos-grid">`;
 
-    jornadaPartidos.forEach(p => {
-      const { colorLocal, colorVisita } = asignarColores(p.equipo1, p.equipo2);
-      const claseCategoria = p.categoria === "femenil" ? "femenino" : "";
-      const clasePartidazo = p.partidazo ? "partidazo" : "";
-
+    lista.forEach(p => {
+      const clsCategoria = p.categoria === "femenil" ? "femenino" : "";
+      const emoji1 = emojiCamisa[p.color1] || "⚪";
+      const emoji2 = emojiCamisa[p.color2] || "⚪";
       html += `
-        <div class="partido-card ${claseCategoria} ${clasePartidazo}">
+        <div class="partido-card ${clsCategoria}">
           <div class="partido-equipos">
-            <div>${emojiCamisa[colorLocal]} ${p.equipo1}</div>
+            <div class="equipo-nombre">${emoji1} ${p.equipo1}</div>
             <div class="vs-badge">VS</div>
-            <div>${emojiCamisa[colorVisita]} ${p.equipo2}</div>
+            <div class="equipo-nombre" style="text-align:right;">${p.equipo2} ${emoji2}</div>
           </div>
           <div class="partido-info">
-            ⏰ ${p.hora}<br>
-            🧑‍⚖️ Árbitro: ${p.arbitro}
+            <span>⏰ ${p.hora}</span>
+            <span>🧑‍⚖️ Árbitro: ${p.arbitro}</span>
           </div>
         </div>`;
     });
@@ -1181,24 +682,19 @@
     html += `</div>`;
     contenedor.innerHTML += html;
   });
+
+  // =============================================
+  // 🚀 INICIALIZAR
+  // =============================================
+  const tablaVaronil  = calcularTabla(equiposVaronil,  "Varonil");
+  const tablaFem      = calcularTabla(equiposFemenil,  "Femenil");
+
+  ordenarYMostrar(tablaVaronil, "tablaVaronil",  false);
+  ordenarYMostrar(tablaFem,     "tablaFemenil",  true);
+
+  renderGoleadores(goleadores,  "goleadoresBody");
+  renderGoleadores(goleadoras,  "goleadorasBody");
 </script>
 
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
