@@ -444,7 +444,7 @@
 
 <!-- GOLEADORES VARONIL -->
 <div class="goleadores-section">
-  <h2 class="section-header">⚽ Goleadores — Varonil</h2>
+  <h2 class="section-header">⚽ Goleador</h2>
   <div class="goleadores-table-wrapper">
     <table class="goleadores-table">
       <thead>
@@ -462,7 +462,7 @@
 
 <!-- GOLEADORAS FEMENIL -->
 <div class="goleadores-section femenina">
-  <h2 class="section-header">⚽ Goleadoras — Femenil 👩</h2>
+  <h2 class="section-header">⚽ Goleadora 👩</h2>
   <div class="goleadores-table-wrapper">
     <table class="goleadores-table">
       <thead>
@@ -484,6 +484,9 @@
   // =============================================
   const resultadosPartidos = [
     // Ejemplo: { equipo1: "Warriors SF", goles1: 2, equipo2: "Sunderland FC", goles2: 1, grupo: "Varonil" }
+    { equipo1: "Atlético San Luis", goles1: 5, equipo2: "Niños del Campo", goles2: 3, grupo: "Varonil" },
+    { equipo1: "Agronenas", goles1: 1, equipo2: "Fénix FC", goles2: 0, grupo: "Femenil" }
+   
   ];
 
   // =============================================
@@ -535,10 +538,18 @@
   // =============================================
   const goleadores = [
     // { nombre: "Jugador", equipo: "Warriors SF", goles: 3 }
+        { nombre: "Eridel", equipo: "Atlético San Luis", goles: 2 },
+        { nombre: "Luis", equipo: "Niños del campo", goles: 2 },
+        { nombre: "Daniel", equipo: "Atlético San Luis", goles: 1 },
+        { nombre: "Cesar", equipo: "Atlético San Luis", goles: 1 },
+        { nombre: "Victor", equipo: "Atlético San Luis", goles: 1 },
+        { nombre: "Alejandro", equipo: "Niños del campo", goles: 2 },
+   
   ];
 
   const goleadoras = [
     // { nombre: "Jugadora", equipo: "Agronenas", goles: 2 }
+       { nombre: "Sherlyn", equipo: "Agronenas", goles: 1 }
   ];
 
   // =============================================
@@ -615,7 +626,7 @@
   }
 
   const partidos = [
-    {
+    /*{
       jornada: 1,
       fecha: "Jueves 13 de Febrero",
       equipo1: "Agronenas",
@@ -636,6 +647,27 @@
       hora: "3:00 pm – 4:00 pm",
       arbitro: "Warriors SF",
       categoria: "varonil"
+    }*/
+   {
+      jornada: 1,
+      fecha: "Lunes 16 de Febrero",
+      equipo1: "Sunderland FC",
+      color1: "azul",
+      equipo2: "Warriors SF",
+      color2: "Roja",
+      hora: "2:00 pm – 3:00 pm",
+      arbitro: "Atlético San Luis",
+      categoria: "varonil"
+    },{
+      jornada: 1,
+      fecha: "Martes 16 de Febrero",
+      equipo1: "Las chicas super poderosas",
+      color1: "Blanca",
+      equipo2: "Fénix FC",
+      color2: "rosa",
+      hora: "2:00 pm – 3:00 pm",
+      arbitro: "Niños del campo",
+      categoria: "femenil"
     }
   ];
 
@@ -701,5 +733,6 @@
   by Licenciaruta en Informatica 1000 E-E-D
 </footer>
 </html>
+
 
 
