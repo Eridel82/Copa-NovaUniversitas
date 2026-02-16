@@ -3,760 +3,1139 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Copa NovaUniversitas</title>
+<title>Copa NovaUniversitas 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
 <style>
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  :root {
+    --bg:        #0d0f14;
+    --bg2:       #131620;
+    --bg3:       #1a1e2b;
+    --surface:   #1e2235;
+    --border:    rgba(255,255,255,0.07);
+    --blue:      #4f8ef7;
+    --blue-dim:  rgba(79,142,247,0.12);
+    --pink:      #f472b6;
+    --pink-dim:  rgba(244,114,182,0.12);
+    --gold:      #f59e0b;
+    --silver:    #94a3b8;
+    --bronze:    #c87533;
+    --text:      #e8eaf0;
+    --text-dim:  #8b92a8;
+    --text-muted:#4a5068;
+    --green:     #34d399;
+    --radius:    16px;
+    --radius-sm: 10px;
   }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+
+  html { scroll-behavior: smooth; }
 
   body {
-    font-family: "Inter", "Segoe UI", sans-serif;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
     min-height: 100vh;
-    padding: 20px;
+    overflow-x: hidden;
   }
 
-  .header {
+  /* ── NOISE TEXTURE OVERLAY ── */
+  body::before {
+    content:'';
+    position:fixed; inset:0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events:none; z-index:0;
+  }
+
+  /* ── GLOW ORBS ── */
+  .orb {
+    position:fixed;
+    border-radius:50%;
+    filter:blur(120px);
+    pointer-events:none;
+    z-index:0;
+    opacity:.35;
+  }
+  .orb-1 { width:600px; height:600px; background:#4f8ef7; top:-200px; left:-200px; animation: orbDrift 18s ease-in-out infinite; }
+  .orb-2 { width:500px; height:500px; background:#f472b6; bottom:-150px; right:-150px; animation: orbDrift 22s ease-in-out 4s infinite reverse; }
+  .orb-3 { width:300px; height:300px; background:#7c3aed; top:50%; left:50%; transform:translate(-50%,-50%); opacity:.2; animation: orbDrift 28s ease-in-out 8s infinite; }
+
+  .page-wrap { position:relative; z-index:1; max-width:1200px; margin:0 auto; padding:0 20px 80px; }
+
+  /* ── HERO ── */
+  .hero {
+    padding: 80px 20px 60px;
     text-align: center;
-    color: white;
-    padding: 40px 20px;
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    border-radius: 20px;
-    max-width: 1200px;
-    margin: 0 auto 40px;
+    position: relative;
   }
 
-  .header h1 {
-    font-size: 3em;
-    font-weight: 800;
-    margin-bottom: 10px;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
-    letter-spacing: -1px;
-  }
-
-  .header .subtitle {
-    font-size: 1.2em;
-    opacity: 0.9;
-    font-weight: 300;
-  }
-
-  .trophy-icon {
-    font-size: 4em;
-    margin-bottom: 15px;
-    animation: bounce 2s infinite;
-  }
-
-  @keyframes bounce {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
-  }
-
-  /* TABLAS */
-  .grupo-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
-    gap: 30px;
-    max-width: 1200px;
-    margin: 0 auto 50px;
-  }
-
-  .tabla {
-    background: white;
-    border-radius: 20px;
-    overflow: hidden;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-    transition: transform 0.3s ease;
-  }
-
-  .tabla:hover {
-    transform: translateY(-5px);
-  }
-
-  .tabla-header {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    padding: 25px;
-    font-size: 1.5em;
-    font-weight: 700;
-    text-align: center;
-    letter-spacing: 1px;
-  }
-
-  .tabla-header.femenina {
-    background: linear-gradient(135deg, #ec4899 0%, #be185d 100%);
-  }
-
-  table {
-    width: 100%;
-    border-collapse: collapse;
-  }
-
-  thead {
-    background: #f8f9fa;
-  }
-
-  th {
-    padding: 15px 10px;
-    text-align: center;
-    font-weight: 600;
-    color: #495057;
-    font-size: 0.9em;
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(79,142,247,0.15);
+    border: 1px solid rgba(79,142,247,0.3);
+    color: var(--blue);
+    padding: 6px 16px;
+    border-radius: 100px;
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 2px;
     text-transform: uppercase;
+    margin-bottom: 28px;
+    animation: fadeIn 0.8s ease both;
+  }
+
+  .hero h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(3rem, 8vw, 6rem);
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -2px;
+    background: linear-gradient(135deg, #fff 30%, rgba(255,255,255,0.5));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 8px;
+    animation: slideUp 0.8s ease 0.1s both;
+  }
+
+  .hero-year {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    font-weight: 600;
+    color: var(--blue);
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    animation: slideUp 0.8s ease 0.2s both;
+  }
+
+  .hero-sub {
+    color: var(--text-dim);
+    font-size: 1.05rem;
+    font-weight: 300;
     letter-spacing: 0.5px;
+    animation: slideUp 0.8s ease 0.3s both;
   }
 
-  td {
-    padding: 15px 10px;
-    text-align: center;
-    border-bottom: 1px solid #f0f0f0;
-    color: #333;
+  .hero-divider {
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--blue), var(--pink));
+    margin: 32px auto;
+    border-radius: 2px;
+    animation: fadeIn 1s ease 0.4s both;
   }
 
-  tbody tr {
-    transition: all 0.2s ease;
+  /* ── LIVE INDICATOR ── */
+  .live-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    flex-wrap: wrap;
+    margin-bottom: 60px;
+    animation: fadeIn 1s ease 0.5s both;
   }
 
-  tbody tr:hover {
-    background: #f8f9ff;
+  .stat-pill {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 10px 20px;
+    border-radius: 100px;
+    font-size: 0.88rem;
   }
 
-  tbody tr:first-child {
-    background: linear-gradient(90deg, #fff3cd 0%, #ffffff 100%);
-    font-weight: 600;
+  .stat-pill .n { font-family:'Syne',sans-serif; font-weight:700; font-size:1.1rem; color:var(--blue); }
+  .stat-pill.fem .n { color:var(--pink); }
+  .stat-pill .l { color:var(--text-dim); }
+
+  /* ── SECTION TITLES ── */
+  .sec-title {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 28px;
   }
 
-  .tabla.femenina tbody tr:first-child {
-    background: linear-gradient(90deg, #fce7f3 0%, #ffffff 100%);
-    font-weight: 600;
-  }
-
-  tbody tr:nth-child(2) {
-    background: linear-gradient(90deg, #e7f3ff 0%, #ffffff 100%);
-    font-weight: 500;
-  }
-
-  .tabla.femenina tbody tr:nth-child(2) {
-    background: linear-gradient(90deg, #fbcfe8 0%, #ffffff 100%);
-    font-weight: 500;
-  }
-
-  .equipo-cell {
-    text-align: left;
-    font-weight: 600;
-    color: #2c3e50;
-  }
-
-  .pts-cell {
+  .sec-title h2 {
+    font-family: 'Syne', sans-serif;
     font-weight: 700;
-    font-size: 1.1em;
-    color: #667eea;
+    font-size: 1.4rem;
+    color: var(--text);
+    letter-spacing: -0.5px;
   }
 
-  .tabla.femenina .pts-cell {
-    color: #ec4899;
+  .sec-title .line {
+    flex: 1;
+    height: 1px;
+    background: var(--border);
   }
 
-  /* PARTIDOS */
-  .partidos-section {
-    max-width: 1200px;
-    background: white;
-    margin: 0 auto 50px;
-    padding: 40px;
-    border-radius: 20px;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+  .sec-tag {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--blue);
+    background: var(--blue-dim);
+    border: 1px solid rgba(79,142,247,0.2);
+    padding: 4px 12px;
+    border-radius: 100px;
   }
 
-  .section-header {
-    text-align: center;
-    margin-bottom: 30px;
-    color: #2c3e50;
-    font-size: 2em;
-    font-weight: 700;
+  .sec-tag.fem { color:var(--pink); background:var(--pink-dim); border-color:rgba(244,114,182,0.2); }
+
+  /* ── CARDS WRAPPER ── */
+  .section-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    padding: 36px;
+    margin-bottom: 28px;
   }
 
-  .jornada-titulo {
+  /* ── PARTIDOS ── */
+  .jornada-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
     flex-wrap: wrap;
     gap: 10px;
-    margin-bottom: 20px;
-    margin-top: 10px;
+    margin: 0 0 20px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--border);
   }
 
-  .jornada-titulo h3 {
-    font-size: 1.3em;
-    color: #2c3e50;
+  .jornada-header h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1rem;
     font-weight: 700;
+    color: var(--text-dim);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
   }
 
-  .fecha-jornada {
-    font-size: 0.95em;
-    color: #667eea;
-    font-weight: 600;
+  .jornada-fecha {
+    font-size: 0.82rem;
+    color: var(--blue);
+    font-weight: 500;
   }
 
   .partidos-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    display: flex;
+    flex-direction: column;
     gap: 20px;
-    margin-bottom: 30px;
+    margin-bottom: 32px;
   }
 
   .partido-card {
-    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-    padding: 20px;
-    border-radius: 15px;
-    border-left: 4px solid #667eea;
-    transition: all 0.3s ease;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 36px 40px;
+    position: relative;
+    overflow: hidden;
+    transition: border-color .3s, transform .3s, box-shadow .3s;
+    animation: cardSlideIn .5s ease both;
   }
 
-  .partido-card.femenino {
-    background: linear-gradient(135deg, #fce7f3 0%, #fbcfe8 100%);
-    border-left: 4px solid #ec4899;
+  /* shimmer sweep on hover */
+  .partido-card::before {
+    content:'';
+    position:absolute;
+    top:0; left:-100%; width:60%; height:100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.04), transparent);
+    transition: left .6s ease;
+    pointer-events:none;
+  }
+  .partido-card:hover::before { left:150%; }
+
+  /* glow accent top */
+  .partido-card::after {
+    content:'';
+    position:absolute;
+    top:0; left:0; right:0;
+    height:2px;
+    background: linear-gradient(90deg, transparent, var(--blue), transparent);
+    border-radius:20px 20px 0 0;
+  }
+
+  .partido-card.femenino::after {
+    background: linear-gradient(90deg, transparent, var(--pink), transparent);
   }
 
   .partido-card:hover {
-    transform: translateX(5px);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-    border-left-color: #764ba2;
+    border-color: rgba(79,142,247,0.35);
+    transform: translateY(-3px);
+    box-shadow: 0 20px 60px rgba(79,142,247,0.12);
   }
 
   .partido-card.femenino:hover {
-    border-left-color: #be185d;
+    border-color: rgba(244,114,182,0.35);
+    box-shadow: 0 20px 60px rgba(244,114,182,0.12);
   }
+
+  /* BG blob inside card */
+  .partido-card .card-blob {
+    position:absolute;
+    right:-60px; top:-60px;
+    width:220px; height:220px;
+    border-radius:50%;
+    background: radial-gradient(circle, rgba(79,142,247,0.08), transparent 70%);
+    pointer-events:none;
+  }
+
+  .partido-card.femenino .card-blob {
+    background: radial-gradient(circle, rgba(244,114,182,0.08), transparent 70%);
+  }
+
+  .cat-label {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--blue);
+    margin-bottom: 28px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .cat-label::before {
+    content:'';
+    display:inline-block;
+    width:6px; height:6px;
+    border-radius:50%;
+    background: var(--blue);
+    animation: pulse 2s infinite;
+  }
+
+  .femenino .cat-label { color: var(--pink); }
+  .femenino .cat-label::before { background: var(--pink); }
 
   .partido-equipos {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 15px;
-    gap: 8px;
+    gap: 24px;
+    margin-bottom: 32px;
   }
 
-  .partido-equipos .equipo-nombre {
-    font-weight: 700;
-    color: #2c3e50;
-    flex: 1;
-    font-size: 0.95em;
+  .equipo-col { flex:1; }
+  .equipo-col.right { text-align:right; }
+
+  .equipo-emoji { font-size:3rem; display:block; margin-bottom:10px; line-height:1; }
+  .equipo-col.right .equipo-emoji { display:block; }
+
+  .equipo-nombre {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+    color: var(--text);
+    line-height: 1.2;
+    letter-spacing: -0.3px;
   }
 
-  .vs-badge {
-    background: #667eea;
-    color: white;
-    padding: 5px 15px;
-    border-radius: 20px;
-    font-weight: 600;
-    font-size: 0.85em;
-    margin: 0 10px;
+  .vs-orb {
+    width: 64px; height: 64px;
+    border-radius: 50%;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    display: flex; align-items:center; justify-content:center;
+    font-family: 'Syne', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 800;
+    color: var(--text-muted);
+    letter-spacing: 1px;
     flex-shrink: 0;
+    position: relative;
   }
 
-  .partido-card.femenino .vs-badge {
-    background: #ec4899;
+  .vs-orb::before {
+    content:'';
+    position:absolute; inset:-4px;
+    border-radius:50%;
+    background: conic-gradient(var(--blue) 0%, transparent 40%, transparent 60%, var(--pink) 100%);
+    opacity: .3;
+    animation: spinSlow 6s linear infinite;
   }
 
-  .partido-info {
+  .partido-meta {
     display: flex;
-    flex-direction: column;
-    gap: 5px;
-    color: #6c757d;
-    font-size: 0.88em;
-    padding-top: 10px;
-    border-top: 1px solid #dee2e6;
-    line-height: 1.6;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
   }
 
-  /* GOLEADORES */
-  .goleadores-section {
-    max-width: 1200px;
-    background: white;
-    margin: 0 auto 50px;
-    padding: 40px;
-    border-radius: 20px;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-  }
-
-  .goleadores-section.femenina {
-    background: linear-gradient(135deg, #fff5f7 0%, #ffffff 100%);
-  }
-
-  .goleadores-stats {
+  .meta-row {
     display: flex;
-    justify-content: space-around;
-    padding: 20px;
-    background: #f8f9fa;
-    border-radius: 15px;
-    margin-bottom: 30px;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.88rem;
+    color: var(--text-dim);
+    background: var(--bg3);
+    padding: 8px 16px;
+    border-radius: 100px;
+    border: 1px solid var(--border);
   }
 
-  .stat-box { text-align: center; }
+  .meta-icon { font-size: 0.95rem; }
 
-  .stat-number {
-    font-size: 2em;
-    font-weight: bold;
-    color: #667eea;
+  /* ── TABLA POSICIONES ── */
+  .tablas-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+    gap: 28px;
+    margin-bottom: 28px;
   }
 
-  .goleadores-section.femenina .stat-number { color: #ec4899; }
-
-  .stat-label {
-    color: #6c757d;
-    font-size: 0.9em;
-    margin-top: 5px;
+  .tabla-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    overflow: hidden;
   }
 
-  .goleadores-table-wrapper {
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
+  .tabla-top {
+    padding: 22px 28px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
   }
 
-  .goleadores-table {
-    width: 100%;
-    border-collapse: collapse;
-    min-width: 500px;
+  .tabla-top h3 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    letter-spacing: -0.3px;
   }
 
-  .goleadores-table thead {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-  }
+  table { width:100%; border-collapse:collapse; }
 
-  .goleadores-section.femenina .goleadores-table thead {
-    background: linear-gradient(135deg, #ec4899 0%, #be185d 100%);
-  }
-
-  .goleadores-table th {
-    padding: 15px;
-    text-align: left;
+  thead th {
+    padding: 12px 16px;
+    font-size: 0.72rem;
     font-weight: 600;
+    letter-spacing: 1.5px;
     text-transform: uppercase;
-    font-size: 14px;
-    color: white;
-  }
-
-  .goleadores-table td {
-    padding: 15px;
-    border-bottom: 1px solid #e9ecef;
-  }
-
-  .goleadores-table tbody tr:hover { background: #f8f9fa; }
-
-  .goleadores-table tbody tr:nth-child(1) { background: linear-gradient(to right, #ffd70020, transparent); }
-  .goleadores-table tbody tr:nth-child(2) { background: linear-gradient(to right, #c0c0c020, transparent); }
-  .goleadores-table tbody tr:nth-child(3) { background: linear-gradient(to right, #cd7f3220, transparent); }
-
-  .position-cell {
-    font-weight: bold;
-    color: #667eea;
-    font-size: 18px;
-  }
-
-  .goleadores-section.femenina .position-cell { color: #ec4899; }
-
-  .player-name-cell { font-weight: 600; color: #212529; }
-  .team-name-cell { color: #6c757d; }
-
-  .goals-cell {
-    font-weight: bold;
-    color: #28a745;
-    font-size: 20px;
+    color: var(--text-muted);
     text-align: center;
+    background: var(--bg3);
   }
 
-  .goleadores-section.femenina .goals-cell { color: #e91e63; }
+  thead th:nth-child(2) { text-align:left; padding-left:20px; }
 
-  .trophy-emoji { font-size: 20px; margin-left: 6px; }
+  tbody td {
+    padding: 14px 16px;
+    text-align: center;
+    font-size: 0.9rem;
+    color: var(--text-dim);
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+  }
 
-  /* RESPONSIVE */
-  @media (max-width: 768px) {
-    body { padding: 10px; }
-    .header h1 { font-size: 2em; }
-    .header { padding: 30px 15px; }
-    .grupo-container { grid-template-columns: 1fr; }
-    .partidos-grid { grid-template-columns: 1fr; }
-    .partidos-section, .goleadores-section { padding: 20px 15px; }
-    .partido-card { padding: 15px; }
-    .partido-equipos .equipo-nombre { font-size: 0.85em; }
-    .vs-badge { padding: 4px 10px; font-size: 0.75em; margin: 0 5px; }
-    .goleadores-stats { flex-direction: column; gap: 15px; }
-    .goleadores-table th, .goleadores-table td { padding: 10px 8px; font-size: 13px; }
-    .position-cell { font-size: 16px; }
-    .goals-cell { font-size: 18px; }
+  tbody td:nth-child(2) { text-align:left; padding-left:20px; }
+
+  tbody tr { transition: background .2s; }
+  tbody tr:hover { background: rgba(255,255,255,0.03); }
+
+  tbody tr:last-child td { border-bottom: none; }
+
+  .pos-num {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.88rem;
+    color: var(--text-muted);
+  }
+
+  .equipo-td {
+    display:flex; align-items:center; gap:10px;
+    font-weight:500; color:var(--text);
+    font-size: 0.9rem;
+  }
+
+  .pos-dot {
+    width:8px; height:8px; border-radius:50%; flex-shrink:0;
+  }
+
+  .pts-td {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--blue);
+  }
+
+  .tabla-card.fem .pts-td { color: var(--pink); }
+
+  .dg-pos { color: var(--green); }
+  .dg-neg { color: #f87171; }
+  .dg-zero { color: var(--text-muted); }
+
+  /* leader row */
+  .leader-row td { background: rgba(79,142,247,0.06); }
+  .fem-leader-row td { background: rgba(244,114,182,0.06); }
+
+  /* ── GOLEADORES ── */
+  .goles-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+    gap: 28px;
+    margin-bottom: 28px;
+  }
+
+  .goles-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    overflow: hidden;
+  }
+
+  .goles-top {
+    padding: 22px 28px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .goles-top h3 {
+    font-family:'Syne', sans-serif;
+    font-weight:700; font-size:1rem;
+  }
+
+  .goles-list { padding: 12px 0; }
+
+  .gol-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 14px 28px;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    transition: background .2s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .gol-row:last-child { border-bottom: none; }
+  .gol-row:hover { background: rgba(255,255,255,0.03); }
+
+  /* top 3 shimmer */
+  .gol-row.rank-1::before {
+    content:'';
+    position:absolute; inset:0;
+    background: linear-gradient(90deg, rgba(245,158,11,0.08), transparent 50%);
+    pointer-events:none;
+  }
+  .gol-row.rank-2::before {
+    content:'';
+    position:absolute; inset:0;
+    background: linear-gradient(90deg, rgba(148,163,184,0.06), transparent 50%);
+    pointer-events:none;
+  }
+  .gol-row.rank-3::before {
+    content:'';
+    position:absolute; inset:0;
+    background: linear-gradient(90deg, rgba(200,117,51,0.06), transparent 50%);
+    pointer-events:none;
+  }
+
+  .rank-badge {
+    width:32px; height:32px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Syne',sans-serif; font-weight:700; font-size:0.82rem;
+    flex-shrink:0;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+  }
+
+  .rank-1 .rank-badge { background:rgba(245,158,11,0.15); border-color:rgba(245,158,11,0.4); color:var(--gold); }
+  .rank-2 .rank-badge { background:rgba(148,163,184,0.15); border-color:rgba(148,163,184,0.4); color:var(--silver); }
+  .rank-3 .rank-badge { background:rgba(200,117,51,0.15); border-color:rgba(200,117,51,0.4); color:var(--bronze); }
+
+  .gol-info { flex:1; min-width:0; }
+  .gol-name { font-weight:600; color:var(--text); font-size:0.92rem; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .gol-team { font-size:0.78rem; color:var(--text-muted); margin-top:2px; }
+
+  .gol-count {
+    flex-shrink:0;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    min-width:64px; height:64px;
+    border-radius:14px;
+    background: var(--bg3);
+    border: 1px solid rgba(79,142,247,0.25);
+    position:relative;
+    overflow:hidden;
+  }
+
+  .gol-count::before {
+    content:'';
+    position:absolute; inset:0;
+    background: linear-gradient(135deg, rgba(79,142,247,0.1), transparent);
+    pointer-events:none;
+  }
+
+  .goles-card.fem .gol-count {
+    border-color: rgba(244,114,182,0.25);
+  }
+
+  .goles-card.fem .gol-count::before {
+    background: linear-gradient(135deg, rgba(244,114,182,0.1), transparent);
+  }
+
+  .gol-count .gol-num {
+    font-family:'Syne',sans-serif;
+    font-weight:800;
+    font-size:1.8rem;
+    line-height:1;
+    color:var(--blue);
+    position:relative; z-index:1;
+  }
+
+  .goles-card.fem .gol-count .gol-num { color:var(--pink); }
+
+  .gol-count .gol-lbl {
+    font-size:0.58rem;
+    font-weight:600;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+    color:var(--text-muted);
+    position:relative; z-index:1;
+    margin-top:2px;
+  }
+
+  .rank-1 .gol-count {
+    border-color: rgba(245,158,11,0.4);
+    background: rgba(245,158,11,0.08);
+  }
+  .rank-1 .gol-count::before { background: linear-gradient(135deg, rgba(245,158,11,0.15), transparent); }
+  .rank-1 .gol-count .gol-num { color: var(--gold); }
+
+  .rank-2 .gol-count {
+    border-color: rgba(148,163,184,0.35);
+    background: rgba(148,163,184,0.07);
+  }
+  .rank-2 .gol-count .gol-num { color: var(--silver); }
+
+  .rank-3 .gol-count {
+    border-color: rgba(200,117,51,0.35);
+    background: rgba(200,117,51,0.07);
+  }
+  .rank-3 .gol-count .gol-num { color: var(--bronze); }
+
+  .gol-bar-wrap {
+    flex:1;
+    height:5px;
+    background:var(--bg3);
+    border-radius:3px;
+    overflow:hidden;
+    max-width:100px;
+  }
+
+  .gol-bar {
+    height:100%;
+    border-radius:3px;
+    background: linear-gradient(90deg, var(--blue), #818cf8);
+    transition: width .8s cubic-bezier(.23,1,.32,1);
+  }
+
+  .goles-card.fem .gol-bar { background: linear-gradient(90deg, var(--pink), #e879f9); }
+
+  /* no data */
+  .empty-state {
+    padding: 48px 28px;
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+  }
+
+  .empty-state .e-icon { font-size: 2.5rem; margin-bottom: 12px; display:block; opacity:.4; }
+
+  /* ── FOOTER ── */
+  footer {
+    text-align: center;
+    padding: 40px 20px;
+    color: var(--text-muted);
+    font-size: 0.82rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    position: relative;
+    z-index: 1;
+  }
+
+  footer::before {
+    content:'';
+    display:block;
+    width:40px; height:1px;
+    background: var(--border);
+    margin: 0 auto 20px;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeIn    { from{opacity:0}                        to{opacity:1} }
+  @keyframes slideUp   { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
+  @keyframes cardSlideIn { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:translateY(0)} }
+  @keyframes spinSlow  { from{transform:rotate(0deg)}           to{transform:rotate(360deg)} }
+  @keyframes pulse     {
+    0%,100%{opacity:1;transform:scale(1)}
+    50%{opacity:.5;transform:scale(.75)}
+  }
+  @keyframes countUp  {
+    from{opacity:0;transform:scale(.6) translateY(8px)}
+    to  {opacity:1;transform:scale(1)  translateY(0)}
+  }
+  @keyframes glowPulse {
+    0%,100%{box-shadow:0 0 0 0 rgba(79,142,247,0)}
+    50%    {box-shadow:0 0 24px 4px rgba(79,142,247,0.18)}
+  }
+  @keyframes glowPulseFem {
+    0%,100%{box-shadow:0 0 0 0 rgba(244,114,182,0)}
+    50%    {box-shadow:0 0 24px 4px rgba(244,114,182,0.18)}
+  }
+  @keyframes heroFloat {
+    0%,100%{transform:translateY(0)}
+    50%{transform:translateY(-8px)}
+  }
+  @keyframes orbDrift {
+    0%,100%{transform:translate(0,0)}
+    33%{transform:translate(30px,-20px)}
+    66%{transform:translate(-20px,30px)}
+  }
+
+  .fade-in { animation: fadeIn .6s ease both; }
+
+  /* scroll-reveal */
+  .reveal {
+    opacity:0;
+    transform:translateY(30px);
+    transition: opacity .6s ease, transform .6s ease;
+  }
+  .reveal.visible {
+    opacity:1;
+    transform:translateY(0);
+  }
+
+  .gol-count { animation: countUp .5s ease both; }
+
+  .rank-1 .gol-count { animation: countUp .4s ease .05s both, glowPulse 3s ease 1s infinite; }
+  .goles-card.fem .rank-1 .gol-count { animation: countUp .4s ease .05s both, glowPulseFem 3s ease 1s infinite; }
+
+  .hero-badge { animation: fadeIn .8s ease both; }
+
+  /* float the trophy badge */
+  .hero-badge { animation: fadeIn .8s ease both, heroFloat 4s ease 1s infinite; }
+
+  /* ── SCROLLBAR ── */
+  ::-webkit-scrollbar { width:6px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--surface); border-radius:3px; }
+
+  /* ── RESPONSIVE ── */
+  @media(max-width:700px){
+    .section-card { padding:24px 18px; }
+    .tablas-grid, .goles-grid { grid-template-columns:1fr; }
+    .tabla-top, .goles-top { padding:18px 20px; }
+    thead th, tbody td { padding:11px 10px; }
+    .gol-row { padding:12px 16px; }
+    .gol-bar-wrap { display:none; }
+    .hero { padding:60px 16px 40px; }
+    .live-bar { gap:12px; }
+    .partido-card { padding:24px 20px; }
+    .equipo-emoji { font-size:2.2rem; }
+    .equipo-nombre { font-size:1rem; }
+    .vs-orb { width:48px; height:48px; }
+    .partido-meta { gap:10px; }
+    .gol-count { min-width:54px; height:54px; }
+    .gol-count .gol-num { font-size:1.4rem; }
   }
 </style>
 </head>
 <body>
 
-<div class="header">
-  <div class="trophy-icon">🏆</div>
-  <h1>Copa NovaUniversitas</h1>
-  <div class="subtitle">Temporada 2026 — Fase de Grupos</div>
-</div>
+<!-- BG ORBS -->
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
+<div class="orb orb-3"></div>
 
-<!-- PRÓXIMOS PARTIDOS -->
-<div class="partidos-section">
-  <h2 class="section-header">📅 Próximos Partidos</h2>
-  <div id="contenedorJornadas"></div>
-</div>
+<div class="page-wrap">
 
-<!-- TABLAS -->
-<div class="grupo-container">
-  <!-- VARONIL -->
-  <div class="tabla">
-    <div class="tabla-header">⚽ VARONIL</div>
-    <table id="tablaVaronil">
-      <thead>
-        <tr>
-          <th>Pos</th>
-          <th style="text-align:left;padding-left:20px;">Equipo</th>
-          <th>GF</th>
-          <th>GC</th>
-          <th>DG</th>
-          <th>Pts</th>
-        </tr>
-      </thead>
-      <tbody></tbody>
-    </table>
+  <!-- ══ HERO ══ -->
+  <div class="hero">
+    <div class="hero-badge">🏆 Temporada 2026</div>
+    <h1>Copa NovaUniversitas  </h1>
+    <div class="hero-sub">Fase de Grupos</div>
+    <div class="hero-divider"></div>
+
+    <div class="live-bar" id="liveBar">
+      <!-- dinámico -->
+    </div>
   </div>
 
-  <!-- FEMENIL -->
-  <div class="tabla femenina">
-    <div class="tabla-header femenina">👩 FEMENIL</div>
-    <table id="tablaFemenil">
-      <thead>
-        <tr>
-          <th>Pos</th>
-          <th style="text-align:left;padding-left:20px;">Equipo</th>
-          <th>GF</th>
-          <th>GC</th>
-          <th>DG</th>
-          <th>Pts</th>
-        </tr>
-      </thead>
-      <tbody></tbody>
-    </table>
+  <!-- ══ PRÓXIMOS PARTIDOS ══ -->
+  <div class="section-card fade-in">
+    <div class="sec-title">
+      <h2>Próximos Partidos</h2>
+      <div class="line"></div>
+    </div>
+    <div id="contenedorJornadas"></div>
   </div>
+
+  <!-- ══ TABLAS ══ -->
+  <div class="sec-title" style="margin-bottom:20px;">
+    <h2>Tabla de Posiciones</h2>
+    <div class="line"></div>
+  </div>
+
+  <div class="tablas-grid" id="tablasGrid">
+    <!-- dinámica -->
+  </div>
+
+  <!-- ══ GOLEADORES ══ -->
+  <div class="sec-title" style="margin-bottom:20px;">
+    <h2>Tabla de Goleadores</h2>
+    <div class="line"></div>
+  </div>
+
+  <div class="goles-grid" id="golesGrid">
+    <!-- dinámica -->
+  </div>
+
 </div>
 
-<!-- GOLEADORES VARONIL -->
-<div class="goleadores-section">
-  <h2 class="section-header">⚽ Goleador</h2>
-  <div class="goleadores-table-wrapper">
-    <table class="goleadores-table">
-      <thead>
-        <tr>
-          <th>Posición</th>
-          <th>Jugador</th>
-          <th>Equipo</th>
-          <th style="text-align:center;">Goles</th>
-        </tr>
-      </thead>
-      <tbody id="goleadoresBody"></tbody>
-    </table>
-  </div>
-</div>
-
-<!-- GOLEADORAS FEMENIL -->
-<div class="goleadores-section femenina">
-  <h2 class="section-header">⚽ Goleadora 👩</h2>
-  <div class="goleadores-table-wrapper">
-    <table class="goleadores-table">
-      <thead>
-        <tr>
-          <th>Posición</th>
-          <th>Jugadora</th>
-          <th>Equipo</th>
-          <th style="text-align:center;">Goles</th>
-        </tr>
-      </thead>
-      <tbody id="goleadorasBody"></tbody>
-    </table>
-  </div>
-</div>
+<footer>by Licenciatura en Informática 1001 E-E-D</footer>
 
 <script>
-  // =============================================
-  // 📊 RESULTADOS — agregar aquí conforme se jueguen
-  // =============================================
-  const resultadosPartidos = [
-    // Ejemplo: { equipo1: "Warriors SF", goles1: 2, equipo2: "Sunderland FC", goles2: 1, grupo: "Varonil" }
-    { equipo1: "Atlético San Luis", goles1: 5, equipo2: "Niños del Campo", goles2: 3, grupo: "Varonil" },
-    { equipo1: "Agronenas", goles1: 1, equipo2: "Fénix FC", goles2: 0, grupo: "Femenil" }
-   
-  ];
+/* ══════════════════════════════════════════════
+   📊 DATOS
+══════════════════════════════════════════════ */
 
-  // =============================================
-  // 👕 EQUIPOS
-  // =============================================
-  const equiposVaronil  = ["Warriors SF", "Sunderland AFC", "Atlético San Luis", "Niños del Campo"];
-  const equiposFemenil  = ["Las Chicas Súper Poderosas", "Agronenas", "Fénix FC"];
+const resultadosPartidos = [
+  { equipo1: "Atlético San Luis", goles1: 5, equipo2: "Niños del Campo", goles2: 3, grupo: "Varonil" },
+  { equipo1: "Agronenas", goles1: 1, equipo2: "Fénix FC", goles2: 0, grupo: "Femenil" }
+];
 
-  // =============================================
-  // ⚙️ CÁLCULO DE TABLA
-  // =============================================
-  function calcularTabla(equiposNombres, grupoNombre) {
-    const tabla = equiposNombres.map(nombre => ({
-      nombre, pj:0, pg:0, pe:0, pp:0, gf:0, gc:0, dg:0, puntos:0, enfrentamientos:{}
-    }));
+const equiposVaronil = ["Warriors SF", "Sunderland AFC", "Atlético San Luis", "Niños del Campo"];
+const equiposFemenil = ["Las Chicas Súper Poderosas", "Agronenas", "Fénix FC"];
 
-    resultadosPartidos
-      .filter(r => r.grupo === grupoNombre)
-      .forEach(r => {
-        const e1 = tabla.find(e => e.nombre === r.equipo1);
-        const e2 = tabla.find(e => e.nombre === r.equipo2);
-        if (!e1) return;
-        if (!e2) {
-          e1.pj++; e1.gf += r.goles1; e1.gc += r.goles2 || 0; e1.pg++; e1.puntos += 3;
-          return;
-        }
-        e1.pj++; e2.pj++;
-        e1.gf += r.goles1; e1.gc += r.goles2;
-        e2.gf += r.goles2; e2.gc += r.goles1;
+const goleadores = [
+  { nombre: "Eridel",    equipo: "Atlético San Luis", goles: 2 },
+  { nombre: "Luis",      equipo: "Niños del Campo",   goles: 2 },
+  { nombre: "Daniel",    equipo: "Atlético San Luis", goles: 1 },
+  { nombre: "Cesar",     equipo: "Atlético San Luis", goles: 1 },
+  { nombre: "Victor",    equipo: "Atlético San Luis", goles: 1 },
+  { nombre: "Alejandro", equipo: "Niños del Campo",   goles: 1 },
+];
 
-        if (r.goles1 > r.goles2) {
-          e1.pg++; e1.puntos += 3; e2.pp++;
-          e1.enfrentamientos[e2.nombre] = 'W'; e2.enfrentamientos[e1.nombre] = 'L';
-        } else if (r.goles1 < r.goles2) {
-          e2.pg++; e2.puntos += 3; e1.pp++;
-          e2.enfrentamientos[e1.nombre] = 'W'; e1.enfrentamientos[e2.nombre] = 'L';
-        } else {
-          e1.pe++; e2.pe++; e1.puntos += 1; e2.puntos += 1;
-          e1.enfrentamientos[e2.nombre] = 'D'; e2.enfrentamientos[e1.nombre] = 'D';
-        }
-      });
+const goleadoras = [
+  { nombre: "Sherlyn", equipo: "Agronenas", goles: 1 }
+];
 
-    tabla.forEach(e => e.dg = e.gf - e.gc);
-    return tabla;
+const coloresEquipos = {
+  "Warriors SF":               "⚪",
+  "Sunderland AFC":             "🔴",
+  "Atlético San Luis":         "🔵",
+  "Niños del Campo":           "⚫",
+  "Las Chicas Súper Poderosas":"⚪",
+  "Agronenas":                 "🔵",
+  "Fénix FC":                  "🩷"
+};
+
+const dotColors = {
+  "Warriors SF":               "#e2e8f0",
+  "Sunderland AFC":             "#f87171",
+  "Atlético San Luis":         "#4f8ef7",
+  "Niños del Campo":           "#475569",
+  "Las Chicas Súper Poderosas":"#e2e8f0",
+  "Agronenas":                 "#4f8ef7",
+  "Fénix FC":                  "#f472b6"
+};
+
+const partidos = [
+  {
+    jornada: 2,
+    fecha: "Lunes 16 de Febrero",
+    equipo1: "Sunderland AFC",     emoji1: "🔴",
+    equipo2: "Warriors SF",        emoji2: "⚪",
+    hora: "2:00 pm – 3:00 pm",
+    arbitro: "Atlético San Luis",
+    categoria: "varonil"
+  },
+  {
+    jornada: 3,
+    fecha: "Martes 17 de Febrero",
+    equipo1: "Las Chicas Súper Poderosas", emoji1: "⚪",
+    equipo2: "Fénix FC",                   emoji2: "🩷",
+    hora: "2:00 pm – 3:00 pm",
+    arbitro: "Niños del Campo",
+    categoria: "femenil"
+  },
+  {
+    jornada: 4,
+    fecha: "Miércoles 18 de Febrero",
+    equipo1: "Niños del Campo", emoji1: "⚫",
+    equipo2: "Warriors SF",     emoji2: "⚪",
+    hora: "2:00 pm – 3:00 pm",
+    arbitro: "Sunderland AFC",
+    categoria: "varonil"
   }
+];
 
-  // =============================================
-  // 🥅 GOLEADORES — agregar aquí
-  // =============================================
-  const goleadores = [
-    // { nombre: "Jugador", equipo: "Warriors SF", goles: 3 }
-        { nombre: "Eridel", equipo: "Atlético San Luis", goles: 2 },
-        { nombre: "Luis", equipo: "Niños del campo", goles: 2 },
-        { nombre: "Daniel", equipo: "Atlético San Luis", goles: 1 },
-        { nombre: "Cesar", equipo: "Atlético San Luis", goles: 1 },
-        { nombre: "Victor", equipo: "Atlético San Luis", goles: 1 },
-        { nombre: "Alejandro", equipo: "Niños del campo", goles: 1 },
-   
-  ];
+/* ══════════════════════════════════════════════
+   ⚙️ CÁLCULO
+══════════════════════════════════════════════ */
+function calcularTabla(nombresEquipos, grupoNombre) {
+  const tabla = nombresEquipos.map(n => ({
+    nombre:n, pj:0, pg:0, pe:0, pp:0, gf:0, gc:0, dg:0, puntos:0, enf:{}
+  }));
 
-  const goleadoras = [
-    // { nombre: "Jugadora", equipo: "Agronenas", goles: 2 }
-       { nombre: "Sherlyn", equipo: "Agronenas", goles: 1 }
-  ];
-
-  // =============================================
-  // 🏗️ RENDER TABLAS
-  // =============================================
-  function ordenarYMostrar(grupo, tablaId, esFem) {
-    grupo.sort((a, b) => {
-      if (b.puntos !== a.puntos) return b.puntos - a.puntos;
-      if (b.dg !== a.dg) return b.dg - a.dg;
-      if (b.gf !== a.gf) return b.gf - a.gf;
-      if (a.enfrentamientos[b.nombre]) {
-        if (a.enfrentamientos[b.nombre] === 'W') return -1;
-        if (a.enfrentamientos[b.nombre] === 'L') return 1;
-      }
-      return 0;
-    });
-
-    const tbody = document.querySelector(`#${tablaId} tbody`);
-    tbody.innerHTML = "";
-    grupo.forEach((e, i) => {
-      tbody.innerHTML += `
-        <tr>
-          <td>${i + 1}</td>
-          <td class="equipo-cell" style="text-align:left;padding-left:20px;">${e.nombre}</td>
-          <td>${e.gf}</td>
-          <td>${e.gc}</td>
-          <td>${e.dg > 0 ? '+' : ''}${e.dg}</td>
-          <td class="pts-cell">${e.puntos}</td>
-        </tr>`;
-    });
-  }
-
-  // =============================================
-  // 🏗️ RENDER GOLEADORES
-  // =============================================
-  function renderGoleadores(arr, bodyId) {
-    arr.sort((a, b) => b.goles - a.goles);
-    const tbody = document.getElementById(bodyId);
-
-    if (arr.length === 0) {
-      tbody.innerHTML = `<tr><td colspan="4" style="text-align:center;color:#999;padding:40px;">Sin goles registrados aún</td></tr>`;
-    } else {
-      tbody.innerHTML = arr.slice(0, 10).map((g, i) => {
-        const trofeo = i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : '';
-        return `<tr>
-          <td class="position-cell">#${i + 1} <span class="trophy-emoji">${trofeo}</span></td>
-          <td class="player-name-cell">${g.nombre}</td>
-          <td class="team-name-cell">${g.equipo}</td>
-          <td class="goals-cell">${g.goles}</td>
-        </tr>`;
-      }).join('');
+  resultadosPartidos.filter(r => r.grupo === grupoNombre).forEach(r => {
+    const e1 = tabla.find(e => e.nombre === r.equipo1);
+    const e2 = tabla.find(e => e.nombre === r.equipo2);
+    if (!e1) return;
+    if (!e2) {
+      e1.pj++; e1.gf += r.goles1; e1.gc += (r.goles2||0); e1.pg++; e1.puntos += 3; return;
     }
+    e1.pj++; e2.pj++;
+    e1.gf += r.goles1; e1.gc += r.goles2;
+    e2.gf += r.goles2; e2.gc += r.goles1;
 
+    if (r.goles1 > r.goles2)      { e1.pg++; e1.puntos+=3; e2.pp++; e1.enf[e2.nombre]='W'; e2.enf[e1.nombre]='L'; }
+    else if (r.goles1 < r.goles2) { e2.pg++; e2.puntos+=3; e1.pp++; e2.enf[e1.nombre]='W'; e1.enf[e2.nombre]='L'; }
+    else                           { e1.pe++; e2.pe++; e1.puntos++; e2.puntos++; e1.enf[e2.nombre]='D'; e2.enf[e1.nombre]='D'; }
+  });
 
+  tabla.forEach(e => e.dg = e.gf - e.gc);
+  tabla.sort((a,b) => {
+    if (b.puntos !== a.puntos) return b.puntos - a.puntos;
+    if (b.dg     !== a.dg)     return b.dg - a.dg;
+    if (b.gf     !== a.gf)     return b.gf - a.gf;
+    if (a.enf[b.nombre]) return a.enf[b.nombre]==='W'?-1:a.enf[b.nombre]==='L'?1:0;
+    return 0;
+  });
+  return tabla;
+}
+
+/* ══════════════════════════════════════════════
+   🏗️ RENDERS
+══════════════════════════════════════════════ */
+
+// TABLA POSICIONES
+function renderTabla(tabla, titulo, isFem) {
+  const rowClass   = isFem ? 'fem-leader-row' : 'leader-row';
+  const cardClass  = isFem ? 'tabla-card fem' : 'tabla-card';
+  const tagClass   = isFem ? 'sec-tag fem' : 'sec-tag';
+  const tagIcon    = isFem ? '👩' : '⚽';
+
+  const rows = tabla.map((e, i) => {
+    const dot   = dotColors[e.nombre] || '#4f8ef7';
+    const dgFmt = e.dg > 0 ? `<span class="dg-pos">+${e.dg}</span>` : e.dg < 0 ? `<span class="dg-neg">${e.dg}</span>` : `<span class="dg-zero">0</span>`;
+    return `
+      <tr class="${i===0 ? rowClass : ''}">
+        <td><span class="pos-num">${i+1}</span></td>
+        <td>
+          <div class="equipo-td">
+            <div class="pos-dot" style="background:${dot};"></div>
+            ${e.nombre}
+          </div>
+        </td>
+        <td>${e.gf}</td>
+        <td>${e.gc}</td>
+        <td>${dgFmt}</td>
+        <td class="pts-td">${e.puntos}</td>
+      </tr>`;
+  }).join('');
+
+  return `
+    <div class="${cardClass}">
+      <div class="tabla-top">
+        <h3>${titulo}</h3>
+        <span class="${tagClass}">${tagIcon} ${isFem ? 'Femenil' : 'Varonil'}</span>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Equipo</th>
+            <th>GF</th>
+            <th>GC</th>
+            <th>DG</th>
+            <th>PTS</th>
+          </tr>
+        </thead>
+        <tbody>${rows}</tbody>
+      </table>
+    </div>`;
+}
+
+// GOLEADORES
+function renderGoleadores(arr, titulo, isFem) {
+  arr = [...arr].sort((a,b) => b.goles - a.goles);
+  const max = arr.length ? arr[0].goles : 1;
+  const cardClass = isFem ? 'goles-card fem' : 'goles-card';
+  const tagClass  = isFem ? 'sec-tag fem' : 'sec-tag';
+  const tagIcon   = isFem ? '👩' : '⚽';
+  const rankMap   = ['rank-1','rank-2','rank-3'];
+
+  let body = '';
+  if (!arr.length) {
+    body = `<div class="empty-state"><span class="e-icon">⚽</span>Sin goles registrados aún</div>`;
+  } else {
+    body = `<div class="goles-list">` +
+      arr.slice(0,10).map((g,i) => {
+        const rankCls = rankMap[i] || '';
+        const pct     = Math.round((g.goles/max)*100);
+        const medal   = i===0?'🥇':i===1?'🥈':i===2?'🥉':`${i+1}`;
+        return `
+          <div class="gol-row ${rankCls}" style="animation-delay:${i*0.08}s">
+            <div class="rank-badge">${medal}</div>
+            <div class="gol-info">
+              <div class="gol-name">${g.nombre}</div>
+              <div class="gol-team">${g.equipo}</div>
+            </div>
+            <div class="gol-bar-wrap">
+              <div class="gol-bar" style="width:0%" data-width="${pct}%"></div>
+            </div>
+            <div class="gol-count">
+              <span class="gol-num">${g.goles}</span>
+              
+            </div>
+          </div>`;
+      }).join('') + `</div>`;
   }
 
-  // =============================================
-  // 📅 PARTIDOS PROGRAMADOS
-  // =============================================
-  const coloresEquipos = {
-    "Warriors SF":                   "blanca",
-    "Sunderland AFC":                 "roja",
-    "Atlético San Luis":             "azul",
-    "Niños del Campo":               "negra",
-    "Las Chicas Súper Poderosas":    "rosa",
-    "Agronenas":                     "azul",
-    "Fénix FC":                      "rosa"
-  };
+  return `
+    <div class="${cardClass}">
+      <div class="goles-top">
+        <h3>${titulo}</h3>
+        <span class="${tagClass}">${tagIcon} ${isFem ? 'Femenil' : 'Varonil'}</span>
+      </div>
+      ${body}
+    </div>`;
+}
 
-  const emojiCamisa = { blanca:"⚪", negra:"⚫", rosa:"🩷", azul:"🔵", roja:"🔴" };
-
-  function getEmoji(equipo) {
-    return emojiCamisa[coloresEquipos[equipo] || "blanca"];
-  }
-
-  const partidos = [
-    /*{
-      jornada: 1,
-      fecha: "Jueves 13 de Febrero",
-      equipo1: "Agronenas",
-      color1: "azul",
-      equipo2: "Fénix FC",
-      color2: "rosa",
-      hora: "2:00 pm – 3:00 pm",
-      arbitro: "Pendiente",
-      categoria: "femenil"
-    },
-    {
-      jornada: 1,
-      fecha: "Jueves 13 de Febrero",
-      equipo1: "Atlético San Luis",
-      color1: "azul",
-      equipo2: "Niños del Campo",
-      color2: "negra",
-      hora: "3:00 pm – 4:00 pm",
-      arbitro: "Warriors SF",
-      categoria: "varonil"
-    }*/
-   {
-      jornada: 2,
-      fecha: "Lunes 16 de Febrero",
-      equipo1: "Sunderland AFC",
-      color1: "azul",
-      equipo2: "Warriors SF",
-      color2: "Roja",
-      hora: "2:00 pm – 3:00 pm",
-      arbitro: "Atlético San Luis",
-      categoria: "varonil"
-    },{
-      jornada: 3,
-      fecha: "Martes 17 de Febrero",
-      equipo1: "Las chicas super poderosas",
-      color1: "Blanca",
-      equipo2: "Fénix FC",
-      color2: "rosa",
-      hora: "2:00 pm – 3:00 pm",
-      arbitro: "Niños del campo",
-      categoria: "femenil"
-    },{
-      jornada: 4,
-      fecha: "Miercoles 18 de Febrero",
-      equipo1: "Niños del campo",
-      color1: "azul",
-      equipo2: "Warriors SF",
-      color2: "Roja",
-      hora: "2:00 pm – 3:00 pm",
-      arbitro: "Sunderland AFC",
-      categoria: "varonil"
-    }/*,{
-      jornada: 5,
-      fecha: "Jueves 19 de Febrero",
-      equipo1: "Atlético San Luis",
-      color1: "azul",
-      equipo2: "Sunderland AFC",
-      color2: "Roja",
-      hora: "2:00 pm – 3:00 pm",
-      arbitro: "Atlético San Luis",
-      categoria: "varonil"
-    }*/
-  ];
-
-  // =============================================
-  // 🏗️ RENDER PARTIDOS
-  // =============================================
+// PARTIDOS
+function renderPartidos() {
   const jornadas = {};
   partidos.forEach(p => {
     if (!jornadas[p.jornada]) jornadas[p.jornada] = [];
     jornadas[p.jornada].push(p);
   });
 
-  const contenedor = document.getElementById("contenedorJornadas");
-
-  Object.keys(jornadas).sort().forEach(num => {
+  let html = '';
+  Object.keys(jornadas).sort((a,b)=>a-b).forEach(num => {
     const lista = jornadas[num];
-    const fecha = lista[0].fecha;
-
-    let html = `
-      <div class="jornada-titulo">
-        <h3>🏅 Jornada ${num}</h3>
-        <span class="fecha-jornada">📅 ${fecha}</span>
+    html += `
+      <div class="jornada-header">
+        <h3>Jornada ${num}</h3>
+        <span class="jornada-fecha">📅 ${lista[0].fecha}</span>
       </div>
       <div class="partidos-grid">`;
 
     lista.forEach(p => {
-      const clsCategoria = p.categoria === "femenil" ? "femenino" : "";
-      const emoji1 = emojiCamisa[p.color1] || "⚪";
-      const emoji2 = emojiCamisa[p.color2] || "⚪";
+      const fem = p.categoria === 'femenil';
       html += `
-        <div class="partido-card ${clsCategoria}">
+        <div class="partido-card ${fem ? 'femenino' : ''}" style="animation-delay:${lista.indexOf(p)*0.1}s">
+          <div class="card-blob"></div>
+          <span class="cat-label">${fem ? 'Femenil' : 'Varonil'}</span>
           <div class="partido-equipos">
-            <div class="equipo-nombre">${emoji1} ${p.equipo1}</div>
-            <div class="vs-badge">VS</div>
-            <div class="equipo-nombre" style="text-align:right;">${p.equipo2} ${emoji2}</div>
+            <div class="equipo-col">
+              <span class="equipo-emoji">${p.emoji1}</span>
+              <div class="equipo-nombre">${p.equipo1}</div>
+            </div>
+            <div class="vs-orb">VS</div>
+            <div class="equipo-col right">
+              <span class="equipo-emoji" style="text-align:right;">${p.emoji2}</span>
+              <div class="equipo-nombre">${p.equipo2}</div>
+            </div>
           </div>
-          <div class="partido-info">
-            <span>⏰ ${p.hora}</span>
-            <span>🧑‍⚖️ Árbitro: ${p.arbitro}</span>
+          <div class="partido-meta">
+            <div class="meta-row"><span class="meta-icon">⏰</span>${p.hora}</div>
+            <div class="meta-row"><span class="meta-icon">🧑‍⚖️</span>Árbitro: ${p.arbitro}</div>
           </div>
         </div>`;
     });
 
     html += `</div>`;
-    contenedor.innerHTML += html;
   });
 
-  // =============================================
-  // 🚀 INICIALIZAR
-  // =============================================
-  const tablaVaronil  = calcularTabla(equiposVaronil,  "Varonil");
-  const tablaFem      = calcularTabla(equiposFemenil,  "Femenil");
+  document.getElementById('contenedorJornadas').innerHTML = html;
+}
 
-  ordenarYMostrar(tablaVaronil, "tablaVaronil",  false);
-  ordenarYMostrar(tablaFem,     "tablaFemenil",  true);
+// LIVE BAR
+function renderLiveBar(tablaV, tablaF) {
+  const totalGolesV = tablaV.reduce((s,e)=>s+e.gf,0);
+  const totalGolesF = tablaF.reduce((s,e)=>s+e.gf,0);
+  const totalPartidos = resultadosPartidos.length;
 
-  renderGoleadores(goleadores,  "goleadoresBody");
-  renderGoleadores(goleadoras,  "goleadorasBody");
+  document.getElementById('liveBar').innerHTML = `
+    <div class="stat-pill">
+      <span class="n">${totalPartidos}</span>
+      <span class="l">Partidos jugados</span>
+    </div>
+    <div class="stat-pill">
+      <span class="n">${equiposVaronil.length + equiposFemenil.length}</span>
+      <span class="l">Equipos</span>
+    </div>
+    <div class="stat-pill">
+      <span class="n">${totalGolesV + totalGolesF}</span>
+      <span class="l">Goles totales</span>
+    </div>
+    <div class="stat-pill fem">
+      <span class="n">${partidos.length}</span>
+      <span class="l">Próximos partidos</span>
+    </div>`;
+}
+
+/* ══════════════════════════════════════════════
+   🚀 INIT
+══════════════════════════════════════════════ */
+const tablaV = calcularTabla(equiposVaronil, 'Varonil');
+const tablaF = calcularTabla(equiposFemenil, 'Femenil');
+
+renderPartidos();
+renderLiveBar(tablaV, tablaF);
+
+document.getElementById('tablasGrid').innerHTML =
+  renderTabla(tablaV, 'Tabla General', false) +
+  renderTabla(tablaF, 'Tabla General', true);
+
+document.getElementById('golesGrid').innerHTML =
+  renderGoleadores(goleadores, 'Goleador', false) +
+  renderGoleadores(goleadoras, 'Goleadora', true);
+
+// Add reveal class to section cards
+document.querySelectorAll('.section-card, .tabla-card, .goles-card, .section-card').forEach(el => {
+  el.classList.add('reveal');
+});
+
+// Scroll-reveal observer
+const revealObs = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      setTimeout(() => entry.target.classList.add('visible'), i * 80);
+      revealObs.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+// Animate bars after short delay using data-width
+setTimeout(() => {
+  document.querySelectorAll('.gol-bar[data-width]').forEach(b => {
+    b.style.width = b.getAttribute('data-width');
+  });
+}, 300);
 </script>
-
 </body>
-<footer style="text-align: center; color: rgba(255,255,255,0.7); padding: 20px; font-size: 0.9em; font-weight: 300; letter-spacing: 1px;">
-  by Licenciatura en Informatica 1001 E-E-D
-</footer>
 </html>
-
-
-
-
-
-
-
