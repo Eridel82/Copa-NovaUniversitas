@@ -391,7 +391,7 @@
   /* ── TABLA POSICIONES ── */
   .tablas-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr));
     gap: 28px;
     margin-bottom: 28px;
   }
@@ -485,7 +485,7 @@
   /* ── GOLEADORES ── */
   .goles-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr));
     gap: 28px;
     margin-bottom: 28px;
   }
@@ -741,22 +741,156 @@
   ::-webkit-scrollbar-thumb { background: var(--surface); border-radius:3px; }
 
   /* ── RESPONSIVE ── */
-  @media(max-width:700px){
-    .section-card { padding:24px 18px; }
-    .tablas-grid, .goles-grid { grid-template-columns:1fr; }
-    .tabla-top, .goles-top { padding:18px 20px; }
-    thead th, tbody td { padding:11px 10px; }
-    .gol-row { padding:12px 16px; }
-    .gol-bar-wrap { display:none; }
-    .hero { padding:60px 16px 40px; }
-    .live-bar { gap:12px; }
-    .partido-card { padding:24px 20px; }
-    .equipo-emoji { font-size:2.2rem; }
-    .equipo-nombre { font-size:1rem; }
-    .vs-orb { width:48px; height:48px; }
-    .partido-meta { gap:10px; }
-    .gol-count { min-width:54px; height:54px; }
-    .gol-count .gol-num { font-size:1.4rem; }
+
+  /* Tablet */
+  @media(max-width:900px){
+    .tablas-grid, .goles-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* Mobile */
+  @media(max-width:600px){
+
+    /* page */
+    .page-wrap { padding: 0 12px 60px; }
+
+    /* hero */
+    .hero { padding: 48px 12px 32px; }
+    .hero h1 { letter-spacing: -1px; }
+    .hero-year { letter-spacing: 3px; }
+    .hero-sub { font-size: 0.9rem; }
+    .hero-divider { margin: 20px auto; }
+    .live-bar { gap: 8px; margin-bottom: 36px; }
+    .stat-pill { padding: 8px 14px; font-size: 0.8rem; }
+    .stat-pill .n { font-size: 1rem; }
+
+    /* section card */
+    .section-card { padding: 20px 16px; border-radius: 18px; }
+
+    /* sec-title */
+    .sec-title h2 { font-size: 1.15rem; white-space: nowrap; }
+
+    /* ── PARTIDOS ── */
+    .partidos-grid { gap: 14px; margin-bottom: 24px; }
+
+    .jornada-header { flex-direction: column; align-items: flex-start; gap: 4px; margin-bottom: 14px; }
+    .jornada-header h3 { font-size: 0.82rem; }
+    .jornada-fecha { font-size: 0.8rem; }
+
+    .partido-card { padding: 20px 16px; border-radius: 16px; }
+    .cat-label { font-size: 0.65rem; margin-bottom: 16px; }
+
+    /* equipos layout: stack vertically on very small screens */
+    .partido-equipos {
+      gap: 10px;
+      margin-bottom: 20px;
+      align-items: center;
+    }
+
+    .equipo-emoji { font-size: 2rem; margin-bottom: 6px; }
+
+    .equipo-nombre {
+      font-size: 0.88rem;
+      letter-spacing: 0;
+    }
+
+    .vs-orb {
+      width: 44px; height: 44px;
+      font-size: 0.75rem;
+      flex-shrink: 0;
+    }
+
+    /* meta pills: stack them */
+    .partido-meta {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 8px;
+      padding-top: 16px;
+    }
+
+    .meta-row {
+      font-size: 0.82rem;
+      padding: 7px 13px;
+      width: 100%;
+    }
+
+    /* ── TABLAS ── */
+    .tablas-grid, .goles-grid { grid-template-columns: 1fr; gap: 16px; margin-bottom: 16px; }
+
+    .tabla-card, .goles-card { border-radius: 18px; }
+    .tabla-top, .goles-top { padding: 16px 16px; }
+    .tabla-top h3, .goles-top h3 { font-size: 0.9rem; }
+
+    /* make table scroll horizontally if needed */
+    .tabla-card table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+
+    thead th {
+      padding: 10px 10px;
+      font-size: 0.65rem;
+      letter-spacing: 1px;
+      white-space: nowrap;
+    }
+
+    tbody td {
+      padding: 12px 10px;
+      font-size: 0.82rem;
+      white-space: nowrap;
+    }
+
+    /* team name col: allow wrap */
+    tbody td:nth-child(2) {
+      padding-left: 12px;
+      white-space: normal;
+      min-width: 120px;
+    }
+
+    thead th:nth-child(2) { padding-left: 12px; }
+
+    .equipo-td { font-size: 0.82rem; gap: 7px; }
+    .pos-dot { width: 7px; height: 7px; }
+    .pts-td { font-size: 0.92rem; }
+
+    /* ── GOLEADORES ── */
+    .goles-list { padding: 6px 0; }
+
+    .gol-row {
+      padding: 12px 14px;
+      gap: 10px;
+    }
+
+    .rank-badge {
+      width: 28px; height: 28px;
+      font-size: 0.72rem;
+      flex-shrink: 0;
+    }
+
+    .gol-info { min-width: 0; }
+    .gol-name { font-size: 0.85rem; }
+    .gol-team { font-size: 0.72rem; }
+
+    /* hide bar on mobile */
+    .gol-bar-wrap { display: none; }
+
+    .gol-count {
+      min-width: 52px; height: 52px;
+      border-radius: 11px;
+      flex-shrink: 0;
+    }
+    .gol-count .gol-num { font-size: 1.4rem; }
+    .gol-count .gol-lbl { font-size: 0.52rem; }
+
+    /* footer */
+    footer { padding: 28px 16px; font-size: 0.75rem; }
+  }
+
+  /* Very small screens (< 380px) */
+  @media(max-width:380px){
+    .equipo-nombre { font-size: 0.78rem; }
+    .vs-orb { width: 36px; height: 36px; font-size: 0.65rem; }
+    .equipo-emoji { font-size: 1.7rem; }
+    .stat-pill { padding: 6px 10px; font-size: 0.72rem; }
+    .stat-pill .n { font-size: 0.88rem; }
   }
 </style>
 </head>
@@ -772,7 +906,7 @@
   <!-- ══ HERO ══ -->
   <div class="hero">
     <div class="hero-badge">🏆 Temporada 2026</div>
-    <h1>Copa NovaUniversitas  </h1>
+    <h1>Copa NovaUniversitas</h1>
     <div class="hero-sub">Fase de Grupos</div>
     <div class="hero-divider"></div>
 
@@ -821,6 +955,8 @@
 
 const resultadosPartidos = [
   { equipo1: "Atlético San Luis", goles1: 5, equipo2: "Niños del Campo", goles2: 3, grupo: "Varonil" },
+  //{ equipo1: "Sunderland AFC", goles1: 6, equipo2: "Warriors SF", goles2: 3, grupo: "Varonil" },
+  //{ equipo1: "Las Chicas Súper Poderosas", goles1: 2, equipo2: "Fénix FC", goles2: 2, grupo: "Femenil" },
   { equipo1: "Agronenas", goles1: 1, equipo2: "Fénix FC", goles2: 0, grupo: "Femenil" }
 ];
 
@@ -1007,7 +1143,7 @@ function renderGoleadores(arr, titulo, isFem) {
             </div>
             <div class="gol-count">
               <span class="gol-num">${g.goles}</span>
-              
+              <span class="gol-lbl">${g.goles === 1 ? 'gol' : 'goles'}</span>
             </div>
           </div>`;
       }).join('') + `</div>`;
