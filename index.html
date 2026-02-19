@@ -1073,7 +1073,7 @@ function calcularTabla(nombresEquipos, grupoNombre) {
 
     if (r.goles1 > r.goles2)      { e1.pg++; e1.puntos+=3; e2.pp++; e1.enf[e2.nombre]='W'; e2.enf[e1.nombre]='L'; }
     else if (r.goles1 < r.goles2) { e2.pg++; e2.puntos+=3; e1.pp++; e2.enf[e1.nombre]='W'; e1.enf[e2.nombre]='L'; }
-    else                           { e1.pe++; e2.pe++; e1.puntos+=2; e2.puntos++; e1.enf[e2.nombre]='D'; e2.enf[e1.nombre]='D';,console.log(`Empate entre ${e1.nombre} y ${e2.nombre}, puntos: ${e1.puntos}-${e2.puntos}`); }
+    else                           { e1.pe++; e2.pe++; e1.puntos+=2; e2.puntos++; e1.enf[e2.nombre]='D'; e2.enf[e1.nombre]='D'; console.log(`Empate entre ${e1.nombre} y ${e2.nombre}, puntos: ${e1.puntos}-${e2.puntos}`); }
   });
 
   tabla.forEach(e => e.dg = e.gf - e.gc);
@@ -1301,6 +1301,7 @@ setTimeout(() => {
 </script>
 </body>
 </html>
+
 
 
 
