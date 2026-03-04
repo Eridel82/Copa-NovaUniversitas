@@ -382,6 +382,8 @@ const resultadosPartidos=[
   {equipo1:"Sunderland AFC",goles1:3,equipo2:"Niños del Campo",goles2:0,grupo:"Varonil"},
   {equipo1:"Las Chicas Súper Poderosas",goles1:1,equipo2:"Agronenas",goles2:7,grupo:"Femenil"},
   {equipo1:"Warriors SF",goles1:3,equipo2:"Niños del Campo",goles2:0,grupo:"Varonil"},
+  {equipo1:"Sunderland AFC",goles1:5,equipo2:"Warriors SF",goles2:0,grupo:"Varonil"},
+  
 ];
 const equiposVaronil=["Warriors SF","Sunderland AFC","Atlético San Luis","Niños del Campo"];
 const equiposFemenil=["Las Chicas Súper Poderosas","Agronenas","Fénix FC"];
@@ -393,9 +395,9 @@ const goleadores=[
   {nombre:"Victor",equipo:"Atlético San Luis",goles:2},
   {nombre:"Alejandro",equipo:"Niños del Campo",goles:1},
   {nombre:"Luis Daniel",equipo:"Warriors SF",goles:2},
-  {nombre:"Abraham",equipo:"Sunderland AFC",goles:3},
-  {nombre:"Perpetuo",equipo:"Sunderland AFC",goles:6},
-  {nombre:"Rey",equipo:"Sunderland AFC",goles:5},
+  {nombre:"Abraham",equipo:"Sunderland AFC",goles:5},
+  {nombre:"Perpetuo",equipo:"Sunderland AFC",goles:8},
+  {nombre:"Rey",equipo:"Sunderland AFC",goles:6},
   {nombre:"Kique",equipo:"Niños del Campo",goles:1},
   {nombre:"Yandel",equipo:"Warriors SF",goles:1},
 ];
@@ -425,11 +427,11 @@ const partidos=[
     hora: "2:00 pm – 3:00 pm",
     arbitro: "Warriors SF",
     categoria: "femenil"
-  },*/
+  },
   {jornada:2,fecha:"Martes 3 de Marzo",equipo1:"Sunderland AFC",emoji1:"⚫",equipo2:"Wariors SF",emoji2:"🔵",hora:"2:00 pm – 3:00 pm",arbitro:"Atlético San Luis",categoria:"varonil"},
-  {
+  */{
     jornada: 3,
-    fecha: "MJueves 5 de Marzo",
+    fecha: "Jueves 5 de Marzo",
     equipo1: "Warriors SF",     emoji1: "⚫",
     equipo2: "Atlético San Luis",  emoji2: "🔵",
     hora: "2:00 pm – 3:00 pm",
@@ -622,6 +624,7 @@ document.querySelectorAll('.goles-card').forEach(c=>rowObs.observe(c));
 </script>
 </body>
 </html>
+
 
 
 
